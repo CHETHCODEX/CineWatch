@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🎬 CineMatch — AI-Powered Movie Matcher
+# 🎬 CineWatch AI — Next-Gen Movie Discovery
 
 **A premium, responsive Next.js movie recommendation web app featuring 3D carousels, mood matching, co-watching, and instant caching.**
 
@@ -17,17 +17,17 @@
 
 ## 📖 About
 
-**CineMatch** is a state-of-the-art movie discovery and recommendation platform. It combines raw cinematic aesthetics, 3D rotating carousels, mood-based AI recommendations, and interactive co-watching mechanics with a server-side caching layer. Powered by standard React Server Components and live TMDB integration, CineMatch serves smooth transitions, instant (0ms) subpage navigations, and responsiveness across all devices from standard laptops to viewports on mobile phones.
+**CineWatch AI** is a state-of-the-art movie discovery and recommendation platform. It combines raw cinematic aesthetics, 3D rotating carousels, mood-based AI recommendations, and interactive co-watching mechanics with a server-side caching layer. Powered by standard React Server Components and live TMDB integration, CineWatch AI serves smooth transitions, instant (0ms) subpage navigations, and responsiveness across all devices from standard laptops to viewports on mobile phones.
 
 ---
 
 ## 🖼️ Screenshots
 
 ### Landing Page & Trending 3D Gallery
-![CineMatch Home Screen](./public/screenshots/hero-demo.webp)
+![CineWatch AI Home Screen](./public/screenshots/hero-demo.webp)
 
 ### Cinematic Details & Trailer Section
-![CineMatch Details Page](./public/screenshots/details-demo.webp)
+![CineWatch AI Details Page](./public/screenshots/details-demo.webp)
 
 ---
 
@@ -44,7 +44,7 @@
 
 ## ⚡ Caching & Performance Optimizations
 
-To deliver highly responsive page transitions, CineMatch implements a double-layered server caching strategy:
+To deliver highly responsive page transitions, CineWatch AI implements a double-layered server caching strategy:
 
 1. **Request-Level Deduplication (React `cache`):** Next.js splits page metadata generation (`generateMetadata`) and page component rendering (`MoviePage`) into distinct lifecycles. We wrap the movie data-fetching controller inside React's `cache` wrapper, ensuring a single Promise is shared across the request. This cuts live TMDB API network queries in half.
 2. **Global Server-Side Caching:** An in-memory cache map inside our TMDB API client module preserves resolved requests for 10 minutes. Clicks on already visited or pre-rendered movies are loaded instantly from memory (0ms network delay).
@@ -72,7 +72,7 @@ To deliver highly responsive page transitions, CineMatch implements a double-lay
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/CineMatch.git
+   git clone https://github.com/your-username/CineWatch-AI.git
    ```
 
 2. **Install Dependencies:**
@@ -90,7 +90,7 @@ To deliver highly responsive page transitions, CineMatch implements a double-lay
    ```bash
    npm run dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) with your browser to experience CineMatch.
+   Open [http://localhost:3000](http://localhost:3000) with your browser to experience CineWatch AI.
 
 5. **Build for Production:**
    ```bash

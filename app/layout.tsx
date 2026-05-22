@@ -13,9 +13,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CineMatch — AI-Powered Movie Recommendations",
+  title: "CineWatch AI — Next-Gen Movie Discovery",
   description:
-    "Discover your next favorite film with CineMatch. AI-powered movie recommendations, curated collections, and a cinematic browsing experience.",
+    "Discover your next favorite film with CineWatch AI. Next-generation movie recommendations, curated collections, and a cinematic browsing experience.",
   keywords: ["movies", "recommendations", "AI", "cinema", "film", "streaming"],
 };
 

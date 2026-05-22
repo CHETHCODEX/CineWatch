@@ -75,7 +75,7 @@ const RippleButton: React.FC<RippleButtonProps> = ({
   variant = 'default',
   rippleColor: userProvidedRippleColor,
   rippleDuration = 600,
-  hoverBaseColor = '#6366f1', // Indigo standard CineMatch primary highlight
+  hoverBaseColor = '#6366f1', // Indigo standard CineWatch AI primary highlight
   hoverRippleColor: customHoverRippleColor,
   hoverBorderEffectColor = '#6996e277',
   hoverBorderEffectThickness = '0.3em',

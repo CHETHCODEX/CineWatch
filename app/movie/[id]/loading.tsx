@@ -1,5 +1,5 @@
 // =============================================================================
-// CineMatch — Movie Detail Page (Loading Skeleton)
+// CineWatch — Movie Detail Page (Loading Skeleton)
 // Premium cinematic loading state with shimmer animations
 // =============================================================================
 

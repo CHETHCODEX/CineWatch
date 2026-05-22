@@ -52,7 +52,7 @@ const HoverButton: React.FC<ButtonProps> = ({
   onClick, 
   className = '', 
   disabled = false,
-  glowColor = '#a855f7', // CineMatch purple glow as default
+  glowColor = '#a855f7', // CineWatch AI purple glow as default
   backgroundColor, // Keep optional so custom tailwind bg classes show through
   textColor = '#ffffff',
   hoverTextColor = '#ffffff'

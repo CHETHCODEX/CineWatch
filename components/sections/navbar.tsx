@@ -98,20 +98,47 @@ export function Navbar() {
     >
       <nav className="mx-auto flex h-16 max-w-[1920px] items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* ---- Logo ---- */}
-        <Link href="/" className="group flex items-center gap-2.5">
-          <motion.div
-            whileHover={{ rotate: [0, -10, 10, 0] }}
-            transition={{ duration: 0.5 }}
-            className="relative flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-cine-blue to-cine-blue/60 shadow-lg shadow-cine-blue/20"
-          >
-            <Film className="h-5 w-5 text-white" />
-            <div className="absolute inset-0 rounded-lg bg-cine-blue/20 blur-md group-hover:bg-cine-blue/40 transition-colors duration-300" />
-          </motion.div>
-          <span className="text-xl font-bold tracking-tight text-foreground">
-            Cine
-            <span className="text-gradient-cine">Match</span>
-          </span>
+        <Link href="/" className="group flex items-center gap-3">
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-black/40 border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.15)] group-hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] transition-all duration-500 overflow-hidden">
+            {/* Pulsing gradient background layers */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-purple-500/5 to-transparent opacity-100 group-hover:opacity-80 transition-opacity duration-500" />
+            
+            {/* Spinning accent border */}
+            <div className="absolute inset-0 rounded-xl border border-transparent bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-600 opacity-20 group-hover:opacity-60 transition-opacity duration-500 [mask-image:linear-gradient(white,transparent)] group-hover:animate-[spin_4s_linear_infinite]" />
+            
+            {/* Glowing neon shutter effect lines */}
+            <div className="relative z-10 flex items-center justify-center">
+              <div className="relative h-6 w-6">
+                {/* Custom glowing shutter paths using absolute layout */}
+                <span className="absolute top-0 left-0 h-2 w-2 border-t-2 border-l-2 border-cyan-400 group-hover:translate-x-0.5 group-hover:translate-y-0.5 transition-transform duration-300" />
+                <span className="absolute top-0 right-0 h-2 w-2 border-t-2 border-r-2 border-cyan-400 group-hover:-translate-x-0.5 group-hover:translate-y-0.5 transition-transform duration-300" />
+                <span className="absolute bottom-0 left-0 h-2 w-2 border-b-2 border-l-2 border-purple-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                <span className="absolute bottom-0 right-0 h-2 w-2 border-b-2 border-r-2 border-purple-500 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                
+                {/* Central lens aperture ring */}
+                <div className="absolute inset-1.5 rounded-full border border-white/40 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <div className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,1)]" />
+                </div>
+              </div>
+            </div>
+            
+            {/* Blurred glow backing */}
+            <div className="absolute inset-0 rounded-xl bg-cyan-500/10 blur-md group-hover:bg-purple-500/20 transition-colors duration-500" />
+          </div>
+
+          <div className="flex flex-col sm:flex-row sm:items-center">
+            <span className="text-lg font-black tracking-[0.12em] bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500 bg-clip-text text-transparent group-hover:brightness-110 transition-all duration-300 uppercase">
+              Cine
+            </span>
+            <span className="text-lg font-light tracking-[0.08em] text-white/90 sm:ml-1 group-hover:text-white transition-colors duration-300 uppercase">
+              Watch
+            </span>
+            <span className="mt-0.5 sm:mt-0 sm:ml-2 self-start sm:self-center text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-md bg-gradient-to-r from-purple-500 via-purple-600 to-pink-500 text-white shadow-[0_0_10px_rgba(168,85,247,0.4)] tracking-wider scale-90 sm:scale-100 origin-left">
+              AI
+            </span>
+          </div>
         </Link>
+
 
         {/* ---- Desktop Navigation ---- */}
         <div className="hidden md:flex items-center gap-1">
@@ -238,13 +265,30 @@ export function Navbar() {
               >
                 <SheetHeader className="px-6 pt-6 pb-4 border-b border-white/[0.06]">
                   <div className="flex items-center justify-between">
-                    <SheetTitle className="flex items-center gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-cine-blue to-cine-blue/60">
-                        <Film className="h-4 w-4 text-white" />
+                    <SheetTitle className="flex items-center gap-2">
+                      <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-black/40 border border-white/10 backdrop-blur-md shadow-[0_0_15px_rgba(6,182,212,0.15)] overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/15 via-transparent to-transparent" />
+                        <div className="relative h-4.5 w-4.5">
+                          <span className="absolute top-0 left-0 h-1.5 w-1.5 border-t border-l border-cyan-400" />
+                          <span className="absolute top-0 right-0 h-1.5 w-1.5 border-t border-r border-cyan-400" />
+                          <span className="absolute bottom-0 left-0 h-1.5 w-1.5 border-b border-l border-purple-500" />
+                          <span className="absolute bottom-0 right-0 h-1.5 w-1.5 border-b border-r border-purple-500" />
+                          <div className="absolute inset-1 rounded-full border border-white/30 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 flex items-center justify-center">
+                            <div className="h-1 w-1 rounded-full bg-white shadow-[0_0_4px_white]" />
+                          </div>
+                        </div>
                       </div>
-                      <span className="text-lg font-bold text-foreground">
-                        Cine<span className="text-gradient-cine">Match</span>
-                      </span>
+                      <div className="flex items-center">
+                        <span className="text-sm font-black tracking-wider bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent uppercase">
+                          Cine
+                        </span>
+                        <span className="text-sm font-light tracking-wide text-white/90 ml-0.5 uppercase">
+                          Watch
+                        </span>
+                        <span className="ml-1.5 text-[8px] uppercase font-bold px-1 rounded-md bg-gradient-to-r from-purple-500 to-pink-500 text-white tracking-wider">
+                          AI
+                        </span>
+                      </div>
                     </SheetTitle>
                   </div>
                 </SheetHeader>

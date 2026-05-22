@@ -82,7 +82,7 @@ const CircularBadge = () => (
           fill="black"
         >
           <textPath href="#circlePath" startOffset="0%">
-            EXPLORE NOW • FIND YOUR FILM • EXPLORE NOW •{" "}
+            CINEWATCH AI • FIND YOUR MATCH •{" "}
           </textPath>
         </text>
       </svg>
@@ -104,7 +104,7 @@ const CircularBadge = () => (
 );
 
 // =============================================================================
-// Hero Component — CineMatch Cinematic Edition
+// Hero Component — CineWatch AI Cinematic Edition
 // =============================================================================
 
 export function Hero() {

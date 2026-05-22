@@ -30,6 +30,7 @@ interface SearchOverlayProps {
 export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   const router = useRouter();
   const [query, setQuery] = useState("");
+  const [searchMode, setSearchMode] = useState<"standard" | "ai">("standard");
   const [results, setResults] = useState<Movie[]>([]);
   const [suggestions, setSuggestions] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -76,7 +77,10 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
     setIsLoading(true);
     const delayDebounceFn = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/movies/search?q=${encodeURIComponent(query)}`);
+        const endpoint = searchMode === "ai"
+          ? `/api/movies/semantic-search?q=${encodeURIComponent(query)}`
+          : `/api/movies/search?q=${encodeURIComponent(query)}`;
+        const res = await fetch(endpoint);
         const data = await res.json();
         if (data && data.results) {
           // Limit to 6 results for command palette format
@@ -91,7 +95,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
     }, 250); // 250ms debounce delay
 
     return () => clearTimeout(delayDebounceFn);
-  }, [query]);
+  }, [query, searchMode]);
 
   // ---------------------------------------------------------------------------
   // Keyboard Event Handlers
@@ -180,16 +184,68 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: -20, opacity: 0, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 350 }}
-            className="w-full max-w-2xl overflow-hidden rounded-2xl border border-white/[0.08] bg-zinc-950/80 shadow-[0_0_50px_rgba(0,0,0,0.8)] shadow-cine-blue/5 glow-blue"
+            className={cn(
+              "w-full max-w-2xl overflow-hidden rounded-2xl border bg-zinc-950/80 shadow-[0_0_50px_rgba(0,0,0,0.8)] transition-all duration-300",
+              searchMode === "ai"
+                ? "border-cine-blue/20 shadow-cine-blue/10 glow-ai"
+                : "border-white/[0.08] shadow-cine-blue/5 glow-blue"
+            )}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Mode Tabs */}
+            <div className="flex items-center gap-1.5 border-b border-white/[0.04] bg-white/[0.01] px-4 py-2">
+              <button
+                onClick={() => {
+                  setSearchMode("standard");
+                  setQuery("");
+                  setResults([]);
+                }}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-semibold tracking-wide transition-all cursor-pointer border",
+                  searchMode === "standard"
+                    ? "bg-white/10 text-white border-white/10"
+                    : "text-muted-foreground hover:text-foreground border-transparent"
+                )}
+              >
+                <Search className="h-3.5 w-3.5" />
+                Standard Search
+              </button>
+              <button
+                onClick={() => {
+                  setSearchMode("ai");
+                  setQuery("");
+                  setResults([]);
+                }}
+                className={cn(
+                  "flex items-center gap-1.5 rounded-lg px-3 py-1 text-xs font-semibold tracking-wide transition-all cursor-pointer relative overflow-hidden group border",
+                  searchMode === "ai"
+                    ? "bg-gradient-to-r from-cine-blue/20 to-purple-500/20 text-cine-blue border-cine-blue/30 shadow-[0_0_15px_rgba(1,180,228,0.15)] font-bold"
+                    : "text-muted-foreground hover:text-foreground border-transparent"
+                )}
+              >
+                <Sparkles className={cn("h-3.5 w-3.5 text-purple-400 group-hover:animate-pulse", searchMode === "ai" && "animate-pulse text-cine-blue")} />
+                AI Semantic Search
+                {searchMode === "ai" && (
+                  <span className="absolute inset-0 bg-gradient-to-r from-cine-blue/5 to-purple-500/5 blur-md animate-pulse" />
+                )}
+              </button>
+            </div>
+
             {/* Input Wrapper */}
             <div className="relative flex items-center border-b border-white/[0.06] px-4 py-3">
-              <Search className="mr-3 h-5 w-5 text-muted-foreground" />
+              {searchMode === "ai" ? (
+                <Sparkles className="mr-3 h-5 w-5 text-cine-blue animate-pulse" />
+              ) : (
+                <Search className="mr-3 h-5 w-5 text-muted-foreground" />
+              )}
               <input
                 ref={inputRef}
                 type="text"
-                placeholder="Search movies, collections..."
+                placeholder={
+                  searchMode === "ai"
+                    ? "Describe a plot, mood, or characters (e.g., lost in space)..."
+                    : "Search movies, collections..."
+                }
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 className="h-10 w-full bg-transparent text-base text-foreground outline-none placeholder:text-muted-foreground/60"
@@ -230,10 +286,17 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                   {/* Category Title Header */}
                   <div className="px-3 py-1.5 text-[10px] font-bold tracking-widest text-muted-foreground/60 uppercase flex items-center gap-1.5">
                     {query.trim() ? (
-                      <>
-                        <Search className="h-3 w-3" />
-                        Search Results
-                      </>
+                      searchMode === "ai" ? (
+                        <>
+                          <Sparkles className="h-3 w-3 text-cine-blue animate-pulse" />
+                          AI Semantic Matches
+                        </>
+                      ) : (
+                        <>
+                          <Search className="h-3 w-3" />
+                          Search Results
+                        </>
+                      )
                     ) : (
                       <>
                         <TrendingUp className="h-3 w-3 text-cine-blue" />
@@ -321,11 +384,19 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
                 /* Beautiful empty state */
                 <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/[0.02] border border-white/[0.06] text-muted-foreground shadow-inner">
-                    <Search className="h-6 w-6" />
+                    {searchMode === "ai" ? (
+                      <Sparkles className="h-6 w-6 text-cine-blue animate-pulse" />
+                    ) : (
+                      <Search className="h-6 w-6 text-muted-foreground" />
+                    )}
                   </div>
-                  <h3 className="text-sm font-bold text-foreground">No matches found</h3>
+                  <h3 className="text-sm font-bold text-foreground">
+                    {searchMode === "ai" ? "No semantic matches found" : "No matches found"}
+                  </h3>
                   <p className="mt-1 text-xs text-muted-foreground max-w-[280px]">
-                    We couldn&apos;t find any movies for &ldquo;{query}&rdquo;. Try another term.
+                    {searchMode === "ai"
+                      ? "Try describing the movie plot in another way, or switch to Standard Search."
+                      : `We couldn't find any movies for "${query}". Try another term.`}
                   </p>
                 </div>
               ) : null}

@@ -59,7 +59,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // 2. Local Storage Watchlist Fallback
   const fetchLocalWatchlist = () => {
     try {
-      const saved = localStorage.getItem("cinematch-watchlist");
+      let saved = localStorage.getItem("cinewatch-watchlist");
+      if (!saved) {
+        const legacySaved = localStorage.getItem("cinematch-watchlist");
+        if (legacySaved) {
+          saved = legacySaved;
+          localStorage.setItem("cinewatch-watchlist", legacySaved);
+          localStorage.removeItem("cinematch-watchlist");
+        }
+      }
+
       if (saved) {
         setWatchlist(JSON.parse(saved));
       } else {
@@ -100,10 +109,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // 4. Offline-to-Online Watchlist Synchronization
   const syncLocalStorageToCloud = async (userId: string) => {
     try {
-      const saved = localStorage.getItem("cinematch-watchlist");
+      const saved = localStorage.getItem("cinewatch-watchlist");
       if (!saved) return;
 
       const localMovies = JSON.parse(saved) as Movie[];
@@ -132,7 +140,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.error("Watchlist sync failed:", error);
       } else {
         // Clear local storage on successful sync to prevent double-loading
-        localStorage.removeItem("cinematch-watchlist");
+        localStorage.removeItem("cinewatch-watchlist");
         console.log("Watchlist synced successfully!");
       }
     } catch (err) {
@@ -179,20 +187,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const errMsg = err.message || JSON.stringify(err);
         if (errMsg.includes("row-level security") || errMsg.includes("RLS") || errMsg.includes("policy")) {
           alert(
-            "CineMatch Watchlist Security Alert\n\n" +
+            "CineWatch AI Watchlist Security Alert\n\n" +
             "It looks like your action was blocked by the database security policy.\n\n" +
             "If you recently created a new account, please check your inbox (and spam/promotions folder) " +
             "for the email titled 'Confirm your email address' and click the confirmation link to activate your account's cloud database write access!\n\n" +
             "Once confirmed, you will be able to add movies to your watchlist successfully."
           );
         } else {
-          alert(`CineMatch Watchlist Error: ${errMsg}`);
+          alert(`CineWatch AI Watchlist Error: ${errMsg}`);
         }
       }
     } else {
       // Local storage mode
       try {
-        const saved = localStorage.getItem("cinematch-watchlist");
+        const saved = localStorage.getItem("cinewatch-watchlist");
         let list: Movie[] = saved ? JSON.parse(saved) : [];
 
         if (isSaved) {
@@ -201,7 +209,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           list = [movie, ...list];
         }
 
-        localStorage.setItem("cinematch-watchlist", JSON.stringify(list));
+        localStorage.setItem("cinewatch-watchlist", JSON.stringify(list));
         setWatchlist(list);
       } catch (err) {
         console.error("Failed to toggle offline local storage watchlist:", err);
@@ -209,7 +217,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     // Proactively dispatch window event to sync other widgets on homepage
-    window.dispatchEvent(new Event("cinematch-watchlist-change"));
+    window.dispatchEvent(new Event("cinewatch-watchlist-change"));
   };
 
   const isInWatchlist = (movieId: number) => {
@@ -237,14 +245,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     } else {
       try {
-        localStorage.removeItem("cinematch-watchlist");
+        localStorage.removeItem("cinewatch-watchlist");
         setWatchlist([]);
       } catch (err) {
         console.error("Failed to clear offline watchlist:", err);
       }
     }
     // Proactively dispatch window event to sync other widgets on homepage
-    window.dispatchEvent(new Event("cinematch-watchlist-change"));
+    window.dispatchEvent(new Event("cinewatch-watchlist-change"));
   };
 
   return (

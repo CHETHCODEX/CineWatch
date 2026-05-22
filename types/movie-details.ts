@@ -1,5 +1,5 @@
 // =============================================================================
-// CineMatch — Mock MovieDetail Data
+// CineWatch AI — Mock MovieDetail Data
 // Rich detail data shaped to TMDB API responses for future integration.
 // =============================================================================
 

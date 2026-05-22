@@ -216,7 +216,7 @@ export async function POST(request: Request) {
     const geminiKey = process.env.GEMINI_API_KEY;
     let chatbotReply = "";
 
-    const systemPrompt = `You are the CineMatch AI Assistant, a premium, exceptionally smart movie concierge. 
+    const systemPrompt = `You are the CineWatch AI Assistant, a premium, exceptionally smart movie concierge. 
 The user is asking for movie suggestions. Recommend these specific movies:
 ${finalRecommendations.map((m) => `- "${m.title}": ${m.overview}`).join("\n")}
 
@@ -236,7 +236,7 @@ Guidelines:
       const titles = finalRecommendations.map((m) => `"${m.title}"`).join(", ");
       
       const responses = [
-        `Outstanding request! Based on your mood, I highly recommend exploring ${titles}. These films have stellar reviews and represent top-tier filmmaking. Check them out directly in the cards below to save them straight to your CineMatch watchlist!`,
+        `Outstanding request! Based on your mood, I highly recommend exploring ${titles}. These films have stellar reviews and represent top-tier filmmaking. Check them out directly in the cards below to save them straight to your CineWatch AI watchlist!`,
         `Excellent taste. I've curated a beautiful list matching your request: ${titles}. They offer deep thematic depth, brilliant visuals, and unmatched performances. What aspects of these films sound most appealing to you?`,
         `A superb exploration. You should dive into ${titles} tonight. They perfectly match your request and deliver a truly memorable cinematic experience. I have attached their movie files below so you can add them to your watchlist with a single click!`,
       ];

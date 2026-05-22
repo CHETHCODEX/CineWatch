@@ -521,7 +521,7 @@ export function MarathonGenerator({ isOpen, onClose, watchlist }: MarathonGenera
                   <div className="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-2.5 mt-2">
                     <AlertTriangle className="w-4 h-4 text-yellow-400 flex-shrink-0 mt-0.5" />
                     <p className="text-[10px] text-yellow-300">
-                      Your watchlist is empty! The algorithm will gracefully fall back to CineMatch Curated Classics.
+                      Your watchlist is empty! The algorithm will gracefully fall back to CineWatch AI Curated Classics.
                     </p>
                   </div>
                 )}

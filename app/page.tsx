@@ -6,7 +6,7 @@ import { TrendingSection } from "@/components/sections/trending-section";
 import { CoWatchSection } from "@/components/sections/co-watch-matcher";
 import { WatchlistSection } from "@/components/sections/watchlist-section";
 import { Footer } from "@/components/sections/footer";
-import { getTrending, getTopRated, getNowPlaying } from "@/lib/tmdb";
+import { getTrending, getTopRated, getNowPlaying, getPopular } from "@/lib/tmdb";
 import { getPosterUrl, MOCK_MOVIES, MOCK_GENRES } from "@/types/movie";
 import type { Movie } from "@/types/movie";
 import type { GalleryMovie } from "@/components/ui/circular-gallery";
@@ -53,23 +53,26 @@ function toExpandCardMovie(movie: Movie): ExpandCardMovie {
 
 async function fetchPageData() {
   try {
-    const [trendingRes, topRatedRes, nowPlayingRes] = await Promise.allSettled([
+    const [trendingRes, topRatedRes, nowPlayingRes, popularRes] = await Promise.allSettled([
       getTrending(),
       getTopRated(),
       getNowPlaying(),
+      getPopular(),
     ]);
 
     const trending =
-      trendingRes.status === "fulfilled" ? trendingRes.value.results.slice(0, 10) : [];
+      trendingRes.status === "fulfilled" ? trendingRes.value.results : [];
     const topRated =
-      topRatedRes.status === "fulfilled" ? topRatedRes.value.results.slice(0, 9) : [];
+      topRatedRes.status === "fulfilled" ? topRatedRes.value.results : [];
     const nowPlaying =
-      nowPlayingRes.status === "fulfilled" ? nowPlayingRes.value.results.slice(0, 8) : [];
+      nowPlayingRes.status === "fulfilled" ? nowPlayingRes.value.results : [];
+    const popular =
+      popularRes.status === "fulfilled" ? popularRes.value.results : [];
 
-    return { trending, topRated, nowPlaying, isLive: trending.length > 0 };
+    return { trending, topRated, nowPlaying, popular, isLive: trending.length > 0 };
   } catch {
     // Graceful fallback to mock data if TMDB key is missing or API is down
-    return { trending: [], topRated: [], nowPlaying: [], isLive: false };
+    return { trending: [], topRated: [], nowPlaying: [], popular: [], isLive: false };
   }
 }
 
@@ -78,11 +81,16 @@ async function fetchPageData() {
 // =============================================================================
 
 export default async function Home() {
-  const { trending, topRated, isLive } = await fetchPageData();
+  const { trending, topRated, nowPlaying, popular, isLive } = await fetchPageData();
 
-  // Transform to component shapes — fall back to undefined (uses built-in defaults)
-  const trendingGallery = isLive ? trending.map(toGalleryMovie) : undefined;
-  const discoverCards = isLive ? topRated.map(toExpandCardMovie) : undefined;
+  // Transform to component shapes — slice to expected display limits
+  const trendingGallery = isLive ? trending.slice(0, 10).map(toGalleryMovie) : undefined;
+  const discoverCards = isLive ? topRated.slice(0, 9).map(toExpandCardMovie) : undefined;
+
+  // Deduplicate and combine a massive pool of 70-80 movies for the Co-Watch Matcher
+  const coWatchPool = isLive 
+    ? Array.from(new Map([...trending, ...topRated, ...nowPlaying, ...popular].map(m => [m.id, m])).values())
+    : undefined;
 
   return (
     <>
@@ -103,7 +111,7 @@ export default async function Home() {
       <TrendingSection movies={trendingGallery} />
 
       {/* Co-Watch Matcher Game Section */}
-      <CoWatchSection movies={topRated} />
+      <CoWatchSection movies={coWatchPool} />
 
       {/* User's saved movies */}
       <WatchlistSection />

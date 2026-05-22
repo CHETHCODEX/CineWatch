@@ -1,5 +1,5 @@
 // =============================================================================
-// CineMatch — Movie Detail API Route
+// CineWatch — Movie Detail API Route
 // GET /api/movies/[id] → returns MovieDetail + similar movies
 // =============================================================================
 

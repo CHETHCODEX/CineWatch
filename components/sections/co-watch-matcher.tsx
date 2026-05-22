@@ -206,6 +206,17 @@ const ConfettiEffect = () => {
   );
 };
 
+// Helper to safely shuffle and pick 8 random movies from the list
+function getRandomDeck(movieList: Movie[]): Movie[] {
+  if (!movieList || movieList.length === 0) return [];
+  const shuffled = [...movieList];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled.slice(0, 8);
+}
+
 // =============================================================================
 // Main Exported Component
 // =============================================================================
@@ -243,7 +254,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
   useEffect(() => {
     const list = movies && movies.length > 5 ? movies : MOCK_MOVIES;
     // Limit to 8 balanced items for faster loop closure
-    setDeck(list.slice(0, 8));
+    setDeck(getRandomDeck(list));
   }, [movies]);
 
   // Check URL query parameters for dynamic join invites
@@ -260,19 +271,29 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
         setIsSimulated(false);
 
         // Load room configuration from localStorage
-        let sessionDataStr = localStorage.getItem(`cinematch_session_${sessionParam}`);
+        let sessionDataStr = localStorage.getItem(`cinewatch_session_${sessionParam}`);
         if (!sessionDataStr) {
-          // Robust Fallback: Initialize local session if it doesn't exist (e.g., across separate browser profiles or sandboxed Incognito tabs)
-          const fallbackDeck = movies && movies.length > 5 ? movies : MOCK_MOVIES.slice(0, 8);
+          // Check for legacy CineMatch session
+          const legacySession = localStorage.getItem(`cinematch_session_${sessionParam}`);
+          if (legacySession) {
+            sessionDataStr = legacySession;
+            localStorage.setItem(`cinewatch_session_${sessionParam}`, legacySession);
+            localStorage.removeItem(`cinematch_session_${sessionParam}`);
+          }
+        }
+
+        if (!sessionDataStr) {
+          // Robust Fallback: Initialize local session if it doesn't exist
+          const fallbackDeck = movies && movies.length > 5 ? movies : MOCK_MOVIES;
           const initialSession = {
-            deck: fallbackDeck,
+            deck: getRandomDeck(fallbackDeck),
             p1Likes: [],
             p2Likes: [],
             p1Active: true,
             p2Active: true,
             matchedMovieId: null
           };
-          localStorage.setItem(`cinematch_session_${sessionParam}`, JSON.stringify(initialSession));
+          localStorage.setItem(`cinewatch_session_${sessionParam}`, JSON.stringify(initialSession));
           sessionDataStr = JSON.stringify(initialSession);
         }
 
@@ -281,7 +302,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
             const parsed = JSON.parse(sessionDataStr);
             // Mark partner active and update
             parsed.p2Active = true;
-            localStorage.setItem(`cinematch_session_${sessionParam}`, JSON.stringify(parsed));
+            localStorage.setItem(`cinewatch_session_${sessionParam}`, JSON.stringify(parsed));
             
             if (parsed.deck && parsed.deck.length > 0) {
               setDeck(parsed.deck);
@@ -324,7 +345,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
     if (typeof window === "undefined" || !sessionId) return;
 
     const handleStorageSync = (e: StorageEvent) => {
-      if (e.key === `cinematch_session_${sessionId}`) {
+      if (e.key === `cinewatch_session_${sessionId}`) {
         try {
           const val = e.newValue;
           if (!val) return;
@@ -420,7 +441,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
 
     // Case A: Real-Time Synced Link Mode (cross-tab)
     if (sessionId && !isSimulated) {
-      const sessionDataStr = localStorage.getItem(`cinematch_session_${sessionId}`);
+      const sessionDataStr = localStorage.getItem(`cinewatch_session_${sessionId}`);
       if (sessionDataStr) {
         try {
           const sessionData = JSON.parse(sessionDataStr);
@@ -438,7 +459,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
           }
 
           // Write back to sync across windows
-          localStorage.setItem(`cinematch_session_${sessionId}`, JSON.stringify(sessionData));
+          localStorage.setItem(`cinewatch_session_${sessionId}`, JSON.stringify(sessionData));
 
           // Check for immediate intersection
           const commonId = sessionData.p1Likes.find((id: number) => sessionData.p2Likes.includes(id));
@@ -579,9 +600,13 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
     setPartnerJoined(false);
     setCopied(false);
 
-    const currentDeck = deck.length > 0 ? deck : MOCK_MOVIES.slice(0, 8);
+    // Generate a fresh random deck for this new session
+    const moviePool = movies && movies.length > 5 ? movies : MOCK_MOVIES;
+    const freshDeck = getRandomDeck(moviePool);
+    setDeck(freshDeck);
+
     const initialSession = {
-      deck: currentDeck,
+      deck: freshDeck,
       p1Likes: [],
       p2Likes: [],
       p1Active: true,
@@ -589,7 +614,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
       matchedMovieId: null
     };
 
-    localStorage.setItem(`cinematch_session_${uniqId}`, JSON.stringify(initialSession));
+    localStorage.setItem(`cinewatch_session_${uniqId}`, JSON.stringify(initialSession));
 
     const url = window.location.origin + window.location.pathname + `?session=${uniqId}&role=p2`;
     setInviteUrl(url);
@@ -597,6 +622,10 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
   };
 
   const startSwiping = (selectedType: 'pass_play' | 'ai') => {
+    // Generate a fresh random deck for this new session
+    const moviePool = movies && movies.length > 5 ? movies : MOCK_MOVIES;
+    setDeck(getRandomDeck(moviePool));
+
     setMatchType(selectedType);
     setMode('swiping');
     setCurrentIndex(0);
@@ -628,6 +657,10 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
     setUserRole(null);
     setPartnerJoined(false);
     setIsSimulated(false);
+
+    // Generate a fresh standby deck
+    const moviePool = movies && movies.length > 5 ? movies : MOCK_MOVIES;
+    setDeck(getRandomDeck(moviePool));
 
     // Remove query params to avoid re-triggering join flow on refresh
     if (typeof window !== "undefined") {
@@ -779,7 +812,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                   <span>Snacking Pairings</span> 
                 </h4>
                 <p className="text-xs text-zinc-400 leading-relaxed font-medium">
-                  The moment a mutual like triggers: **It's a CineMatch!** Unlocks a detailed recommendations screen paired with a custom snack menu (e.g. Alien popcorn + space cider).
+                  The moment a mutual like triggers: **It's a CineWatch Match!** Unlocks a detailed recommendations screen paired with a custom snack menu (e.g. Alien popcorn + space cider).
                 </p>
                 <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
@@ -1145,7 +1178,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
             </h3>
 
             <p className="text-xs text-zinc-400 leading-relaxed mb-8 font-premium">
-              It is Player 2's turn to vote. Player 1's likes are locked in secret. Pass the device over, click the button below to load the same deck of films, and find out your CineMatches! No peeking!
+              It is Player 2's turn to vote. Player 1's likes are locked in secret. Pass the device over, click the button below to load the same deck of films, and find out your CineWatch Matches! No peeking!
             </p>
 
             <HoverButton
@@ -1181,7 +1214,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
               <div className="text-center mb-6">
                 <div className="inline-flex gap-2 items-center px-4.5 py-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 text-xs font-black text-emerald-400 uppercase tracking-widest mb-4 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
                   <Sparkles className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '3s' }} />
-                  <span className="font-premium">It's a CineMatch!</span>
+                  <span className="font-premium">It's a CineWatch Match!</span>
                 </div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white font-premium uppercase flex flex-wrap items-center justify-center gap-3">
                   <span>You Agreed on a Movie!</span>

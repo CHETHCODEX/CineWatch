@@ -1,5 +1,5 @@
 // =============================================================================
-// CineMatch — Movie Detail Page (Server Component)
+// CineWatch AI — Movie Detail Page (Server Component)
 // Route: /movie/[id]
 // =============================================================================
 
@@ -45,11 +45,11 @@ export async function generateMetadata({
   const data = await getMovie(Number(id));
 
   if (!data) {
-    return { title: "Movie Not Found — CineMatch" };
+    return { title: "Movie Not Found — CineWatch AI" };
   }
 
   return {
-    title: `${data.movie.title} — CineMatch`,
+    title: `${data.movie.title} — CineWatch AI`,
     description: data.movie.overview.slice(0, 160),
   };
 }

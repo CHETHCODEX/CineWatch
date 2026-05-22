@@ -1,5 +1,5 @@
 // =============================================================================
-// CineMatch — TMDB API Client
+// CineWatch AI — TMDB API Client
 // Server-side only. Never import this in client components.
 // =============================================================================
 

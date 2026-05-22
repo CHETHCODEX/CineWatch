@@ -1,5 +1,5 @@
 // =============================================================================
-// CineMatch — Shared TypeScript Interfaces
+// CineWatch AI — Shared TypeScript Interfaces
 // Shaped to match TMDB API response schemas for future integration.
 // =============================================================================
 
@@ -230,5 +230,60 @@ export const MOCK_MOVIES: Movie[] = [
     release_date: "2015-05-13",
     vote_average: 7.6,
     genre_ids: [28, 12, 878],
+  },
+  {
+    id: 603,
+    title: "The Matrix",
+    overview:
+      "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground freedom fighters to battle the powerful computers that rule the Earth.",
+    poster_path: "/f89U3wzqrjVnH5vjo21uQ23N08v.jpg",
+    backdrop_path: "/lh5aSmchF7BzIFw636uz6UIE56t.jpg",
+    release_date: "1999-03-30",
+    vote_average: 8.2,
+    genre_ids: [28, 878],
+  },
+  {
+    id: 98,
+    title: "Gladiator",
+    overview:
+      "In the year 180, the death of Emperor Marcus Aurelius throws the Roman Empire into chaos. Maximus is one of the Roman army's most capable and trusted generals. When the emperor's devious son Commodus ascends to the throne, Maximus is arrested and condemned to death.",
+    poster_path: "/ty87ILCoUcWtKj1Z0w3p5T8j70B.jpg",
+    backdrop_path: "/h7922gL55l4zD410A49bU6A1T1A.jpg",
+    release_date: "2000-05-01",
+    vote_average: 8.2,
+    genre_ids: [28, 12, 18],
+  },
+  {
+    id: 329,
+    title: "Jurassic Park",
+    overview:
+      "A wealthy entrepreneur secretly creates a theme park featuring living dinosaurs drawn from prehistoric DNA. Before opening the attraction to the public, he invites a select group of experts to secure the park.",
+    poster_path: "/o9Q3QIhLh9aWb3c8qWwU40W8k4B.jpg",
+    backdrop_path: "/2vFuGgVjBwLd9A8y0w4A102A10A.jpg",
+    release_date: "1993-06-11",
+    vote_average: 7.9,
+    genre_ids: [12, 878, 53],
+  },
+  {
+    id: 597,
+    title: "Titanic",
+    overview:
+      "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later, and the young man named Jack Dawson she fell in love with.",
+    poster_path: "/9xj724H1rm2567Wv44Z5YEC4w5C.jpg",
+    backdrop_path: "/2y772gL55l4zD410A49bU6A1T1A.jpg",
+    release_date: "1997-11-18",
+    vote_average: 7.9,
+    genre_ids: [18, 10749, 53],
+  },
+  {
+    id: 129,
+    title: "Spirited Away",
+    overview:
+      "A young girl, Chihiro, becomes trapped in a mysterious world of spirits. After her parents are transformed into pigs, she must take a job working in a bathhouse to find a way to free them and return to the human world.",
+    poster_path: "/39wmItIWsg5scl6c6Hw2gScg8tV.jpg",
+    backdrop_path: "/4H922gL55l4zD410A49bU6A1T1A.jpg",
+    release_date: "2001-07-20",
+    vote_average: 8.5,
+    genre_ids: [16, 14, 10751],
   },
 ];
