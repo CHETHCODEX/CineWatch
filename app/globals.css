@@ -1,26 +1,289 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap');
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================================
+   CineMatch — Dark Cinematic Theme
+   Aesthetic: High-end film magazine meets premium streaming platform
+   ============================================================================ */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
-}
+  --font-heading: var(--font-sans);
+  --font-display: "Syne", sans-serif;
+  --font-premium: "Outfit", "Plus Jakarta Sans", sans-serif;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* shadcn semantic color mappings */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --radius-none: 0px;
+  --radius-xs: 0.125rem;
+  --radius-default: 0.375rem;
+  --radius-full: 9999px;
+  --color-button-ripple-color: var(--button-ripple-color);
+
+  /* CineMatch custom accent tokens */
+  --color-cine-blue: var(--cine-blue);
+  --color-cine-blue-glow: var(--cine-blue-glow);
+  --color-cine-amber: var(--cine-amber);
+  --color-cine-amber-glow: var(--cine-amber-glow);
+  --color-cine-surface: var(--cine-surface);
+  --color-cine-surface-hover: var(--cine-surface-hover);
+
+  /* Marquee animation for gallery */
+  --animate-marquee: marquee var(--duration, 40s) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================================
+   Light mode (exists for completeness but CineMatch is dark-first)
+   ============================================================================ */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* CineMatch accent tokens — light mode fallback */
+  --cine-blue: oklch(0.62 0.214 259);
+  --cine-blue-glow: oklch(0.62 0.214 259 / 40%);
+  --cine-amber: oklch(0.795 0.184 86);
+  --cine-amber-glow: oklch(0.795 0.184 86 / 40%);
+  --cine-surface: oklch(0.95 0 0);
+  --cine-surface-hover: oklch(0.92 0 0);
+  --button-ripple-color: oklch(0.145 0 0 / 0.3);
+}
+
+/* ============================================================================
+   Dark mode — THE primary CineMatch experience
+   Deep blacks, rich charcoal, electric blue & neon amber accents
+   ============================================================================ */
+.dark {
+  /* Core surfaces — pure cinema darkness */
+  --background: oklch(0.09 0 0);            /* near-black, deeper than default */
+  --foreground: oklch(0.96 0 0);            /* crisp off-white text */
+
+  /* Cards float slightly above background */
+  --card: oklch(0.13 0 0);
+  --card-foreground: oklch(0.96 0 0);
+
+  /* Popovers / dialogs — slightly lighter than cards */
+  --popover: oklch(0.15 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+
+  /* Primary — electric blue accent */
+  --primary: oklch(0.62 0.214 259);
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Secondary — muted charcoal surface */
+  --secondary: oklch(0.18 0 0);
+  --secondary-foreground: oklch(0.9 0 0);
+
+  /* Muted — for subdued text and subtle elements */
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+
+  /* Accent — a slightly brighter surface for interactive elements */
+  --accent: oklch(0.2 0 0);
+  --accent-foreground: oklch(0.96 0 0);
+
+  --destructive: oklch(0.704 0.191 22.216);
+
+  /* Borders — very subtle, glass-like */
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.62 0.214 259 / 50%);      /* blue ring glow */
+
+  /* Charts */
+  --chart-1: oklch(0.62 0.214 259);         /* electric blue */
+  --chart-2: oklch(0.795 0.184 86);         /* amber */
+  --chart-3: oklch(0.56 0.2 320);           /* magenta */
+  --chart-4: oklch(0.7 0.18 160);           /* teal */
+  --chart-5: oklch(0.75 0.12 60);           /* warm */
+
+  /* Sidebar */
+  --sidebar: oklch(0.11 0 0);
+  --sidebar-foreground: oklch(0.96 0 0);
+  --sidebar-primary: oklch(0.62 0.214 259);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.18 0 0);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: oklch(0.62 0.214 259 / 50%);
+
+  /* CineMatch bespoke accent tokens */
+  --cine-blue: oklch(0.62 0.214 259);       /* primary electric blue */
+  --cine-blue-glow: oklch(0.62 0.214 259 / 30%);
+  --cine-amber: oklch(0.795 0.184 86);      /* neon amber — ratings, highlights */
+  --cine-amber-glow: oklch(0.795 0.184 86 / 30%);
+  --cine-surface: oklch(1 0 0 / 5%);        /* glassmorphism surface */
+  --cine-surface-hover: oklch(1 0 0 / 10%);
+  --button-ripple-color: oklch(0.985 0 0 / 0.5);
+}
+
+/* ============================================================================
+   Base Layer
+   ============================================================================ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+  }
+}
+
+/* ============================================================================
+   Utility: hide scrollbars (for horizontal scrolling areas)
+   ============================================================================ */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================================
+   Utility: cinematic text gradient
+   ============================================================================ */
+.text-gradient-cine {
+  background: linear-gradient(
+    135deg,
+    oklch(0.62 0.214 259) 0%,
+    oklch(0.75 0.2 280) 50%,
+    oklch(0.795 0.184 86) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================================================
+   Utility: glow effects for cards and buttons
+   ============================================================================ */
+.glow-blue {
+  box-shadow: 0 0 20px oklch(0.62 0.214 259 / 20%),
+              0 0 60px oklch(0.62 0.214 259 / 10%);
+}
+
+.glow-amber {
+  box-shadow: 0 0 20px oklch(0.795 0.184 86 / 20%),
+              0 0 60px oklch(0.795 0.184 86 / 10%);
+}
+
+/* ============================================================================
+   Styling native select options for proper dark-theme rendering across browsers
+   ============================================================================ */
+select option {
+  background-color: #0f0f13; /* Solid dark cinematic background matching the theme */
+  color: #f5f5f7;            /* High-contrast off-white text color */
+}
+
+/* Optional: ensure dropdown matches dark background on platforms that support it */
+select {
+  color-scheme: dark;
+}
+
+/* ============================================================================
+   AI Assistant Glow & Animation Utilities (Tailwind 4 Compliant)
+   ============================================================================ */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-popIn {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.floating-ai-button:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.9), 0 0 50px rgba(124, 58, 237, 0.7), 0 0 70px rgba(109, 40, 217, 0.5);
 }
