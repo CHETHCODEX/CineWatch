@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchMovies } from "@/lib/tmdb";
 
-const PYTHON_BACKEND_URL = "http://127.0.0.1:8000/search";
+const PYTHON_BACKEND_URL = process.env.PYTHON_BACKEND_URL || "http://127.0.0.1:8000/search";
 
 export async function GET(req: NextRequest) {
   try {

@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getMoviesByMood } from "@/lib/tmdb";
 
-const PYTHON_BACKEND_URL = "http://127.0.0.1:8000/search";
+const PYTHON_BACKEND_URL = process.env.PYTHON_BACKEND_URL || "http://127.0.0.1:8000/search";
 
 // Maps standard mood keys to rich natural-language prompts for vector search
 const MOOD_PROMPTS: Record<string, string> = {
