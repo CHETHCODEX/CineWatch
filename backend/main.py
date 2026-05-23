@@ -227,8 +227,8 @@ def startup_event():
     
     if TMDB_API_KEY:
         try:
-            # Fetch 5 pages of popular movies and 5 pages of top-rated movies
-            for page in range(1, 6):
+            # Fetch 3 pages of popular movies and 3 pages of top-rated movies
+            for page in range(1, 4):
                 # Popular
                 pop_url = f"{TMDB_BASE}/movie/popular?api_key={TMDB_API_KEY}&page={page}"
                 pop_res = requests.get(pop_url, timeout=10)
@@ -246,7 +246,10 @@ def startup_event():
                             fetched_movies[m["id"]] = m
             
             movie_database = list(fetched_movies.values())
-            print(f"Successfully fetched {len(movie_database)} unique movies from TMDB.")
+            
+            # Limit to exactly 80 movies to stay perfectly within the Google Gemini Free Tier rate limit of 100 requests per minute
+            movie_database = movie_database[:80]
+            print(f"Successfully fetched and limited to {len(movie_database)} unique movies from TMDB.")
             
         except Exception as e:
             print(f"[Warning] Failed to fetch live TMDB movies: {e}. Falling back to mock data.")
