@@ -59,19 +59,19 @@ def get_gemini_embeddings(texts: list[str]) -> np.ndarray:
     """Fetches text embeddings for a list of strings using Google Gemini's Embedding API."""
     if not GEMINI_API_KEY:
         print("[Error] GEMINI_API_KEY is missing. Cannot fetch embeddings.")
-        return np.zeros((len(texts), 768)) # text-embedding-004 uses 768 dimensions
+        return np.zeros((len(texts), 768)) # gemini-embedding-001 uses 768 dimensions
         
     embeddings_list = []
     chunk_size = 50 # Batch in chunks to prevent large payloads
     
     for i in range(0, len(texts), chunk_size):
         chunk = texts[i:i+chunk_size]
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:batchEmbedContents?key={GEMINI_API_KEY}"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents?key={GEMINI_API_KEY}"
         
         requests_payload = {
             "requests": [
                 {
-                    "model": "models/text-embedding-004",
+                    "model": "models/gemini-embedding-001",
                     "content": {
                         "parts": [{"text": text}]
                     }
@@ -102,9 +102,9 @@ def get_gemini_query_embedding(query: str) -> np.ndarray:
     if not GEMINI_API_KEY:
         return np.zeros(768)
         
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key={GEMINI_API_KEY}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key={GEMINI_API_KEY}"
     payload = {
-        "model": "models/text-embedding-004",
+        "model": "models/gemini-embedding-001",
         "content": {
             "parts": [{"text": query}]
         }
@@ -281,7 +281,7 @@ def get_status():
     return {
         "ready": is_ready,
         "indexed_movies_count": len(movie_database),
-        "model": "Gemini-text-embedding-004"
+        "model": "Gemini-gemini-embedding-001"
     }
 
 @app.get("/search")
