@@ -7,14 +7,13 @@ import numpy as np
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from sentence_transformers import SentenceTransformer
 
 # =============================================================================
 # FastAPI Initialization
 # =============================================================================
 app = FastAPI(
     title="CineWatch AI Semantic Search Service",
-    description="Vector search microservice using sentence-transformers.",
+    description="Vector search microservice using Gemini Embeddings API.",
     version="1.0.0"
 )
 
@@ -27,7 +26,6 @@ app.add_middleware(
 )
 
 # Global variables to store movie index
-model = None
 movie_database = []
 movie_embeddings = None
 is_ready = False
@@ -35,24 +33,94 @@ is_ready = False
 # =============================================================================
 # Helper: Parse Environment Variables
 # =============================================================================
-def load_tmdb_key() -> str:
-    """Reads the TMDB API key from the parent directory's .env.local file."""
-    # Look in the parent project directory
+def load_env_key(key_name: str) -> str:
+    """Reads an API key from the parent directory's .env.local file or environment."""
     env_path = Path(__file__).resolve().parent.parent / ".env.local"
     if env_path.exists():
         try:
             with open(env_path, "r", encoding="utf-8") as f:
                 for line in f:
-                    if line.strip().startswith("TMDB_API_KEY="):
-                        key = line.strip().split("=", 1)[1]
-                        return key.strip("'\"")
+                    if line.strip().startswith(f"{key_name}="):
+                        val = line.strip().split("=", 1)[1]
+                        return val.strip("'\"")
         except Exception as e:
             print(f"[Warning] Failed to read .env.local file: {e}")
     
-    return os.getenv("TMDB_API_KEY", "")
+    return os.getenv(key_name, "")
 
-TMDB_API_KEY = load_tmdb_key()
+TMDB_API_KEY = load_env_key("TMDB_API_KEY")
+GEMINI_API_KEY = load_env_key("GEMINI_API_KEY")
 TMDB_BASE = "https://api.themoviedb.org/3"
+
+# =============================================================================
+# Gemini Embeddings Helpers
+# =============================================================================
+def get_gemini_embeddings(texts: list[str]) -> np.ndarray:
+    """Fetches text embeddings for a list of strings using Google Gemini's Embedding API."""
+    if not GEMINI_API_KEY:
+        print("[Error] GEMINI_API_KEY is missing. Cannot fetch embeddings.")
+        return np.zeros((len(texts), 768)) # text-embedding-004 uses 768 dimensions
+        
+    embeddings_list = []
+    chunk_size = 50 # Batch in chunks to prevent large payloads
+    
+    for i in range(0, len(texts), chunk_size):
+        chunk = texts[i:i+chunk_size]
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:batchEmbedContents?key={GEMINI_API_KEY}"
+        
+        requests_payload = {
+            "requests": [
+                {
+                    "model": "models/text-embedding-004",
+                    "content": {
+                        "parts": [{"text": text}]
+                    }
+                }
+                for text in chunk
+            ]
+        }
+        
+        try:
+            res = requests.post(url, json=requests_payload, timeout=20)
+            if res.status_code == 200:
+                data = res.json()
+                for emb in data.get("embeddings", []):
+                    embeddings_list.append(emb.get("values", []))
+            else:
+                print(f"[Error] Gemini Embedding API failed: {res.text}")
+                for _ in chunk:
+                    embeddings_list.append([0.0] * 768)
+        except Exception as e:
+            print(f"[Error] Gemini Embedding API connection error: {e}")
+            for _ in chunk:
+                embeddings_list.append([0.0] * 768)
+                
+    return np.array(embeddings_list)
+
+def get_gemini_query_embedding(query: str) -> np.ndarray:
+    """Fetches the embedding for a single search query string using Gemini."""
+    if not GEMINI_API_KEY:
+        return np.zeros(768)
+        
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/text-embedding-004:embedContent?key={GEMINI_API_KEY}"
+    payload = {
+        "model": "models/text-embedding-004",
+        "content": {
+            "parts": [{"text": query}]
+        }
+    }
+    
+    try:
+        res = requests.post(url, json=payload, timeout=10)
+        if res.status_code == 200:
+            data = res.json()
+            return np.array(data.get("embedding", {}).get("values", [0.0] * 768))
+        else:
+            print(f"[Error] Gemini Single Embedding API failed: {res.text}")
+    except Exception as e:
+        print(f"[Error] Gemini Single Embedding API connection error: {e}")
+        
+    return np.zeros(768)
 
 # =============================================================================
 # Mock Database Fallback (if TMDB Key is missing or TMDB is offline)
@@ -145,14 +213,15 @@ MOCK_MOVIES = [
 # =============================================================================
 @app.on_event("startup")
 def startup_event():
-    """Starts up the server, loads the NLP model, indexes popular movies from TMDB."""
-    global model, movie_database, movie_embeddings, is_ready
+    """Starts up the server, indexes popular movies from TMDB, and fetches Gemini vector embeddings."""
+    global movie_database, movie_embeddings, is_ready
     
-    print("[1/3] Loading SentenceTransformer NLP Model ('all-MiniLM-L6-v2')...")
-    # Load model (downloads if not cached; about 90MB)
-    model = SentenceTransformer("all-MiniLM-L6-v2")
-    print("NLP Model loaded successfully.")
-    
+    print("[1/3] Checking API Configurations...")
+    if not GEMINI_API_KEY:
+        print("[Warning] GEMINI_API_KEY is missing! Semantic search will run in mock mode.")
+    else:
+        print("Gemini API key loaded successfully.")
+        
     print("[2/3] Fetching popular movies from TMDB API to populate the database...")
     fetched_movies = {}
     
@@ -186,22 +255,22 @@ def startup_event():
         print("[Notice] TMDB API Key not found in environment or .env.local. Initializing with fallback mock database.")
         movie_database = MOCK_MOVIES
 
-    print(f"[3/3] Generating vector embeddings for {len(movie_database)} movies...")
+    print(f"[3/3] Generating Gemini vector embeddings for {len(movie_database)} movies...")
     # Generate text document for each movie: "Title: <title>. Overview: <overview>"
     documents = [
         f"Title: {movie['title']}. Overview: {movie['overview']}"
         for movie in movie_database
     ]
     
-    # Compute embeddings
-    movie_embeddings = model.encode(documents, show_progress_bar=True, convert_to_numpy=True)
+    # Compute embeddings using Gemini API instead of local sentence-transformers
+    movie_embeddings = get_gemini_embeddings(documents)
     
     # Normalize embeddings for high-speed cosine similarity (dot product of normalized vectors)
     norms = np.linalg.norm(movie_embeddings, axis=1, keepdims=True)
     movie_embeddings = movie_embeddings / np.where(norms == 0, 1, norms)
     
     is_ready = True
-    print("AI Semantic Index built and ready for search queries!")
+    print("AI Semantic Index built and ready for search queries via Gemini Embeddings!")
 
 # =============================================================================
 # API Endpoints
@@ -212,13 +281,13 @@ def get_status():
     return {
         "ready": is_ready,
         "indexed_movies_count": len(movie_database),
-        "model": "all-MiniLM-L6-v2"
+        "model": "Gemini-text-embedding-004"
     }
 
 @app.get("/search")
 def search(query: str, genres: str = None):
     """Semantic vector search using cosine similarity with optional genre filtering."""
-    global model, movie_database, movie_embeddings, is_ready
+    global movie_database, movie_embeddings, is_ready
     
     if not is_ready:
         raise HTTPException(
@@ -238,8 +307,8 @@ def search(query: str, genres: str = None):
             except ValueError:
                 pass
 
-        # Embed query
-        query_embedding = model.encode(query, convert_to_numpy=True)
+        # Embed query using Gemini API
+        query_embedding = get_gemini_query_embedding(query)
         
         # Normalize query embedding
         query_norm = np.linalg.norm(query_embedding)
@@ -290,4 +359,3 @@ def search(query: str, genres: str = None):
     except Exception as e:
         print(f"Error during semantic search: {e}")
         raise HTTPException(status_code=500, detail="Internal semantic search computation failure.")
-
