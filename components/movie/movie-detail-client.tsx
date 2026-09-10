@@ -45,6 +45,7 @@ interface MovieDetailClientProps {
   };
   onBack?: () => void;
   backLabel?: string;
+  backUrl?: string;
 }
 
 // =============================================================================
@@ -57,6 +58,7 @@ export default function MovieDetailClient({
   explanation,
   onBack,
   backLabel,
+  backUrl,
 }: MovieDetailClientProps) {
   const { isInWatchlist, toggleWatchlist } = useAuth();
   const [showTrailer, setShowTrailer] = useState(false);
@@ -181,11 +183,11 @@ export default function MovieDetailClient({
               </button>
             ) : (
               <Link
-                href="/"
+                href={backUrl || (explanation ? "/hackathon" : "/")}
                 className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black/40 hover:bg-black/60 backdrop-blur-md text-white/90 hover:text-white text-sm font-medium transition-all duration-200 border border-white/10"
               >
                 <ArrowLeft className="w-4 h-4" />
-                {backLabel || "Back"}
+                {backLabel || (explanation ? "Back to AI Match" : "Back")}
               </Link>
             )}
           </motion.div>

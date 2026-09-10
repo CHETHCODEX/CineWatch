@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { 
   Sparkles, 
   ArrowLeft, 
@@ -28,9 +29,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/sections/navbar';
-import MovieDetailClient from '@/components/movie/movie-detail-client';
 import { CarouselStacked, type Slide } from '@/components/ui/carousel-07';
-import type { MovieDetail, Movie, CastMember } from '@/types/movie';
 
 interface Explanation {
   text: string;
@@ -58,6 +57,7 @@ interface WatchlistItem {
   voteAverage?: number;
   tagline?: string;
   trailerKey?: string;
+  tmdbId?: number;
 }
 
 interface UserEngagement {
@@ -121,52 +121,6 @@ const getFallbackPoster = (title: string, year: number) => {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 };
 
-const KNOWN_TRAILERS: Record<string, string> = {
-  "the devil wears prada": "6ZOZwUQKu3E",
-  "pirates of the caribbean: on stranger tides": "KR_9A-cUEJc",
-  "avatar": "5PSNL1qE6VY",
-  "the matrix": "vKQi3bBA1y8",
-  "the godfather": "sY1S34973zA",
-  "superbad": "4eaZ_48ZYog",
-  "gandhi, my father": "p_0L0Q_u_Y8",
-  "zombieland": "8m9EVP8X7N8",
-  "blade runner": "gCcx85zbxz4",
-  "the social network": "lB95KLmpLR4",
-  "monsters, inc.": "CGbSVVvQYEY",
-  "monsters university": "xBzPioph8CI",
-  "psycho": "Wz717bWcx6g",
-  "one flew over the cuckoo's nest": "OXrcDonY-B8",
-  "a league of their own": "WcN392BA8ac",
-  "maleficent": "704cAxyh7zA",
-  "friends with money": "zR_H04hF3qI",
-  "the adventures of tintin": "Jvh_6QZ6m1g",
-  "jupiter ascending": "fOVLwU6jZ28",
-  "diamonds are forever": "FvA3E_sYn0w",
-  "the living daylights": "s0Q4s-2h_6s",
-  "tomorrow never dies": "ok_6by-4v2k",
-  "the man with the golden gun": "d7iZ7qYd6eQ",
-  "a view to a kill": "D3z_7h0l868",
-  "live and let die": "f0yv46-2j98",
-  "the mask of zorro": "uctq_e7m384",
-  "bowfinger": "vQy5h6Z2j7w",
-  "the longest yard": "f9k8h6Z2j7w",
-  "s.w.a.t.": "v5g7h8j2k1l",
-  "ghost world": "f9h8j7k6l5m",
-  "not another teen movie": "p9o8i7u6y5t",
-  "yours, mine and ours": "m9n8b7v6c5x",
-};
-
-const ACTOR_PHOTOS = [
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&q=80",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&q=80",
-  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&q=80",
-  "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&q=80",
-  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&q=80",
-  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80",
-];
-
 export default function HackathonDashboard() {
   const [selectedUserId, setSelectedUserId] = useState<number>(42);
   const [customInputId, setCustomInputId] = useState<string>('');
@@ -175,9 +129,7 @@ export default function HackathonDashboard() {
   const [watchlist, setWatchlist] = useState<WatchlistItem[]>([]);
   const [metadata, setMetadata] = useState<MetadataStats | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  
-  // Selected movie for viewing in full CineWatch MovieDetailClient
-  const [selectedMovie, setSelectedMovie] = useState<WatchlistItem | null>(null);
+  const router = useRouter();
 
   // Convert watchlist into slides for the 3D deck
   const carouselSlides: Slide[] = useMemo(() => {
@@ -227,106 +179,37 @@ export default function HackathonDashboard() {
     }
   };
 
+  // Direct navigation to authentic /movie/[id] page (with TMDB backdrop, playable trailer, cast & XAI explanation)
   const handleSelectMovie = (slide: Slide) => {
-    if (slide.data) {
-      setSelectedMovie(slide.data as WatchlistItem);
-    } else if (slide.movieId) {
-      const found = watchlist.find((m) => m.movieId === slide.movieId);
-      if (found) setSelectedMovie(found);
+    const movie: WatchlistItem | undefined = slide.data
+      ? (slide.data as WatchlistItem)
+      : watchlist.find((m) => m.movieId === slide.movieId);
+
+    if (!movie) return;
+
+    const targetId = movie.tmdbId || movie.movieId;
+    const params = new URLSearchParams();
+    if (movie.explanation?.text) {
+      params.set("whyPicked", movie.explanation.text);
     }
+    if (movie.explanation?.tags && movie.explanation.tags.length > 0) {
+      params.set("tags", movie.explanation.tags.join(","));
+    }
+    if (movie.explanation?.peerAgreementPct !== undefined) {
+      params.set("peerAgreement", String(movie.explanation.peerAgreementPct));
+    }
+    if (movie.explanation?.collabScore !== undefined) {
+      params.set("collabScore", String(movie.explanation.collabScore));
+    }
+    if (movie.explanation?.contentScore !== undefined) {
+      params.set("contentScore", String(movie.explanation.contentScore));
+    }
+    if (movie.explanation?.hybridScore !== undefined) {
+      params.set("hybridScore", String(movie.explanation.hybridScore));
+    }
+
+    router.push(`/movie/${targetId}?${params.toString()}`);
   };
-
-  // Convert selectedMovie to CineWatch MovieDetail format
-  const movieDetailObject: MovieDetail | null = useMemo(() => {
-    if (!selectedMovie) return null;
-
-    // Parse cast list
-    let actorNames: string[] = [];
-    if (selectedMovie.cast && selectedMovie.cast.length > 0) {
-      const raw = selectedMovie.cast.join(' ');
-      const names = raw.split(/[,•|]/).map((s) => s.trim()).filter(Boolean);
-      if (names.length === 1 && names[0].split(' ').length > 2) {
-        const words = names[0].split(' ');
-        const paired: string[] = [];
-        for (let i = 0; i < words.length; i += 2) {
-          paired.push([words[i], words[i + 1] || ''].join(' ').trim());
-        }
-        actorNames = paired.filter(Boolean).slice(0, 8);
-      } else {
-        actorNames = names.slice(0, 8);
-      }
-    } else {
-      actorNames = ['Leading Cast', 'Co-Starring Actor', 'Supporting Actor'];
-    }
-
-    const castMembers: CastMember[] = actorNames.map((name, idx) => ({
-      id: selectedMovie.movieId * 100 + idx + 1,
-      name: name,
-      character: idx === 0 ? "Lead Character" : idx === 1 ? "Supporting Role" : "Featured Role",
-      profile_path: ACTOR_PHOTOS[idx % ACTOR_PHOTOS.length],
-    }));
-
-    const cleanTitleLower = selectedMovie.title.toLowerCase().trim();
-    const trailerKey = KNOWN_TRAILERS[cleanTitleLower] || "PMd1at7OwiE";
-
-    return {
-      id: selectedMovie.movieId,
-      title: selectedMovie.title,
-      overview: selectedMovie.overview || "Curated recommendation synthesized through neural collaborative filtering and semantic metadata affinity.",
-      poster_path: selectedMovie.posterPath,
-      backdrop_path: selectedMovie.posterPath,
-      release_date: `${selectedMovie.year}-01-01`,
-      vote_average: selectedMovie.voteAverage ?? (selectedMovie.predictedRating ? Number((selectedMovie.predictedRating * 2).toFixed(1)) : 8.4),
-      genre_ids: [28, 12],
-      genres: selectedMovie.genres.map((g, idx) => ({ id: idx + 1, name: g })),
-      runtime: selectedMovie.runtime || 118,
-      tagline: selectedMovie.tagline || null,
-      credits: {
-        cast: castMembers,
-      },
-      videos: {
-        results: [
-          {
-            id: `trailer-${selectedMovie.movieId}`,
-            key: trailerKey,
-            name: `${selectedMovie.title} Official Trailer`,
-            site: "YouTube",
-            type: "Trailer",
-          },
-        ],
-      },
-    };
-  }, [selectedMovie]);
-
-  const similarMovies: Movie[] = useMemo(() => {
-    if (!selectedMovie) return [];
-    return watchlist
-      .filter((m) => m.movieId !== selectedMovie.movieId)
-      .slice(0, 6)
-      .map((m) => ({
-        id: m.movieId,
-        title: m.title,
-        overview: m.overview || "",
-        poster_path: m.posterPath,
-        backdrop_path: m.posterPath,
-        release_date: `${m.year}-01-01`,
-        vote_average: m.voteAverage ?? 8.0,
-        genre_ids: [28],
-      }));
-  }, [selectedMovie, watchlist]);
-
-  // If a movie is selected, render the EXACT CineWatch MovieDetailClient view!
-  if (selectedMovie && movieDetailObject) {
-    return (
-      <MovieDetailClient
-        movie={movieDetailObject}
-        similar={similarMovies}
-        explanation={selectedMovie.explanation}
-        onBack={() => setSelectedMovie(null)}
-        backLabel="Back to 3D Watchlist"
-      />
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-cyan-500 selection:text-black">

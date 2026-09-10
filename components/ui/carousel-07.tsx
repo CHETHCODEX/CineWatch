@@ -11,7 +11,7 @@ import {
 } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, Sparkles, ExternalLink } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles, ExternalLink, Play } from "lucide-react";
 
 export interface Slide {
   image: string;
@@ -254,7 +254,8 @@ export const CarouselStacked = ({
             onClick={() => onSelect?.(currentSlide, activeIndex)}
             className="group flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-extrabold text-xs sm:text-sm tracking-wide shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
-            <span>Open "{currentSlide?.title}" & Why Picked</span>
+            <Play className="w-4 h-4 fill-black" />
+            <span>Open "{currentSlide?.title}" (Watch Trailer & Cast)</span>
             <ExternalLink className="w-4 h-4 text-black group-hover:translate-x-0.5 transition-transform" />
           </button>
         </div>
@@ -364,11 +365,11 @@ const Card = ({ slide, index, total, progress, config, isActive, onCardClick }: 
         </div>
       )}
 
-      {/* Active "Click to Inspect" hint on center card */}
+      {/* Active "Watch Trailer & Details" badge on center card */}
       {isActive && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-cyan-400/40 text-[10px] sm:text-xs font-semibold text-cyan-300 pointer-events-none shadow-xl flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
-          <Sparkles className="w-3 h-3 text-cyan-400" />
-          <span>Click to Inspect</span>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3.5 py-2 rounded-full bg-cyan-500/90 backdrop-blur-md border border-cyan-300 text-xs font-bold text-black pointer-events-none shadow-xl flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all">
+          <Play className="w-3.5 h-3.5 fill-black" />
+          <span>Watch Trailer & Details</span>
         </div>
       )}
 
