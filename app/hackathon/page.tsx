@@ -30,7 +30,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/sections/navbar';
-import { CarouselStacked, type Slide } from '@/components/ui/carousel-07';
+import { CoverFlowCarousel, type CarouselItem } from '@/components/ui/3-d-coverflow-carousel';
 import { BentoGridShowcase } from '@/components/ui/bento-product-features';
 import {
   Card,
@@ -144,19 +144,21 @@ export default function HackathonDashboard() {
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
-  // Convert watchlist into slides for the 3D deck
-  const carouselSlides: Slide[] = useMemo(() => {
+  // Convert watchlist into items for the 3D CoverFlow Carousel
+  const coverFlowItems: CarouselItem[] = useMemo(() => {
     return watchlist.map((movie) => {
       const posterUrl = movie.posterPath.startsWith('http')
         ? movie.posterPath
         : `https://image.tmdb.org/t/p/w500${movie.posterPath}`;
       return {
-        image: posterUrl || getFallbackPoster(movie.title, movie.year),
-        title: movie.title,
-        description: `${movie.year} • ${movie.genres.slice(0, 2).join(', ')} • Match: ${movie.matchPercentage}%`,
-        badge: `${movie.matchPercentage}% Match`,
-        rank: movie.rank,
+        tag: `#${movie.rank} • ${movie.matchPercentage}% MATCH`,
+        titleLine1: movie.title,
+        titleLine2: `${movie.year} • ${movie.genres.slice(0, 2).join(' / ')}`,
+        desc: movie.explanation?.text || movie.overview || "Autonomous ML latent feature recommendation.",
+        img: posterUrl || getFallbackPoster(movie.title, movie.year),
+        ctaText: "View Details",
         movieId: movie.movieId,
+        tmdbId: movie.tmdbId,
         data: movie,
       };
     });
@@ -195,10 +197,10 @@ export default function HackathonDashboard() {
   };
 
   // Direct navigation to authentic /movie/[id] page (with TMDB backdrop, playable trailer, cast & XAI explanation)
-  const handleSelectMovie = (slide: Slide) => {
-    const movie: WatchlistItem | undefined = slide.data
-      ? (slide.data as WatchlistItem)
-      : watchlist.find((m) => m.movieId === slide.movieId);
+  const handleSelectMovie = (item: CarouselItem) => {
+    const movie: WatchlistItem | undefined = item.data
+      ? (item.data as WatchlistItem)
+      : watchlist.find((m) => m.movieId === item.movieId);
 
     if (!movie) return;
 
@@ -597,21 +599,17 @@ export default function HackathonDashboard() {
             </div>
           )}
 
-          {/* 3D Stacked Deck Carousel */}
+          {/* 3D CoverFlow Carousel */}
           {!loading && (
-            <div className="rounded-3xl bg-cine-surface border border-white/[0.08] backdrop-blur-xl p-4 sm:p-8 shadow-2xl relative overflow-hidden">
+            <div className="rounded-3xl bg-cine-surface/80 border border-white/[0.08] backdrop-blur-xl p-2 sm:p-6 shadow-2xl relative overflow-hidden">
               <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
               
-              <div className="text-center mb-2">
-                <span className="text-xs text-cyan-400 font-medium flex items-center justify-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  Drag horizontally or click any card to inspect full details, trailer, cast & why picked
-                </span>
-              </div>
-
-              <CarouselStacked 
-                slides={carouselSlides} 
-                onSelect={handleSelectMovie}
+              <CoverFlowCarousel 
+                items={coverFlowItems} 
+                sectionLabel={currentUser ? `AI MATCH FOR ${currentUser.persona.toUpperCase()}` : "TOP AI RECOMMENDATIONS"}
+                accentColor="#06b6d4"
+                onCtaClick={handleSelectMovie}
+                onCardClick={handleSelectMovie}
               />
             </div>
           )}
