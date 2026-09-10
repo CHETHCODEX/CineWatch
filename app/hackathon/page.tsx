@@ -24,12 +24,25 @@ import {
   Clock,
   Film,
   Users,
-  ExternalLink
+  ExternalLink,
+  Command
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/sections/navbar';
 import { CarouselStacked, type Slide } from '@/components/ui/carousel-07';
+import { BentoGridShowcase } from '@/components/ui/bento-product-features';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
 
 interface Explanation {
   text: string;
@@ -327,147 +340,216 @@ export default function HackathonDashboard() {
           </div>
         </section>
 
-        {/* Subscriber Engagement & Retention Diagnostic Panel */}
+        {/* Subscriber Engagement & Retention Diagnostic Bento Grid */}
         {currentUser && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Engagement Score Radial Card */}
-            <div className="p-6 rounded-2xl bg-cine-surface border border-white/[0.08] backdrop-blur-xl flex flex-col justify-between shadow-xl">
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Engagement Index
-                  </span>
-                  <span className={cn(
-                    "px-2.5 py-0.5 rounded-full text-xs font-extrabold border",
-                    currentUser.engagement.cohort === 'Power Viewer' 
-                      ? "bg-purple-500/10 text-purple-400 border-purple-500/30" 
-                      : currentUser.engagement.cohort === 'Core Active'
-                      ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30"
-                      : "bg-amber-500/10 text-amber-400 border-amber-500/30"
-                  )}>
-                    {currentUser.engagement.cohort}
-                  </span>
-                </div>
-
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span className="text-5xl font-black text-white tracking-tight">
-                    {currentUser.engagement.score}
-                  </span>
-                  <span className="text-sm font-semibold text-muted-foreground">/ 100</span>
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Multi-factor score derived from volume, frequency, and genre dispersion.
-                </p>
+                <span className="text-[10px] font-bold tracking-wider uppercase text-cyan-400 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                  Product Features & AI Intelligence
+                </span>
+                <h2 className="text-2xl font-bold text-white tracking-tight mt-0.5">
+                  Subscriber Diagnostic Showcase
+                </h2>
               </div>
-
-              <div className="mt-6 grid grid-cols-3 gap-2 pt-4 border-t border-white/[0.08] text-center">
-                <div>
-                  <span className="text-[10px] text-muted-foreground uppercase font-semibold block">Ratings</span>
-                  <span className="text-sm font-bold text-white">{currentUser.engagement.totalRatings}</span>
-                </div>
-                <div>
-                  <span className="text-[10px] text-muted-foreground uppercase font-semibold block">Mean Rating</span>
-                  <span className="text-sm font-bold text-white">{currentUser.engagement.meanRating} ★</span>
-                </div>
-                <div>
-                  <span className="text-[10px] text-muted-foreground uppercase font-semibold block">Diversity</span>
-                  <span className="text-sm font-bold text-cyan-400">{currentUser.engagement.genreDiversityPct}%</span>
-                </div>
-              </div>
+              <Badge variant="outline" className="border-cyan-500/30 text-cyan-400 bg-cyan-500/10 text-xs font-semibold self-start sm:self-auto">
+                Cohort: {currentUser.engagement.cohort}
+              </Badge>
             </div>
 
-            {/* Churn Risk & Retention Strategy Card */}
-            <div className="p-6 rounded-2xl bg-cine-surface border border-white/[0.08] backdrop-blur-xl flex flex-col justify-between shadow-xl">
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Churn Risk Analysis
-                  </span>
-                  <div className="flex items-center gap-1.5">
-                    <ShieldAlert className={cn(
-                      "w-4 h-4",
-                      currentUser.engagement.churnRisk.includes('Low')
-                        ? "text-emerald-400"
-                        : currentUser.engagement.churnRisk.includes('Moderate')
-                        ? "text-amber-400"
-                        : "text-rose-400"
-                    )} />
-                    <span className={cn(
-                      "text-xs font-bold",
-                      currentUser.engagement.churnRisk.includes('Low')
-                        ? "text-emerald-400"
-                        : currentUser.engagement.churnRisk.includes('Moderate')
-                        ? "text-amber-400"
-                        : "text-rose-400"
-                    )}>
-                      {currentUser.engagement.churnRisk}
+            <BentoGridShowcase
+              integration={
+                <Card className="flex h-full flex-col justify-between p-6 bg-cine-surface border-white/[0.08] backdrop-blur-xl shadow-xl hover:border-cyan-500/30 transition-all">
+                  <CardHeader className="p-0">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shadow-inner">
+                      <Sparkles className="w-6 h-6 text-cyan-400" />
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                      <CardTitle className="text-xl font-bold text-white">Autonomous Retention</CardTitle>
+                      <Badge variant="outline" className={cn(
+                        "font-bold text-[11px]",
+                        currentUser.engagement.churnRisk.includes('Low')
+                          ? "border-emerald-500/30 text-emerald-400 bg-emerald-500/10"
+                          : currentUser.engagement.churnRisk.includes('Moderate')
+                          ? "border-amber-500/30 text-amber-400 bg-amber-500/10"
+                          : "border-rose-500/30 text-rose-400 bg-rose-500/10"
+                      )}>
+                        {currentUser.engagement.churnRisk}
+                      </Badge>
+                    </div>
+                    <CardDescription className="mt-3 text-xs text-zinc-300 leading-relaxed font-medium bg-black/40 p-3.5 rounded-xl border border-white/[0.08]">
+                      "{currentUser.engagement.retentionStrategy}"
+                    </CardDescription>
+
+                    <div className="mt-4 space-y-2 text-xs">
+                      <div className="flex justify-between py-1 border-b border-white/[0.06]">
+                        <span className="text-muted-foreground">Subscriber Cohort</span>
+                        <span className="font-semibold text-white">{currentUser.engagement.cohort}</span>
+                      </div>
+                      <div className="flex justify-between py-1 border-b border-white/[0.06]">
+                        <span className="text-muted-foreground">Catalog Diversity</span>
+                        <span className="font-mono font-bold text-cyan-400">{currentUser.engagement.genreDiversityPct}%</span>
+                      </div>
+                      <div className="flex justify-between py-1 border-b border-white/[0.06]">
+                        <span className="text-muted-foreground">Mean Rating</span>
+                        <span className="font-mono font-bold text-amber-400">{currentUser.engagement.meanRating} ★</span>
+                      </div>
+                    </div>
+                  </CardHeader>
+
+                  <CardFooter className="mt-6 flex items-center justify-between p-0 pt-4 border-t border-white/[0.08]">
+                    <Button variant="outline" size="sm" className="border-white/10 text-xs font-semibold hover:border-cyan-500/30 hover:bg-cyan-500/10 text-white cursor-pointer">
+                      <ShieldAlert className="mr-1.5 h-3.5 w-3.5 text-cyan-400" />
+                      Live Protocol
+                    </Button>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-muted-foreground font-medium">Auto-Intervene</span>
+                      <Switch defaultChecked className="data-[state=checked]:bg-cyan-500" aria-label="Toggle autonomous retention" />
+                    </div>
+                  </CardFooter>
+                </Card>
+              }
+              trackers={
+                <Card className="h-full bg-cine-surface border-white/[0.08] backdrop-blur-xl shadow-xl hover:border-cyan-500/30 transition-all">
+                  <CardContent className="flex h-full flex-col justify-between p-6">
+                    <div>
+                      <CardTitle className="text-base font-semibold text-white">Subscriber Cohort Signal</CardTitle>
+                      <CardDescription className="text-xs text-muted-foreground mt-0.5">Active peer streamers in cluster</CardDescription>
+                    </div>
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="flex -space-x-2 overflow-hidden">
+                        <img
+                          className="inline-block h-8 w-8 rounded-full ring-2 ring-background object-cover"
+                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80"
+                          alt="Streamer 1"
+                        />
+                        <img
+                          className="inline-block h-8 w-8 rounded-full ring-2 ring-background object-cover"
+                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80"
+                          alt="Streamer 2"
+                        />
+                        <img
+                          className="inline-block h-8 w-8 rounded-full ring-2 ring-background object-cover"
+                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&q=80"
+                          alt="Streamer 3"
+                        />
+                      </div>
+                      <span className="text-xs font-mono font-bold text-cyan-400">
+                        +{currentUser.engagement.totalRatings} Ratings
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              }
+              statistic={
+                <Card className="relative h-full w-full overflow-hidden bg-cine-surface border-white/[0.08] backdrop-blur-xl shadow-xl hover:border-cyan-500/30 transition-all">
+                  <div
+                    className="absolute inset-0 opacity-15 pointer-events-none"
+                    style={{
+                      backgroundImage: "radial-gradient(rgba(6, 182, 212, 0.6) 1px, transparent 1px)",
+                      backgroundSize: "16px 16px",
+                    }}
+                  />
+                  <CardContent className="relative z-10 flex flex-col h-full items-center justify-center p-6 text-center">
+                    <span className="text-5xl lg:text-6xl font-black text-cyan-400 tracking-tight">
+                      {metadata?.svdRMSE ?? "0.898"}
                     </span>
-                  </div>
-                </div>
-
-                <h3 className="text-lg font-bold text-white mt-3">
-                  Autonomous Agent Recommendation
-                </h3>
-                <div className="mt-2 p-3.5 rounded-xl bg-black/40 border border-white/[0.08]">
-                  <p className="text-xs text-zinc-300 leading-relaxed font-medium">
-                    "{currentUser.engagement.retentionStrategy}"
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-4 flex items-center gap-2 text-[11px] text-muted-foreground pt-3 border-t border-white/[0.08]">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
-                <span>Trigger targeted notification campaign based on hybrid affinity</span>
-              </div>
-            </div>
-
-            {/* Model Confidence & Accuracy Metrics */}
-            <div className="p-6 rounded-2xl bg-cine-surface border border-white/[0.08] backdrop-blur-xl flex flex-col justify-between shadow-xl">
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Engine Accuracy
-                  </span>
-                  <span className="text-xs font-mono text-cyan-400 font-bold">
-                    Surprise SVD v1.2
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-bold text-white mt-3">
-                  Offline Evaluation Benchmarks
-                </h3>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Validated against 1.05M MovieLens ratings with 5-fold cross-validation.
-                </p>
-              </div>
-
-              <div className="mt-4 grid grid-cols-2 gap-3 pt-3 border-t border-white/[0.08]">
-                <div className="p-3 rounded-xl bg-black/40 border border-white/[0.08] text-center">
-                  <span className="text-[10px] text-muted-foreground uppercase block font-semibold">SVD RMSE</span>
-                  <span className="text-lg font-extrabold text-cyan-400">
-                    {metadata?.svdRMSE ?? '0.8982'}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground block">Target ≤ 0.90</span>
-                </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-white/[0.08] text-center">
-                  <span className="text-[10px] text-muted-foreground uppercase block font-semibold">SVD MAE</span>
-                  <span className="text-lg font-extrabold text-purple-400">
-                    {metadata?.svdMAE ?? '0.6906'}
-                  </span>
-                  <span className="text-[10px] text-muted-foreground block">Target ≤ 0.70</span>
-                </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-white/[0.08] text-center">
-                  <span className="text-[10px] text-muted-foreground uppercase block font-semibold">Catalog Movies</span>
-                  <span className="text-lg font-extrabold text-white">4,760</span>
-                  <span className="text-[10px] text-muted-foreground block">20 Genres</span>
-                </div>
-                <div className="p-3 rounded-xl bg-black/40 border border-white/[0.08] text-center">
-                  <span className="text-[10px] text-muted-foreground uppercase block font-semibold">Hybrid Weight</span>
-                  <span className="text-sm font-extrabold text-amber-400">60% / 40%</span>
-                  <span className="text-[10px] text-muted-foreground block">SVD / Content</span>
-                </div>
-              </div>
-            </div>
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mt-1">
+                      SVD RMSE Benchmark
+                    </span>
+                  </CardContent>
+                </Card>
+              }
+              focus={
+                <Card className="h-full bg-cine-surface border-white/[0.08] backdrop-blur-xl shadow-xl hover:border-cyan-500/30 transition-all">
+                  <CardContent className="flex h-full flex-col justify-between p-6">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <CardTitle className="text-base font-semibold text-white">Engagement Index</CardTitle>
+                        <CardDescription className="text-xs text-muted-foreground">Activity & Health Score</CardDescription>
+                      </div>
+                      <Badge variant="outline" className="border-purple-500/30 text-purple-400 bg-purple-500/10 text-xs font-bold">
+                        {currentUser.engagement.cohort}
+                      </Badge>
+                    </div>
+                    <div>
+                      <span className="text-5xl font-black text-white">{currentUser.engagement.score}%</span>
+                    </div>
+                    <div className="flex justify-between text-xs text-muted-foreground pt-1 border-t border-white/[0.06]">
+                      <span>Diversity: {currentUser.engagement.genreDiversityPct}%</span>
+                      <span>Ratings: {currentUser.engagement.totalRatings}</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              }
+              productivity={
+                <Card className="h-full bg-cine-surface border-white/[0.08] backdrop-blur-xl shadow-xl hover:border-cyan-500/30 transition-all">
+                  <CardContent className="flex h-full flex-col justify-between p-6">
+                    <div>
+                      <CardTitle className="text-base font-semibold text-white">Hybrid Ensemble</CardTitle>
+                      <CardDescription className="text-xs text-muted-foreground mt-1">
+                        Surprise SVD (60%) + TF-IDF Cosine (40%) across 4,760 catalog movies.
+                      </CardDescription>
+                    </div>
+                    <div className="flex items-center gap-2 pt-2">
+                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">
+                        60% SVD
+                      </span>
+                      <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300">
+                        40% Content
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              }
+              shortcuts={
+                <Card className="h-full bg-cine-surface border-white/[0.08] backdrop-blur-xl shadow-xl hover:border-cyan-500/30 transition-all">
+                  <CardContent className="flex h-full flex-wrap items-center justify-between gap-4 p-6">
+                    <div>
+                      <CardTitle className="text-base font-semibold text-white">Fast Persona Switch</CardTitle>
+                      <CardDescription className="text-xs text-muted-foreground">
+                        Simulate subscriber vectors instantly with one-click keyboard triggers
+                      </CardDescription>
+                    </div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedUserId(42)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cyan-500/30 bg-black/50 hover:bg-cyan-500/10 text-xs font-mono font-bold text-cyan-300 transition-colors cursor-pointer"
+                      >
+                        <Command className="h-3 w-3" />
+                        <span>42 (Sci-Fi)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedUserId(1)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-500/30 bg-black/50 hover:bg-purple-500/10 text-xs font-mono font-bold text-purple-300 transition-colors cursor-pointer"
+                      >
+                        <Command className="h-3 w-3" />
+                        <span>1 (Action)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedUserId(15)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-amber-500/30 bg-black/50 hover:bg-amber-500/10 text-xs font-mono font-bold text-amber-300 transition-colors cursor-pointer"
+                      >
+                        <Command className="h-3 w-3" />
+                        <span>15 (Drama)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedUserId(84)}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-emerald-500/30 bg-black/50 hover:bg-emerald-500/10 text-xs font-mono font-bold text-emerald-300 transition-colors cursor-pointer"
+                      >
+                        <Command className="h-3 w-3" />
+                        <span>84 (Mystery)</span>
+                      </button>
+                    </div>
+                  </CardContent>
+                </Card>
+              }
+            />
           </div>
         )}
 

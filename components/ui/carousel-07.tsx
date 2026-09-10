@@ -365,13 +365,6 @@ const Card = ({ slide, index, total, progress, config, isActive, onCardClick }: 
         </div>
       )}
 
-      {/* Active "Watch Trailer & Details" badge on center card */}
-      {isActive && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 px-3.5 py-2 rounded-full bg-cyan-500/90 backdrop-blur-md border border-cyan-300 text-xs font-bold text-black pointer-events-none shadow-xl flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all">
-          <Play className="w-3.5 h-3.5 fill-black" />
-          <span>Watch Trailer & Details</span>
-        </div>
-      )}
 
       {/* Bottom Info Banner */}
       <div className="absolute bottom-5 left-3 right-3 sm:bottom-8 sm:left-5 sm:right-5 lg:bottom-8 lg:left-6 lg:right-6 text-white text-center sm:text-left pointer-events-none">
