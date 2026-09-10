@@ -99,7 +99,7 @@ export function CoverFlowCarousel({
   autoplay = false,
   autoplayDelay = 5000,
   className = "",
-  accentColor = "#06b6d4",
+  accentColor = "#e2b36f",
   onCtaClick,
   onCardClick,
 }: CoverFlowCarouselProps) {
@@ -430,7 +430,7 @@ export function CoverFlowCarousel({
                         gap: "6px",
                         padding: "8px 20px",
                         borderRadius: "9999px",
-                        background: `linear-gradient(135deg, ${accentColor} 0%, #2563eb 100%)`,
+                        background: `linear-gradient(135deg, ${accentColor} 0%, #d97706 100%)`,
                         color: "#000000",
                         fontSize: "0.75rem",
                         fontWeight: 800,
