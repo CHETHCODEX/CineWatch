@@ -11,7 +11,8 @@ import {
 } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, Sparkles, ExternalLink, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles, ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export interface Slide {
   image: string;
@@ -249,15 +250,17 @@ export const CarouselStacked = ({
             <span>Card {activeIndex + 1} of {total}</span>
           </div>
 
-          <button
-            type="button"
+          <Button
             onClick={() => onSelect?.(currentSlide, activeIndex)}
-            className="group flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-black font-extrabold text-xs sm:text-sm tracking-wide shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            className="relative text-sm font-medium rounded-full h-12 p-1 ps-6 pe-14 group transition-all duration-500 hover:ps-14 hover:pe-6 w-fit overflow-hidden cursor-pointer"
           >
-            <Play className="w-4 h-4 fill-black" />
-            <span>Open "{currentSlide?.title}" (Watch Trailer & Cast)</span>
-            <ExternalLink className="w-4 h-4 text-black group-hover:translate-x-0.5 transition-transform" />
-          </button>
+            <span className="relative z-10 transition-all duration-500">
+              View Details
+            </span>
+            <div className="absolute right-1 w-10 h-10 bg-background text-foreground rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-44px)] group-hover:rotate-45">
+              <ArrowUpRight size={16} />
+            </div>
+          </Button>
         </div>
 
         {/* Next Button */}
