@@ -59,16 +59,19 @@ export type TMDBProfileSize = "w45" | "w185" | "h632" | "original";
 
 export function getPosterUrl(path: string | null, size: TMDBPosterSize = "w500"): string {
   if (!path) return "/placeholder-poster.svg";
+  if (path.startsWith("http")) return path;
   return `${TMDB_IMAGE_BASE}/${size}${path}`;
 }
 
 export function getBackdropUrl(path: string | null, size: TMDBBackdropSize = "w1280"): string {
   if (!path) return "/placeholder-backdrop.svg";
+  if (path.startsWith("http")) return path;
   return `${TMDB_IMAGE_BASE}/${size}${path}`;
 }
 
 export function getProfileUrl(path: string | null, size: TMDBProfileSize = "w185"): string {
   if (!path) return "/placeholder-profile.svg";
+  if (path.startsWith("http")) return path;
   return `${TMDB_IMAGE_BASE}/${size}${path}`;
 }
 

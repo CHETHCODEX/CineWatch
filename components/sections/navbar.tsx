@@ -15,7 +15,8 @@ import {
   Compass,
   LogOut,
   ChevronDown,
-  LogIn
+  LogIn,
+  Flame
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,10 +36,11 @@ import { AuthModal } from "@/components/ui/auth-modal";
 // =============================================================================
 
 const NAV_LINKS = [
-  { label: "Discover", href: "#discover", icon: Compass },
-  { label: "Trending", href: "#trending", icon: TrendingUp },
-  { label: "For You", href: "#recommendations", icon: Sparkles },
-  { label: "Watchlist", href: "#watchlist", icon: Bookmark },
+  { label: "Discover", href: "/#discover", icon: Compass },
+  { label: "Trending", href: "/#trending", icon: TrendingUp },
+  { label: "For You", href: "/#recommendations", icon: Sparkles },
+  { label: "Watchlist", href: "/#watchlist", icon: Bookmark },
+  { label: "AI Match", href: "/hackathon", icon: Flame },
 ] as const;
 
 // =============================================================================

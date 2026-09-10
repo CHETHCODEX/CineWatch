@@ -16,6 +16,8 @@ import {
   ChevronRight,
   X,
   ExternalLink,
+  Sparkles,
+  Flame,
 } from "lucide-react";
 import type { MovieDetail, Movie } from "@/types/movie";
 import {
@@ -33,6 +35,16 @@ import { useAuth } from "@/components/providers/auth-provider";
 interface MovieDetailClientProps {
   movie: MovieDetail;
   similar: Movie[];
+  explanation?: {
+    text: string;
+    tags: string[];
+    peerAgreementPct: number;
+    collabScore: number;
+    contentScore: number;
+    hybridScore: number;
+  };
+  onBack?: () => void;
+  backLabel?: string;
 }
 
 // =============================================================================
@@ -42,6 +54,9 @@ interface MovieDetailClientProps {
 export default function MovieDetailClient({
   movie,
   similar,
+  explanation,
+  onBack,
+  backLabel,
 }: MovieDetailClientProps) {
   const { isInWatchlist, toggleWatchlist } = useAuth();
   const [showTrailer, setShowTrailer] = useState(false);
@@ -155,13 +170,24 @@ export default function MovieDetailClient({
             transition={{ delay: 0.2 }}
             className="absolute top-6 left-6 z-20"
           >
-            <Link
-              href="/"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black/40 hover:bg-black/60 backdrop-blur-md text-white/90 hover:text-white text-sm font-medium transition-all duration-200 border border-white/10"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Link>
+            {onBack ? (
+              <button
+                type="button"
+                onClick={onBack}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black/40 hover:bg-black/60 backdrop-blur-md text-white/90 hover:text-white text-sm font-medium transition-all duration-200 border border-white/10 cursor-pointer shadow-lg"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                {backLabel || "Back"}
+              </button>
+            ) : (
+              <Link
+                href="/"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-black/40 hover:bg-black/60 backdrop-blur-md text-white/90 hover:text-white text-sm font-medium transition-all duration-200 border border-white/10"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                {backLabel || "Back"}
+              </Link>
+            )}
           </motion.div>
         </div>
 
@@ -282,6 +308,120 @@ export default function MovieDetailClient({
               </div>
             </motion.div>
           </div>
+
+          {/* ================================================================= */}
+          {/* Explainable AI (XAI) Attribution Card (When Opened From ML Agent) */}
+          {/* ================================================================= */}
+          {explanation && (
+            <motion.section
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.5 }}
+              className="mt-12 rounded-3xl bg-linear-to-b from-zinc-900/90 to-zinc-950 border border-cyan-500/40 p-6 sm:p-8 shadow-2xl backdrop-blur-xl relative overflow-hidden"
+            >
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-extrabold text-white flex items-center gap-2">
+                      <span>Why Picked for You</span>
+                      <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                        XAI Attribution
+                      </span>
+                    </h2>
+                    <p className="text-xs text-zinc-400">
+                      Curated by blending collaborative peer signals (60%) with metadata semantic affinity (40%)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-xs font-bold self-start sm:self-auto flex items-center gap-1.5">
+                  <Flame className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Hybrid Match: {Math.round(explanation.hybridScore * 100)}%</span>
+                </div>
+              </div>
+
+              {/* Natural-Language Explanation Quote */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-black/60 border border-zinc-800 mb-5">
+                <p className="text-zinc-200 text-sm sm:text-base leading-relaxed font-medium italic">
+                  "{explanation.text}"
+                </p>
+              </div>
+
+              {/* Attribution Feature Tags */}
+              <div className="space-y-2 mb-6">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                  Key Attribution Signals:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {explanation.tags.map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="text-xs font-semibold px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 flex items-center gap-1.5"
+                    >
+                      <Check className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>{tag}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Score Attribution Breakdown Progress Bars */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-5 border-t border-zinc-800">
+                <div className="p-4 rounded-xl bg-black/40 border border-zinc-800">
+                  <div className="flex justify-between text-xs text-zinc-400 mb-2">
+                    <span>Collaborative Signal:</span>
+                    <span className="font-mono text-cyan-300 font-extrabold">
+                      {Math.round(explanation.collabScore * 100)}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+                    <div
+                      className="bg-cyan-400 h-full rounded-full transition-all duration-700"
+                      style={{ width: `${Math.min(100, Math.round(explanation.collabScore * 100))}%` }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-zinc-400 mt-1 block">Weight: 60% SVD Factorization</span>
+                </div>
+
+                <div className="p-4 rounded-xl bg-black/40 border border-zinc-800">
+                  <div className="flex justify-between text-xs text-zinc-400 mb-2">
+                    <span>Content Affinity:</span>
+                    <span className="font-mono text-purple-300 font-extrabold">
+                      {Math.round(explanation.contentScore * 100)}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+                    <div
+                      className="bg-purple-400 h-full rounded-full transition-all duration-700"
+                      style={{ width: `${Math.min(100, Math.round(explanation.contentScore * 100))}%` }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-zinc-400 mt-1 block">Weight: 40% TF-IDF Cosine</span>
+                </div>
+
+                <div className="p-4 rounded-xl bg-black/40 border border-zinc-800">
+                  <div className="flex justify-between text-xs text-zinc-400 mb-2">
+                    <span>Peer Consensus:</span>
+                    <span className="font-mono text-emerald-300 font-extrabold">
+                      {explanation.peerAgreementPct}%
+                    </span>
+                  </div>
+                  <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden">
+                    <div
+                      className="bg-emerald-400 h-full rounded-full transition-all duration-700"
+                      style={{ width: `${explanation.peerAgreementPct}%` }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-zinc-400 mt-1 block">Subscriber Cohort Agreement</span>
+                </div>
+              </div>
+            </motion.section>
+          )}
 
           {/* ================================================================= */}
           {/* Cast Carousel */}

@@ -1,0 +1,2997 @@
+{
+  "metadata": {
+    "generatedAt": "2026-09-09",
+    "totalMoviesInCatalog": 4760,
+    "totalRatingsTrained": 200000,
+    "svdRMSE": 0.8987,
+    "svdMAE": 0.6911,
+    "genresCount": 20,
+    "hybridWeights": {
+      "collaborative": 0.6,
+      "content": 0.4
+    }
+  },
+  "personas": {
+    "1": {
+      "user": {
+        "userId": 1,
+        "persona": "Classic Action & Espionage Fan",
+        "description": "Casual weekend viewer who prioritizes classic spy franchises, action thrillers, and iconic blockbusters.",
+        "engagement": {
+          "score": 45,
+          "cohort": "Casual Viewer",
+          "churnRisk": "Moderate (35%)",
+          "totalRatings": 15,
+          "meanRating": 3.17,
+          "ratingStdDev": 1.27,
+          "genresExplored": 9,
+          "genreDiversityPct": 45,
+          "retentionStrategy": "Moderate Retention. User sticks to 1-2 favorite genres. Recommend genre-adjacent popular titles and actor crossovers to broaden catalog discovery."
+        }
+      },
+      "watchlist": [
+        {
+          "rank": 1,
+          "movieId": 306,
+          "title": "Diamonds Are Forever",
+          "year": 1971,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Thriller"
+          ],
+          "director": "Guy Hamilton",
+          "cast": [
+            "Sean Connery Jill St. John Charles Gray Lana Wood Jimmy Dean"
+          ],
+          "predictedRating": 4.07,
+          "matchPercentage": 81,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTEwMTdmOWQtNjA0NS00NTBmLTkxMjAtYWI0YjVlZTQ0NmMzXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Action and Adventure alignment with 91% peer agreement.",
+            "tags": [
+              "Dir. Guy Hamilton",
+              "Action / Adventure Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.767,
+            "contentScore": 0.191,
+            "hybridScore": 0.537
+          },
+          "overview": "Diamonds are stolen only to be sold again in the international market. James Bond infiltrates a smuggling mission to find out who\u2019s guilty. The mission takes him to Las Vegas where Bond meets his archenemy Blofeld.",
+          "runtime": 120,
+          "voteAverage": 6.3,
+          "tagline": "The man who made 007 a household number"
+        },
+        {
+          "rank": 2,
+          "movieId": 322,
+          "title": "The Living Daylights",
+          "year": 1987,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Thriller"
+          ],
+          "director": "John Glen",
+          "cast": [
+            "Timothy Dalton Maryam d'Abo Jeroen Krabb\\u00e9 Joe Don Baker John Rhys-Davies"
+          ],
+          "predictedRating": 3.54,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BOGQ1OTY3Y2QtNzhlYS00OGFmLWE0YzAtYzk0NWFjZDYwMGQyXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Action and Adventure alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. John Glen",
+              "Action / Adventure Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.635,
+            "contentScore": 0.243,
+            "hybridScore": 0.478
+          },
+          "overview": "James Bond helps a Russian General escape into the west. He soon finds out that the KGB wants to kill him for helping the General. A little while later the General is kidnapped from the Secret Service leading 007 to be suspicious.",
+          "runtime": 130,
+          "voteAverage": 6.2,
+          "tagline": "Licensed to thrill."
+        },
+        {
+          "rank": 3,
+          "movieId": 307,
+          "title": "The Man with the Golden Gun",
+          "year": 1974,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Thriller"
+          ],
+          "director": "Guy Hamilton",
+          "cast": [
+            "Roger Moore Christopher Lee Britt Ekland Maud Adams Herv\\u00e9 Villechaize"
+          ],
+          "predictedRating": 3.46,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNzEzMzFiZDgtMWQ4YS00YmU1LWI5OTUtZjcwZmYyY2FlMTFhXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Action and Adventure alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Guy Hamilton",
+              "Action / Adventure Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.616,
+            "contentScore": 0.27,
+            "hybridScore": 0.477
+          },
+          "overview": "A golden bullet has 007 engraved on it as it smashes into the secret service headquarters. The bullet came from the professional killer Scaramanga who has yet to miss a target and James Bond begins a mission to try and stop him.",
+          "runtime": 125,
+          "voteAverage": 6.3,
+          "tagline": "The man with the golden gun is ready to assassinate James Bond."
+        },
+        {
+          "rank": 4,
+          "movieId": 3000,
+          "title": "The Incredibly True Adventure of Two Girls In Love",
+          "year": 1995,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "director": "Maria Maggenti",
+          "cast": [
+            "Laurel Holloman Maggie Moore Kate Stafford Nicole Ari Parker Toby Poser"
+          ],
+          "predictedRating": 3.93,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZjMwZDg3YmQtNTNkNy00OGZiLWJlNGMtYmMzZTU4NGM4NGVjXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Comedy alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. Maria Maggenti",
+              "Comedy Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.734,
+            "contentScore": 0.065,
+            "hybridScore": 0.466
+          },
+          "overview": "An adventurous love story between two young women of different social and economic backgrounds who find themselves going through all the typical struggles of a new romance.",
+          "runtime": 94,
+          "voteAverage": 5.7,
+          "tagline": ""
+        },
+        {
+          "rank": 5,
+          "movieId": 1293,
+          "title": "The Man Who Knew Too Little",
+          "year": 1997,
+          "genres": [
+            "Comedy",
+            "Thriller",
+            "Crime",
+            "Action"
+          ],
+          "director": "Jon Amiel",
+          "cast": [
+            "Bill Murray Peter Gallagher Joanne Whalley Alfred Molina Richard Wilson"
+          ],
+          "predictedRating": 3.81,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMmM3YmJhZTktODY3OS00MWZlLWEyMDMtYjIxZjZiNjZiMTIxXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Comedy and Action alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Jon Amiel",
+              "Comedy / Action Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.702,
+            "contentScore": 0.108,
+            "hybridScore": 0.465
+          },
+          "overview": "An American gets a ticket for an audience participation game in London, then gets involved in a case of mistaken identity. As an international plot unravels around him, he thinks it's all part of the act.",
+          "runtime": 97,
+          "voteAverage": 6.5,
+          "tagline": "He\u2019s on a mission so secret, even he doesn\u2019t know about it."
+        },
+        {
+          "rank": 6,
+          "movieId": 2728,
+          "title": "Novocaine",
+          "year": 2001,
+          "genres": [
+            "Comedy",
+            "Crime",
+            "Thriller"
+          ],
+          "director": "David Atkins",
+          "cast": [
+            "Chelcie Ross Steve Martin Laura Dern Lynne Thigpen Polly Noonan"
+          ],
+          "predictedRating": 3.92,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMWU4MmUxODktMWUwYy00YzM0LTg1ZmItNzVlMTZhOWVlNWFjXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Comedy and Thriller alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. David Atkins",
+              "Comedy / Thriller Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.729,
+            "contentScore": 0.06,
+            "hybridScore": 0.462
+          },
+          "overview": "A dentist finds himself a murder suspect after a sexy patient seduces him into prescribing her drugs",
+          "runtime": 95,
+          "voteAverage": 6.0,
+          "tagline": ""
+        },
+        {
+          "rank": 7,
+          "movieId": 328,
+          "title": "Tomorrow Never Dies",
+          "year": 1997,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Thriller"
+          ],
+          "director": "Roger Spottiswoode",
+          "cast": [
+            "Pierce Brosnan Jonathan Pryce Michelle Yeoh Teri Hatcher Ricky Jay"
+          ],
+          "predictedRating": 3.59,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Action and Adventure alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Roger Spottiswoode",
+              "Action / Adventure Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.647,
+            "contentScore": 0.15,
+            "hybridScore": 0.448
+          },
+          "overview": "A deranged media mogul is staging international incidents to pit the world's superpowers against each other. Now 007 must take on this evil mastermind in an adrenaline-charged battle to end his reign of terror and prevent global pandemonium.",
+          "runtime": 119,
+          "voteAverage": 6.0,
+          "tagline": "Yesterday is a memory. Today is history. Tomorrow is in the hands of one man."
+        },
+        {
+          "rank": 8,
+          "movieId": 1837,
+          "title": "Nothing",
+          "year": 2003,
+          "genres": [
+            "Comedy",
+            "Fantasy",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Vincenzo Natali",
+          "cast": [
+            "David Hewlett Andrew Miller Gordon Pinsent Marie-Jos\\u00e9e Croze"
+          ],
+          "predictedRating": 2.87,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZmRhNGI0OWUtYTVhNi00ZWZjLTk3NDMtYzc0ZmFmZGQ2ZDk1XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Comedy alignment with 84% peer agreement.",
+            "tags": [
+              "Dir. Vincenzo Natali",
+              "Comedy Match",
+              "84% Peer Match"
+            ],
+            "peerAgreementPct": 84,
+            "collabScore": 0.468,
+            "contentScore": 0.396,
+            "hybridScore": 0.439
+          },
+          "overview": "The film tells the story of two good friends who live together, Andrew (Andrew Miller), an agoraphobic travel agent who works from his home, and Dave (David Hewlett), a loser who works in an office where he is treated with contempt. Just when it seems things can't get any worse for the two, the entire world outside of their house disappears and is replaced with an endless white void.",
+          "runtime": 90,
+          "voteAverage": 5.8,
+          "tagline": ""
+        },
+        {
+          "rank": 9,
+          "movieId": 110,
+          "title": "The Godfather",
+          "year": 1972,
+          "genres": [
+            "Drama",
+            "Crime"
+          ],
+          "director": "Francis Ford Coppola",
+          "cast": [
+            "Marlon Brando Al Pacino James Caan Richard S. Castellano Robert Duvall"
+          ],
+          "predictedRating": 3.81,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Francis Ford Coppola",
+              "Drama",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.704,
+            "contentScore": 0.026,
+            "hybridScore": 0.432
+          },
+          "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+          "runtime": 175,
+          "voteAverage": 8.4,
+          "tagline": "An offer you can't refuse."
+        },
+        {
+          "rank": 10,
+          "movieId": 3681,
+          "title": "Griff the Invisible",
+          "year": 2011,
+          "genres": [
+            "Romance",
+            "Comedy",
+            "Drama"
+          ],
+          "director": "Leon Ford",
+          "cast": [
+            "Ryan Kwanten Maeve Dermody Marshall Napier Heather Mitchell Patrick Brammall"
+          ],
+          "predictedRating": 3.71,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjA2OTA2MDA3OV5BMl5BanBnXkFtZTcwODQ2NTQxNw@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Comedy alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Leon Ford",
+              "Comedy Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.678,
+            "contentScore": 0.062,
+            "hybridScore": 0.432
+          },
+          "overview": "Griff, office worker by day, superhero by night, has his world turned upside down when he meets Melody, a beautiful young scientist who shares his passion for the impossible.",
+          "runtime": 93,
+          "voteAverage": 6.1,
+          "tagline": "He's a dreamer, stuck in the real world."
+        },
+        {
+          "rank": 11,
+          "movieId": 119,
+          "title": "Live and Let Die",
+          "year": 1973,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Thriller"
+          ],
+          "director": "Guy Hamilton",
+          "cast": [
+            "Roger Moore Yaphet Kotto Jane Seymour Clifton James Julius Harris"
+          ],
+          "predictedRating": 3.23,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BOGQ0OThkZGQtMzM4Zi00ZDc2LWE4ZWQtZGYyNjEzYzAzMTYzXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Action and Adventure alignment with 86% peer agreement.",
+            "tags": [
+              "Dir. Guy Hamilton",
+              "Action / Adventure Match",
+              "86% Peer Match"
+            ],
+            "peerAgreementPct": 86,
+            "collabScore": 0.558,
+            "contentScore": 0.24,
+            "hybridScore": 0.431
+          },
+          "overview": "James Bond must investigate a mysterious murder case of a British agent in New Orleans. Soon he finds himself up against a gangster boss named Mr. Big.",
+          "runtime": 121,
+          "voteAverage": 6.4,
+          "tagline": "Roger Moore is James Bond."
+        },
+        {
+          "rank": 12,
+          "movieId": 321,
+          "title": "A View to a Kill",
+          "year": 1985,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Thriller"
+          ],
+          "director": "John Glen",
+          "cast": [
+            "Roger Moore Christopher Walken Tanya Roberts Grace Jones Patrick Macnee"
+          ],
+          "predictedRating": 3.33,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZjc3ZTJkZjUtM2E4Mi00YzA1LWJkZTAtM2U0OWUyYTE4YTFiXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for On Her Majesty's Secret Service. Strong Action and Adventure alignment with 87% peer agreement.",
+            "tags": [
+              "Dir. John Glen",
+              "Action / Adventure Match",
+              "87% Peer Match"
+            ],
+            "peerAgreementPct": 87,
+            "collabScore": 0.581,
+            "contentScore": 0.199,
+            "hybridScore": 0.428
+          },
+          "overview": "A newly developed microchip designed by Zorin Industries for the British Government that can survive the electromagnetic radiation caused by a nuclear explosion has landed in the hands of the KGB. James Bond must find out how and why. His suspicions soon lead him to big industry leader Max Zorin.",
+          "runtime": 131,
+          "voteAverage": 6.0,
+          "tagline": "Has James Bond finally met his match?"
+        }
+      ]
+    },
+    "15": {
+      "user": {
+        "userId": 15,
+        "persona": "Drama & Romance Binge-Watcher",
+        "description": "Regular evening binge-watcher drawn to emotional narratives, character dramas, and romantic comedy.",
+        "engagement": {
+          "score": 52,
+          "cohort": "Casual Viewer",
+          "churnRisk": "Moderate (35%)",
+          "totalRatings": 12,
+          "meanRating": 4.04,
+          "ratingStdDev": 1.09,
+          "genresExplored": 12,
+          "genreDiversityPct": 60,
+          "retentionStrategy": "Moderate Retention. User sticks to 1-2 favorite genres. Recommend genre-adjacent popular titles and actor crossovers to broaden catalog discovery."
+        }
+      },
+      "watchlist": [
+        {
+          "rank": 1,
+          "movieId": 1945,
+          "title": "Not Another Teen Movie",
+          "year": 2001,
+          "genres": [
+            "Comedy"
+          ],
+          "director": "Joel Gallen",
+          "cast": [
+            "Chyler Leigh Chris Evans Jaime Pressly Eric Christian Olsen Mia Kirshner"
+          ],
+          "predictedRating": 4.82,
+          "matchPercentage": 87,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNjllYzVjNjItYjQ2Ni00OGU4LTlkYjItMDYxOTBlM2YzNDA5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Comedy alignment with 95% peer agreement.",
+            "tags": [
+              "Dir. Joel Gallen",
+              "Comedy Match",
+              "95% Peer Match"
+            ],
+            "peerAgreementPct": 95,
+            "collabScore": 0.956,
+            "contentScore": 0.172,
+            "hybridScore": 0.642
+          },
+          "overview": "On a bet, a gridiron hero at John Hughes High School sets out to turn a bespectacled plain Jane into a beautiful and popular prom queen in this outrageous send-up of the teen movie genre.",
+          "runtime": 89,
+          "voteAverage": 5.5,
+          "tagline": "They served you Breakfast. They gave you Pie. Now we\u2019re gonna stuff your face."
+        },
+        {
+          "rank": 2,
+          "movieId": 2728,
+          "title": "Novocaine",
+          "year": 2001,
+          "genres": [
+            "Comedy",
+            "Crime",
+            "Thriller"
+          ],
+          "director": "David Atkins",
+          "cast": [
+            "Chelcie Ross Steve Martin Laura Dern Lynne Thigpen Polly Noonan"
+          ],
+          "predictedRating": 4.63,
+          "matchPercentage": 85,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMWU4MmUxODktMWUwYy00YzM0LTg1ZmItNzVlMTZhOWVlNWFjXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Thriller and Comedy alignment with 94% peer agreement.",
+            "tags": [
+              "Dir. David Atkins",
+              "Thriller / Comedy Match",
+              "94% Peer Match"
+            ],
+            "peerAgreementPct": 94,
+            "collabScore": 0.909,
+            "contentScore": 0.138,
+            "hybridScore": 0.601
+          },
+          "overview": "A dentist finds himself a murder suspect after a sexy patient seduces him into prescribing her drugs",
+          "runtime": 95,
+          "voteAverage": 6.0,
+          "tagline": ""
+        },
+        {
+          "rank": 3,
+          "movieId": 1303,
+          "title": "Grosse Pointe Blank",
+          "year": 1997,
+          "genres": [
+            "Action",
+            "Comedy",
+            "Thriller",
+            "Romance"
+          ],
+          "director": "George Armitage",
+          "cast": [
+            "John Cusack Minnie Driver Dan Aykroyd Joan Cusack Alan Arkin"
+          ],
+          "predictedRating": 4.57,
+          "matchPercentage": 84,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZDJkMWJkMTgtZjljZS00ZDNlLWE2MjEtNjQ2NzI5NDk4MTRkXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Comedy and Thriller alignment with 93% peer agreement.",
+            "tags": [
+              "Dir. George Armitage",
+              "Comedy / Thriller Match",
+              "93% Peer Match"
+            ],
+            "peerAgreementPct": 93,
+            "collabScore": 0.893,
+            "contentScore": 0.136,
+            "hybridScore": 0.591
+          },
+          "overview": "Martin Blank is a freelance hitman who starts to develop a conscience, which causes him to muff a couple of routine assignments. On the advice of his secretary and his psychiatrist, he attends his 10th year High School reunion in Grosse Pointe, Michigan.",
+          "runtime": 107,
+          "voteAverage": 6.9,
+          "tagline": "Even a hit man deserves a second shot."
+        },
+        {
+          "rank": 4,
+          "movieId": 4027,
+          "title": "Inchon",
+          "year": 1981,
+          "genres": [
+            "Drama",
+            "History",
+            "War"
+          ],
+          "director": "Terence Young",
+          "cast": [
+            "Laurence Olivier Jacqueline Bisset Ben Gazzara Toshir\\u014d Mifune Richard Roundtree"
+          ],
+          "predictedRating": 4.48,
+          "matchPercentage": 84,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNzc1NzkyYWQtN2JjOS00MjNjLThiNDQtNzhiNGNhZmU3YzQ0XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Drama alignment with 93% peer agreement.",
+            "tags": [
+              "Dir. Terence Young",
+              "Drama Match",
+              "93% Peer Match"
+            ],
+            "peerAgreementPct": 93,
+            "collabScore": 0.871,
+            "contentScore": 0.145,
+            "hybridScore": 0.581
+          },
+          "overview": "A noisy and absurd re-telling of the great 1950 invasion of Inchon during the Korean War which was masterminded by General Douglas MacArthur.",
+          "runtime": 140,
+          "voteAverage": 6.5,
+          "tagline": "LOVE. DESTINY. HEROES. War Changes Everything."
+        },
+        {
+          "rank": 5,
+          "movieId": 4222,
+          "title": "Deceptive Practice: The Mysteries and Mentors of Ricky Jay",
+          "year": 2012,
+          "genres": [
+            "Documentary"
+          ],
+          "director": "Molly Bernstein",
+          "cast": [
+            "Ricky Jay Dick Cavett Winston Simon David Mamet Persi Diaconis"
+          ],
+          "predictedRating": 4.04,
+          "matchPercentage": 83,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTQ5MzM3NjQ5Ml5BMl5BanBnXkFtZTcwMzcyNTYzOQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 91% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Molly Bernstein",
+              "Documentary",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.76,
+            "contentScore": 0.305,
+            "hybridScore": 0.578
+          },
+          "overview": "The life and career of renowned magician and sleight of hand artist Ricky Jay.",
+          "runtime": 88,
+          "voteAverage": 7.1,
+          "tagline": ""
+        },
+        {
+          "rank": 6,
+          "movieId": 1090,
+          "title": "Superbad",
+          "year": 2007,
+          "genres": [
+            "Comedy"
+          ],
+          "director": "Greg Mottola",
+          "cast": [
+            "Jonah Hill Michael Cera Christopher Mintz-Plasse Bill Hader Seth Rogen"
+          ],
+          "predictedRating": 4.44,
+          "matchPercentage": 83,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNjk0MzdlZGEtNTRkOC00ZDRiLWJkYjAtMzUzYTRiNzk1YTViXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Comedy alignment with 93% peer agreement.",
+            "tags": [
+              "Dir. Greg Mottola",
+              "Comedy Match",
+              "93% Peer Match"
+            ],
+            "peerAgreementPct": 93,
+            "collabScore": 0.861,
+            "contentScore": 0.15,
+            "hybridScore": 0.577
+          },
+          "overview": "High school best buddies are facing separation anxiety as they prepare to go off to college. While attempting to score alcohol for a party with help from a fake ID-toting friend, the guys' evening takes a turn into chaotic territory.",
+          "runtime": 113,
+          "voteAverage": 7.0,
+          "tagline": "Come and Get Some!"
+        },
+        {
+          "rank": 7,
+          "movieId": 2176,
+          "title": "No End in Sight",
+          "year": 2007,
+          "genres": [
+            "Documentary"
+          ],
+          "director": "Charles Ferguson",
+          "cast": [
+            "Campbell Scott Gerald Burke Ali Fadhil Robert Hutchings"
+          ],
+          "predictedRating": 4.53,
+          "matchPercentage": 83,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTg0NDYzODE4OV5BMl5BanBnXkFtZTcwMjAyOTk0MQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 93% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Charles Ferguson",
+              "Documentary",
+              "93% Peer Match"
+            ],
+            "peerAgreementPct": 93,
+            "collabScore": 0.882,
+            "contentScore": 0.106,
+            "hybridScore": 0.571
+          },
+          "overview": "Chronological look at the fiasco in Iraq, especially decisions made in the spring of 2003 - and the backgrounds of those making decisions - immediately following the overthrow of Saddam: no occupation plan, an inadequate team to run the country, insufficient troops to keep order, and three edicts from the White House announced by Bremmer when he took over.",
+          "runtime": 102,
+          "voteAverage": 7.2,
+          "tagline": "The American Occupation of Iraq. The Inside Story From the Ultimate Insiders."
+        },
+        {
+          "rank": 8,
+          "movieId": 2905,
+          "title": "Veronika Decides to Die",
+          "year": 2009,
+          "genres": [
+            "Drama",
+            "Romance"
+          ],
+          "director": "Emily Young",
+          "cast": [
+            "Sarah Michelle Gellar David Thewlis Jonathan Tucker Erika Christensen Melissa Leo"
+          ],
+          "predictedRating": 4.44,
+          "matchPercentage": 83,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTQzNTk4NTUwM15BMl5BanBnXkFtZTgwODE0NTA4MzE@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Drama alignment with 93% peer agreement.",
+            "tags": [
+              "Dir. Emily Young",
+              "Drama Match",
+              "93% Peer Match"
+            ],
+            "peerAgreementPct": 93,
+            "collabScore": 0.861,
+            "contentScore": 0.125,
+            "hybridScore": 0.567
+          },
+          "overview": "After a frantic suicide attempt, Veronika awakens inside a mysterious mental asylum. Under the supervision of an unorthodox psychiatrist who specializes in controversial treatment, Veronika learns that she has only weeks to live.",
+          "runtime": 103,
+          "voteAverage": 5.8,
+          "tagline": "For Veronika, confronting death... is discovering life."
+        },
+        {
+          "rank": 9,
+          "movieId": 1264,
+          "title": "The Mask of Zorro",
+          "year": 1998,
+          "genres": [
+            "Action",
+            "Adventure"
+          ],
+          "director": "Martin Campbell",
+          "cast": [
+            "Antonio Banderas Anthony Hopkins Catherine Zeta-Jones Stuart Wilson Diego Sieres"
+          ],
+          "predictedRating": 4.46,
+          "matchPercentage": 82,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMzA2MDgyYzMtNjc4OC00YjU0LWEzMWEtOTRhMTViODY0Mjk0XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 93% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Martin Campbell",
+              "Action",
+              "93% Peer Match"
+            ],
+            "peerAgreementPct": 93,
+            "collabScore": 0.866,
+            "contentScore": 0.096,
+            "hybridScore": 0.558
+          },
+          "overview": "It has been twenty years since Don Diego de la Vega fought Spanish oppression in Alta California as the legendary romantic hero, Zorro. Having escaped from prison he transforms troubled bandit Alejandro into his successor, in order to foil the plans of the tyrannical Don Rafael Montero who robbed him of his freedom, his wife and his precious daughter.",
+          "runtime": 136,
+          "voteAverage": 6.3,
+          "tagline": "No one has seen his face... but everyone ... knows this mark."
+        },
+        {
+          "rank": 10,
+          "movieId": 508,
+          "title": "Ghost World",
+          "year": 2001,
+          "genres": [
+            "Comedy",
+            "Drama"
+          ],
+          "director": "Terry Zwigoff",
+          "cast": [
+            "Thora Birch Scarlett Johansson Steve Buscemi Brad Renfro Bob Balaban"
+          ],
+          "predictedRating": 4.32,
+          "matchPercentage": 82,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNzQ4NmFmYzYtNGJmZi00NGNkLTk2YTktM2Q0MzQ5MWRlZGEyXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Drama and Comedy alignment with 92% peer agreement.",
+            "tags": [
+              "Dir. Terry Zwigoff",
+              "Drama / Comedy Match",
+              "92% Peer Match"
+            ],
+            "peerAgreementPct": 92,
+            "collabScore": 0.829,
+            "contentScore": 0.143,
+            "hybridScore": 0.554
+          },
+          "overview": "A quirky girl tries to figure out what to do now that she had graduated from high school, and forms a friendship with an eccentric 40-year-old record collector after playing a prank on him with her best friend.",
+          "runtime": 111,
+          "voteAverage": 7.1,
+          "tagline": "Accentuate the negative."
+        },
+        {
+          "rank": 11,
+          "movieId": 328,
+          "title": "Tomorrow Never Dies",
+          "year": 1997,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Thriller"
+          ],
+          "director": "Roger Spottiswoode",
+          "cast": [
+            "Pierce Brosnan Jonathan Pryce Michelle Yeoh Teri Hatcher Ricky Jay"
+          ],
+          "predictedRating": 4.42,
+          "matchPercentage": 82,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTM1MTk2ODQxNV5BMl5BanBnXkFtZTcwOTY5MDg0NA@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Spanish Prisoner. Strong Thriller alignment with 92% peer agreement.",
+            "tags": [
+              "Dir. Roger Spottiswoode",
+              "Thriller Match",
+              "92% Peer Match"
+            ],
+            "peerAgreementPct": 92,
+            "collabScore": 0.854,
+            "contentScore": 0.104,
+            "hybridScore": 0.554
+          },
+          "overview": "A deranged media mogul is staging international incidents to pit the world's superpowers against each other. Now 007 must take on this evil mastermind in an adrenaline-charged battle to end his reign of terror and prevent global pandemonium.",
+          "runtime": 119,
+          "voteAverage": 6.0,
+          "tagline": "Yesterday is a memory. Today is history. Tomorrow is in the hands of one man."
+        },
+        {
+          "rank": 12,
+          "movieId": 593,
+          "title": "Pirates of the Caribbean: On Stranger Tides",
+          "year": 2011,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Fantasy"
+          ],
+          "director": "Rob Marshall",
+          "cast": [
+            "Johnny Depp Pen\\u00e9lope Cruz Ian McShane Kevin McNally Geoffrey Rush"
+          ],
+          "predictedRating": 4.62,
+          "matchPercentage": 82,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjE5MjkwODI3Nl5BMl5BanBnXkFtZTcwNjcwMDk4NA@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 94% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Rob Marshall",
+              "Adventure",
+              "94% Peer Match"
+            ],
+            "peerAgreementPct": 94,
+            "collabScore": 0.905,
+            "contentScore": 0.02,
+            "hybridScore": 0.551
+          },
+          "overview": "Captain Jack Sparrow crosses paths with a woman from his past, and he's not sure if it's love -- or if she's a ruthless con artist who's using him to find the fabled Fountain of Youth. When she forces him aboard the Queen Anne's Revenge, the ship of the formidable pirate Blackbeard, Jack finds himself on an unexpected adventure in which he doesn't know who to fear more: Blackbeard or the woman from his past.",
+          "runtime": 136,
+          "voteAverage": 6.4,
+          "tagline": "Live Forever Or Die Trying."
+        }
+      ]
+    },
+    "23": {
+      "user": {
+        "userId": 23,
+        "persona": "User #23 (Casual Streamer)",
+        "description": "Dynamic subscriber profile calculated in real time from MovieLens ratings.",
+        "engagement": {
+          "score": 61,
+          "cohort": "Casual Viewer",
+          "churnRisk": "Moderate (35%)",
+          "totalRatings": 32,
+          "meanRating": 4,
+          "ratingStdDev": 0.9,
+          "genresExplored": 16,
+          "genreDiversityPct": 80,
+          "retentionStrategy": "Moderate Retention. User sticks to 1-2 favorite genres. Recommend genre-adjacent popular titles and actor crossovers to broaden catalog discovery."
+        }
+      },
+      "watchlist": [
+        {
+          "rank": 1,
+          "movieId": 2966,
+          "title": "The Runaways",
+          "year": 2010,
+          "genres": [
+            "Drama",
+            "Music"
+          ],
+          "director": "Floria Sigismondi",
+          "cast": [
+            "Dakota Fanning Kristen Stewart Michael Shannon Riley Keough Stella Maeve"
+          ],
+          "predictedRating": 4.55,
+          "matchPercentage": 84,
+          "posterPath": "",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Drama alignment with 93% peer agreement.",
+            "tags": [
+              "Dir. Floria Sigismondi",
+              "Drama Match",
+              "93% Peer Match"
+            ],
+            "peerAgreementPct": 93,
+            "collabScore": 0.886,
+            "contentScore": 0.141,
+            "hybridScore": 0.588
+          },
+          "overview": "Joan Jett and Cherie Currie, two rebellious teenagers from Southern California, become the frontwomen for the Runaways -- the now-legendary group that paved the way for future generations of female rockers. Under the Svengalilike influence of impresario Kim Fowley, the band becomes a huge success.",
+          "runtime": 106,
+          "voteAverage": 6.3,
+          "tagline": "It's 1975 and they're about to explode."
+        },
+        {
+          "rank": 2,
+          "movieId": 1086,
+          "title": "Ice Age: Dawn of the Dinosaurs",
+          "year": 2009,
+          "genres": [
+            "Animation",
+            "Comedy",
+            "Family",
+            "Adventure"
+          ],
+          "director": "Carlos Saldanha",
+          "cast": [
+            "Ray Romano John Leguizamo Denis Leary Queen Latifah Simon Pegg"
+          ],
+          "predictedRating": 4.3,
+          "matchPercentage": 82,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTMzNDkzMTcyOV5BMl5BanBnXkFtZTcwNDIzMjM2MQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Comedy and Family alignment with 92% peer agreement.",
+            "tags": [
+              "Dir. Carlos Saldanha",
+              "Comedy / Family Match",
+              "92% Peer Match"
+            ],
+            "peerAgreementPct": 92,
+            "collabScore": 0.826,
+            "contentScore": 0.138,
+            "hybridScore": 0.551
+          },
+          "overview": "Times are changing for Manny the moody mammoth, Sid the motor mouthed sloth and Diego the crafty saber-toothed tiger. Life heats up for our heroes when they meet some new and none-too-friendly neighbors \u2013 the mighty dinosaurs.",
+          "runtime": 94,
+          "voteAverage": 6.5,
+          "tagline": "You Won't Believe Your Ice!"
+        },
+        {
+          "rank": 3,
+          "movieId": 150,
+          "title": "Brother",
+          "year": 2000,
+          "genres": [
+            "Crime",
+            "Drama",
+            "Thriller"
+          ],
+          "director": "Takeshi Kitano",
+          "cast": [
+            "Takeshi Kitano Omar Epps Claude Maki Susumu Terajima Masaya Kato"
+          ],
+          "predictedRating": 4.29,
+          "matchPercentage": 82,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNDVmOWNhNWYtM2Y1MS00MWFjLTlkNTctMTRkNmMxM2UwODZlXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Drama alignment with 92% peer agreement.",
+            "tags": [
+              "Dir. Takeshi Kitano",
+              "Drama Match",
+              "92% Peer Match"
+            ],
+            "peerAgreementPct": 92,
+            "collabScore": 0.823,
+            "contentScore": 0.132,
+            "hybridScore": 0.547
+          },
+          "overview": "A Japanese Yakuza gangster\u2019s deadly existence in his homeland gets him exiled to Los Angeles, California, where he is taken in by his little brother and his brother\u2019s gang. This is the first English film by Takeshi Kitano.",
+          "runtime": 114,
+          "voteAverage": 6.8,
+          "tagline": "Are You Japanese?"
+        },
+        {
+          "rank": 4,
+          "movieId": 1293,
+          "title": "The Man Who Knew Too Little",
+          "year": 1997,
+          "genres": [
+            "Comedy",
+            "Thriller",
+            "Crime",
+            "Action"
+          ],
+          "director": "Jon Amiel",
+          "cast": [
+            "Bill Murray Peter Gallagher Joanne Whalley Alfred Molina Richard Wilson"
+          ],
+          "predictedRating": 4.31,
+          "matchPercentage": 81,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMmM3YmJhZTktODY3OS00MWZlLWEyMDMtYjIxZjZiNjZiMTIxXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Comedy alignment with 92% peer agreement.",
+            "tags": [
+              "Dir. Jon Amiel",
+              "Comedy Match",
+              "92% Peer Match"
+            ],
+            "peerAgreementPct": 92,
+            "collabScore": 0.827,
+            "contentScore": 0.109,
+            "hybridScore": 0.539
+          },
+          "overview": "An American gets a ticket for an audience participation game in London, then gets involved in a case of mistaken identity. As an international plot unravels around him, he thinks it's all part of the act.",
+          "runtime": 97,
+          "voteAverage": 6.5,
+          "tagline": "He\u2019s on a mission so secret, even he doesn\u2019t know about it."
+        },
+        {
+          "rank": 5,
+          "movieId": 2364,
+          "title": "Code Name: The Cleaner",
+          "year": 2007,
+          "genres": [
+            "Action",
+            "Comedy",
+            "Crime"
+          ],
+          "director": "Les Mayfield",
+          "cast": [
+            "Cedric the Entertainer Lucy Liu Nicollette Sheridan Mark Dacascos Callum Keith Rennie"
+          ],
+          "predictedRating": 3.84,
+          "matchPercentage": 81,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BODM0ODg1NDI0NF5BMl5BanBnXkFtZTcwMjk0NzA0MQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Comedy alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Les Mayfield",
+              "Comedy Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.71,
+            "contentScore": 0.265,
+            "hybridScore": 0.532
+          },
+          "overview": "Cedric the Entertainer plays Jake, a seemingly regular guy who has no idea who he is after being hit over the head by mysterious assailants. When he finds himself entangled in a government conspiracy, Jake and his pursuers become convinced that he is an undercover agent.",
+          "runtime": 84,
+          "voteAverage": 4.7,
+          "tagline": ""
+        },
+        {
+          "rank": 6,
+          "movieId": 3363,
+          "title": "Battleship",
+          "year": 2012,
+          "genres": [
+            "Thriller",
+            "Action",
+            "Adventure",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Peter Berg",
+          "cast": [
+            "Taylor Kitsch Alexander Skarsg\\u00e5rd Rihanna Brooklyn Decker Tadanobu Asano"
+          ],
+          "predictedRating": 4.24,
+          "matchPercentage": 81,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjI5NTM5MDA2N15BMl5BanBnXkFtZTcwNjkwMzQxNw@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Adventure alignment with 92% peer agreement.",
+            "tags": [
+              "Dir. Peter Berg",
+              "Adventure Match",
+              "92% Peer Match"
+            ],
+            "peerAgreementPct": 92,
+            "collabScore": 0.809,
+            "contentScore": 0.11,
+            "hybridScore": 0.529
+          },
+          "overview": "When mankind beams a radio signal into space, a reply comes from \u2018Planet G\u2019, in the form of several alien crafts that splash down in the waters off Hawaii. Lieutenant Alex Hopper is a weapons officer assigned to the USS John Paul Jones, part of an international naval coalition which becomes the world's last hope for survival as they engage the hostile alien force of unimaginable strength. While taking on the invaders, Hopper must also try to live up to the potential his brother, and his fianc\u00e9e's father, Admiral Shane, expect of him.",
+          "runtime": 131,
+          "voteAverage": 5.5,
+          "tagline": "The Battle for Earth Begins at Sea"
+        },
+        {
+          "rank": 7,
+          "movieId": 2396,
+          "title": "Soul Men",
+          "year": 2008,
+          "genres": [
+            "Comedy",
+            "Music"
+          ],
+          "director": "Malcolm D. Lee",
+          "cast": [
+            "Samuel L. Jackson Bernie Mac Sharon Leal Adam Herschman Sean Hayes"
+          ],
+          "predictedRating": 4.06,
+          "matchPercentage": 81,
+          "posterPath": "",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Comedy alignment with 91% peer agreement.",
+            "tags": [
+              "Dir. Malcolm D. Lee",
+              "Comedy Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.764,
+            "contentScore": 0.167,
+            "hybridScore": 0.525
+          },
+          "overview": "Two former backup soul singers, Louis and Floyd, have not spoken to each other in 20 years, and reluctantly agree to travel across the country together to a reunion concert to honor their recently-deceased lead singer. Cleo, a beautiful young woman who is believed to be Floyd's daughter, accompanies them as a new singer.",
+          "runtime": 103,
+          "voteAverage": 6.3,
+          "tagline": ""
+        },
+        {
+          "rank": 8,
+          "movieId": 2739,
+          "title": "Barbershop 2:  Back in Business",
+          "year": 2004,
+          "genres": [
+            "Comedy",
+            "Drama"
+          ],
+          "director": "Kevin Rodney Sullivan",
+          "cast": [
+            "Ice Cube Cedric the Entertainer Sean Patrick Thomas Keke Palmer Michael Ealy"
+          ],
+          "predictedRating": 4.18,
+          "matchPercentage": 80,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTk4MTA2ODQ4MF5BMl5BanBnXkFtZTYwOTY1Njc3._V1_SX250.jpg",
+          "explanation": {
+            "text": "Recommended because you loved The Original Kings of Comedy. Shares director Kevin Rodney Sullivan and Comedy & Drama themes, with 91% of viewers with matching taste rating it 4+ stars.",
+            "tags": [
+              "Dir. Kevin Rodney Sullivan",
+              "Comedy / Drama Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.795,
+            "contentScore": 0.105,
+            "hybridScore": 0.519
+          },
+          "overview": "The continuing adventures of the barbers at Calvin's Barbershop. Gina, a stylist at the beauty shop next door, is now trying to cut in on his buisness. Calvin is again struggling to keep his father's shop and traditions alive--this time against urban developers looking to replace mom &amp; pop establishments with name-brand chains. The world changes, but some things never go out of style--from current events and politics to relationships and love, you can still say anything you want at the barbershop.",
+          "runtime": 106,
+          "voteAverage": 5.6,
+          "tagline": "Let your hair down"
+        },
+        {
+          "rank": 9,
+          "movieId": 3415,
+          "title": "Living Out Loud",
+          "year": 1998,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "director": "Richard LaGravenese",
+          "cast": [
+            "Holly Hunter Danny DeVito Queen Latifah Martin Donovan Rachael Leigh Cook"
+          ],
+          "predictedRating": 4.23,
+          "matchPercentage": 80,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BOGM4YTEzNDQtNDdjZi00YTQ5LWFlNzctMWY1YTc0ZDBhNzllXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Comedy and Romance alignment with 91% peer agreement.",
+            "tags": [
+              "Dir. Richard LaGravenese",
+              "Comedy / Romance Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.807,
+            "contentScore": 0.08,
+            "hybridScore": 0.516
+          },
+          "overview": "Dramatic comedy about two unlikely people who find each other while looking for love. Judith Nelson (Holly Hunter) is suddenly single after discovering her husband of fifteen years, a successful doctor (Martin Donovan), has been having an affair with a younger woman. Judith stews, plans, plots and fantasizes, but she can't decide what to do with her life until she goes out to a night club to see singer Liz Bailey (Queen Latifah), who is full of advice on life and love. While out on the town, Judith is suddenly kissed by a total stranger, which opens her eyes to new possibilities ... which is when she notices Pat (Danny De Vito), the elevator operator in her building.",
+          "runtime": 100,
+          "voteAverage": 5.3,
+          "tagline": ""
+        },
+        {
+          "rank": 10,
+          "movieId": 2984,
+          "title": "Def Jam's How to Be a Player",
+          "year": 1997,
+          "genres": [
+            "Comedy",
+            "Romance"
+          ],
+          "director": "Lionel C. Martin",
+          "cast": [
+            "Bill Bellamy Lark Voorhies Bernie Mac Elise Neal"
+          ],
+          "predictedRating": 4.02,
+          "matchPercentage": 80,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNGVlNGVkMDgtMmMzYy00OWM4LThjMjYtMDczMmYwYzMxZWVjXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Comedy and Romance alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. Lionel C. Martin",
+              "Comedy / Romance Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.755,
+            "contentScore": 0.158,
+            "hybridScore": 0.516
+          },
+          "overview": "Dray is a young playboy whose only objective in life seems to be to have sex with as many girls as he can without getting caught by his girlfriend Lisa. Dray's sister Jenny and her friend Katrina plan to show him that the way he lives is wrong and organize a party in Malibu, inviting all of his girlfriends.",
+          "runtime": 93,
+          "voteAverage": 5.3,
+          "tagline": ""
+        },
+        {
+          "rank": 11,
+          "movieId": 110,
+          "title": "The Godfather",
+          "year": 1972,
+          "genres": [
+            "Drama",
+            "Crime"
+          ],
+          "director": "Francis Ford Coppola",
+          "cast": [
+            "Marlon Brando Al Pacino James Caan Richard S. Castellano Robert Duvall"
+          ],
+          "predictedRating": 4.39,
+          "matchPercentage": 80,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Drama alignment with 92% peer agreement.",
+            "tags": [
+              "Dir. Francis Ford Coppola",
+              "Drama Match",
+              "92% Peer Match"
+            ],
+            "peerAgreementPct": 92,
+            "collabScore": 0.847,
+            "contentScore": 0.012,
+            "hybridScore": 0.513
+          },
+          "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+          "runtime": 175,
+          "voteAverage": 8.4,
+          "tagline": "An offer you can't refuse."
+        },
+        {
+          "rank": 12,
+          "movieId": 265,
+          "title": "Men in Black II",
+          "year": 2002,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Comedy",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Barry Sonnenfeld",
+          "cast": [
+            "Tommy Lee Jones Will Smith Rip Torn Lara Flynn Boyle Johnny Knoxville"
+          ],
+          "predictedRating": 4.13,
+          "matchPercentage": 80,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTMxNDA0NTMxMV5BMl5BanBnXkFtZTYwMDE2NzY2._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for The Original Kings of Comedy. Strong Comedy and Adventure alignment with 91% peer agreement.",
+            "tags": [
+              "Dir. Barry Sonnenfeld",
+              "Comedy / Adventure Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.782,
+            "contentScore": 0.085,
+            "hybridScore": 0.503
+          },
+          "overview": "Kay and Jay reunite to provide our best, last and only line of defense against a sinister seductress who levels the toughest challenge yet to the MIB's untarnished mission statement \u2013 protecting Earth from the scum of the universe. It's been four years since the alien-seeking agents averted an intergalactic disaster of epic proportions. Now it's a race against the clock as Jay must convince Kay \u2013 who not only has absolutely no memory of his time spent with the MIB, but is also the only living person left with the expertise to save the galaxy \u2013 to reunite with the MIB before the earth submits to ultimate destruction.",
+          "runtime": 88,
+          "voteAverage": 6.0,
+          "tagline": "Same Planet. New Scum."
+        }
+      ]
+    },
+    "34": {
+      "user": {
+        "userId": 34,
+        "persona": "User #34 (Casual Streamer)",
+        "description": "Dynamic subscriber profile calculated in real time from MovieLens ratings.",
+        "engagement": {
+          "score": 40,
+          "cohort": "Casual Viewer",
+          "churnRisk": "Moderate (35%)",
+          "totalRatings": 4,
+          "meanRating": 3,
+          "ratingStdDev": 0.94,
+          "genresExplored": 10,
+          "genreDiversityPct": 50,
+          "retentionStrategy": "Moderate Retention. User sticks to 1-2 favorite genres. Recommend genre-adjacent popular titles and actor crossovers to broaden catalog discovery."
+        }
+      },
+      "watchlist": [
+        {
+          "rank": 1,
+          "movieId": 3200,
+          "title": "Gandhi, My Father",
+          "year": 2007,
+          "genres": [
+            "Drama",
+            "Foreign",
+            "History"
+          ],
+          "director": "Feroz Abbas Khan",
+          "cast": [
+            "Darshan Jariwala Akshaye Khanna Bhumika Chawla Shefali Shah Vinay Jain"
+          ],
+          "predictedRating": 3.63,
+          "matchPercentage": 80,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BY2YxYTFhOGMtMzFhNS00YjM2LWJmNDUtMjM0Mzg3YzQ5NjFhXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Foreign and Drama alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Feroz Abbas Khan",
+              "Foreign / Drama Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.657,
+            "contentScore": 0.279,
+            "hybridScore": 0.506
+          },
+          "overview": "With Gandhi My Father, producer Anil Kapoor and director Feroz Abbas Khan have shed light onto Gandhi the person, rather than Gandhi the icon. Using Gandhi\u2019s political career as a canvas, the film paints a picture of his intricate, complex, and strained relationship with his son Harilal Gandhi.",
+          "runtime": 136,
+          "voteAverage": 6.0,
+          "tagline": "To the People...He was a Father. To his Son...he was a Father he never had."
+        },
+        {
+          "rank": 2,
+          "movieId": 2973,
+          "title": "Yours, Mine and Ours",
+          "year": 1968,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Family"
+          ],
+          "director": "Melville Shavelson",
+          "cast": [
+            "Lucille Ball Henry Fonda Van Johnson Tom Bosley Louise Troy"
+          ],
+          "predictedRating": 4.04,
+          "matchPercentage": 79,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BY2U1MGNhNDQtZTk0My00ZmQyLTg3NWUtZGJhZjRkMTZkZTE4XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Drama alignment with 91% peer agreement.",
+            "tags": [
+              "Dir. Melville Shavelson",
+              "Drama Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.76,
+            "contentScore": 0.086,
+            "hybridScore": 0.49
+          },
+          "overview": "When a widower with 10 children marries a widow with 8, can the 20 of them ever come together as one big happy family?",
+          "runtime": 111,
+          "voteAverage": 6.2,
+          "tagline": "Their wedding night set new attendence records"
+        },
+        {
+          "rank": 3,
+          "movieId": 1210,
+          "title": "Amen.",
+          "year": 2002,
+          "genres": [
+            "Drama",
+            "History"
+          ],
+          "director": "Costa-Gavras",
+          "cast": [
+            "Ulrich Tukur Mathieu Kassovitz Ulrich M\\u00fche Michel Duchaussoy Marcel Iure\\u0219"
+          ],
+          "predictedRating": 4.02,
+          "matchPercentage": 79,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNzQzYmE4NTktMjA0Ny00YWMwLWE2MzMtMjVkYjE5YmU5ZTg0XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Drama alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. Costa-Gavras",
+              "Drama Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.756,
+            "contentScore": 0.067,
+            "hybridScore": 0.48
+          },
+          "overview": "The film \"Amen.\" examines the links between the Vatican and Nazi Germany. The central character is Kurt Gerstein, a member of the Institute for Hygiene of the Waffen-SS who is horrified by what he sees in the death camps. Moreover, he is shocked to learn that the process he used to purify water for his troops, by using zyklon, served as a basis to kill people in gas chambers.",
+          "runtime": 132,
+          "voteAverage": 7.1,
+          "tagline": "Two Men   Two Worlds   One Cause"
+        },
+        {
+          "rank": 4,
+          "movieId": 349,
+          "title": "Gandhi",
+          "year": 1982,
+          "genres": [
+            "Drama",
+            "History"
+          ],
+          "director": "Richard Attenborough",
+          "cast": [
+            "Ben Kingsley Candice Bergen Edward Fox John Gielgud Trevor Howard"
+          ],
+          "predictedRating": 3.83,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNTg3ODhlZTEtM2Q3MC00YzMxLWJjN2YtOWUyMDIyYTlhYzM3XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Drama alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Richard Attenborough",
+              "Drama Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.707,
+            "contentScore": 0.14,
+            "hybridScore": 0.48
+          },
+          "overview": "In the early years of the 20th century, Mohandas K. Gandhi, a British-trained lawyer, forsakes all worldly possessions to take up the cause of Indian independence. Faced with armed resistance from the British government, Gandhi adopts a policy of 'passive resistance', endeavouring to win freedom for his people without resorting to bloodshed.",
+          "runtime": 191,
+          "voteAverage": 7.4,
+          "tagline": "His triumph changed the world forever."
+        },
+        {
+          "rank": 5,
+          "movieId": 32,
+          "title": "Blade Runner",
+          "year": 1982,
+          "genres": [
+            "Science",
+            "Fiction",
+            "Drama",
+            "Thriller"
+          ],
+          "director": "Ridley Scott",
+          "cast": [
+            "Harrison Ford Rutger Hauer Sean Young Edward James Olmos M. Emmet Walsh"
+          ],
+          "predictedRating": 4.15,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Drama alignment with 91% peer agreement.",
+            "tags": [
+              "Dir. Ridley Scott",
+              "Drama Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.789,
+            "contentScore": 0.009,
+            "hybridScore": 0.477
+          },
+          "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
+          "runtime": 117,
+          "voteAverage": 7.9,
+          "tagline": "Man has made his match... now it's his problem."
+        },
+        {
+          "rank": 6,
+          "movieId": 260,
+          "title": "The Matrix",
+          "year": 1999,
+          "genres": [
+            "Action",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Lilly Wachowski",
+          "cast": [
+            "Keanu Reeves Laurence Fishburne Carrie-Anne Moss Hugo Weaving Gloria Foster"
+          ],
+          "predictedRating": 4.13,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 91% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Lilly Wachowski",
+              "Action",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.783,
+            "contentScore": 0.018,
+            "hybridScore": 0.477
+          },
+          "overview": "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.",
+          "runtime": 136,
+          "voteAverage": 7.9,
+          "tagline": "Welcome to the Real World."
+        },
+        {
+          "rank": 7,
+          "movieId": 593,
+          "title": "Pirates of the Caribbean: On Stranger Tides",
+          "year": 2011,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Fantasy"
+          ],
+          "director": "Rob Marshall",
+          "cast": [
+            "Johnny Depp Pen\\u00e9lope Cruz Ian McShane Kevin McNally Geoffrey Rush"
+          ],
+          "predictedRating": 4.16,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjE5MjkwODI3Nl5BMl5BanBnXkFtZTcwNjcwMDk4NA@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 91% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Rob Marshall",
+              "Adventure",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.79,
+            "contentScore": 0,
+            "hybridScore": 0.474
+          },
+          "overview": "Captain Jack Sparrow crosses paths with a woman from his past, and he's not sure if it's love -- or if she's a ruthless con artist who's using him to find the fabled Fountain of Youth. When she forces him aboard the Queen Anne's Revenge, the ship of the formidable pirate Blackbeard, Jack finds himself on an unexpected adventure in which he doesn't know who to fear more: Blackbeard or the woman from his past.",
+          "runtime": 136,
+          "voteAverage": 6.4,
+          "tagline": "Live Forever Or Die Trying."
+        },
+        {
+          "rank": 8,
+          "movieId": 110,
+          "title": "The Godfather",
+          "year": 1972,
+          "genres": [
+            "Drama",
+            "Crime"
+          ],
+          "director": "Francis Ford Coppola",
+          "cast": [
+            "Marlon Brando Al Pacino James Caan Richard S. Castellano Robert Duvall"
+          ],
+          "predictedRating": 4.13,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Drama alignment with 91% peer agreement.",
+            "tags": [
+              "Dir. Francis Ford Coppola",
+              "Drama Match",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.783,
+            "contentScore": 0.002,
+            "hybridScore": 0.471
+          },
+          "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+          "runtime": 175,
+          "voteAverage": 8.4,
+          "tagline": "An offer you can't refuse."
+        },
+        {
+          "rank": 9,
+          "movieId": 3930,
+          "title": "The Other Conquest",
+          "year": 1999,
+          "genres": [
+            "Drama",
+            "Foreign"
+          ],
+          "director": "Salvador Carrasco",
+          "cast": [
+            "Dami\\u00e1n Delgado Jos\\u00e9 Carlos Rodr\\u00edguez Elpidia Carrillo I\\u00f1aki Aierra Honorato Magaloni"
+          ],
+          "predictedRating": 3.78,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTIwMTQwOTczMF5BMl5BanBnXkFtZTcwNjgwMjc0MQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Foreign and Drama alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Salvador Carrasco",
+              "Foreign / Drama Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.694,
+            "contentScore": 0.103,
+            "hybridScore": 0.458
+          },
+          "overview": "The film is a drama about the aftermath of the 1520s Spanish Conquest of Mexico told from the perspective of the indigenous Aztec people. It explores the social, religious, and psychological changes brought about by a historical process of colonization that both defined the American continent and is also highly reminiscent of today\u2019s neocolonialism.",
+          "runtime": 105,
+          "voteAverage": 5.4,
+          "tagline": "The spirit of a people can never be conquered."
+        },
+        {
+          "rank": 10,
+          "movieId": 3168,
+          "title": "The Social Network",
+          "year": 2010,
+          "genres": [
+            "Drama"
+          ],
+          "director": "David Fincher",
+          "cast": [
+            "Jesse Eisenberg Andrew Garfield Justin Timberlake Armie Hammer Max Minghella"
+          ],
+          "predictedRating": 3.79,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjlkNTE5ZTUtNGEwNy00MGVhLThmZjMtZjU1NDE5Zjk1NDZkXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Drama alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. David Fincher",
+              "Drama Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.697,
+            "contentScore": 0.085,
+            "hybridScore": 0.453
+          },
+          "overview": "On a fall night in 2003, Harvard undergrad and computer programming genius Mark Zuckerberg sits down at his computer and heatedly begins working on a new idea. In a fury of blogging and programming, what begins in his dorm room as a small site among friends soon becomes a global social network and a revolution in communication. A mere six years and 500 million friends later, Mark Zuckerberg is the youngest billionaire in history... but for this entrepreneur, success leads to both personal and legal complications.",
+          "runtime": 120,
+          "voteAverage": 7.1,
+          "tagline": "You don't get to 500 million friends without making a few enemies."
+        },
+        {
+          "rank": 11,
+          "movieId": 162,
+          "title": "The Devil Wears Prada",
+          "year": 2006,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "director": "David Frankel",
+          "cast": [
+            "Meryl Streep Anne Hathaway Emily Blunt Stanley Tucci Simon Baker"
+          ],
+          "predictedRating": 3.96,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZmM3ZDU3ODItZmY5Yi00OTQ2LWE5OTctZTA5NDBhMWJkOGY3XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Water. Strong Romance and Drama alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. David Frankel",
+              "Romance / Drama Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.74,
+            "contentScore": 0.02,
+            "hybridScore": 0.452
+          },
+          "overview": "The Devil Wears Prada is about a young journalist who moves to New York to work in the fashion industry. Her boss however is extremely demanding and cruel and won\u2019t let her succeed if she doesn\u2019t fit into the high class elegant look of their magazine when all she really wants to be a good journalist.",
+          "runtime": 109,
+          "voteAverage": 7.0,
+          "tagline": "Meet Andy Sachs. A million girls would kill to have her job. She's not one of them."
+        },
+        {
+          "rank": 12,
+          "movieId": 265,
+          "title": "Men in Black II",
+          "year": 2002,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Comedy",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Barry Sonnenfeld",
+          "cast": [
+            "Tommy Lee Jones Will Smith Rip Torn Lara Flynn Boyle Johnny Knoxville"
+          ],
+          "predictedRating": 3.97,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTMxNDA0NTMxMV5BMl5BanBnXkFtZTYwMDE2NzY2._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 90% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Barry Sonnenfeld",
+              "Action",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.743,
+            "contentScore": 0,
+            "hybridScore": 0.446
+          },
+          "overview": "Kay and Jay reunite to provide our best, last and only line of defense against a sinister seductress who levels the toughest challenge yet to the MIB's untarnished mission statement \u2013 protecting Earth from the scum of the universe. It's been four years since the alien-seeking agents averted an intergalactic disaster of epic proportions. Now it's a race against the clock as Jay must convince Kay \u2013 who not only has absolutely no memory of his time spent with the MIB, but is also the only living person left with the expertise to save the galaxy \u2013 to reunite with the MIB before the earth submits to ultimate destruction.",
+          "runtime": 88,
+          "voteAverage": 6.0,
+          "tagline": "Same Planet. New Scum."
+        }
+      ]
+    },
+    "42": {
+      "user": {
+        "userId": 42,
+        "persona": "Sci-Fi & Thriller Buff",
+        "description": "Dedicated subscriber with a passion for mind-bending sci-fi and complex psychological thrillers.",
+        "engagement": {
+          "score": 31,
+          "cohort": "Dormant / At-Risk",
+          "churnRisk": "High (70%+)",
+          "totalRatings": 2,
+          "meanRating": 3.5,
+          "ratingStdDev": 0.5,
+          "genresExplored": 7,
+          "genreDiversityPct": 35,
+          "retentionStrategy": "High Churn Risk. Serve high-consensus global blockbusters, trending releases, and prominent homepage hooks to re-engage dormant viewing habits."
+        }
+      },
+      "watchlist": [
+        {
+          "rank": 1,
+          "movieId": 593,
+          "title": "Pirates of the Caribbean: On Stranger Tides",
+          "year": 2011,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Fantasy"
+          ],
+          "director": "Rob Marshall",
+          "cast": [
+            "Johnny Depp Pen\\u00e9lope Cruz Ian McShane Kevin McNally Geoffrey Rush"
+          ],
+          "predictedRating": 4.17,
+          "matchPercentage": 79,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjE5MjkwODI3Nl5BMl5BanBnXkFtZTcwNjcwMDk4NA@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 91% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Rob Marshall",
+              "Adventure",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.793,
+            "contentScore": 0.025,
+            "hybridScore": 0.486
+          },
+          "overview": "Captain Jack Sparrow crosses paths with a woman from his past, and he's not sure if it's love -- or if she's a ruthless con artist who's using him to find the fabled Fountain of Youth. When she forces him aboard the Queen Anne's Revenge, the ship of the formidable pirate Blackbeard, Jack finds himself on an unexpected adventure in which he doesn't know who to fear more: Blackbeard or the woman from his past.",
+          "runtime": 136,
+          "voteAverage": 6.4,
+          "tagline": "Live Forever Or Die Trying."
+        },
+        {
+          "rank": 2,
+          "movieId": 1188,
+          "title": "Friends with Money",
+          "year": 2006,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "director": "Nicole Holofcener",
+          "cast": [
+            "Catherine Keener Jason Isaacs Timm Sharp Jennifer Aniston Joan Cusack"
+          ],
+          "predictedRating": 3.88,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjE3Mjc3NjQ5NV5BMl5BanBnXkFtZTYwMjY5MjE3._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Comedy and Drama alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. Nicole Holofcener",
+              "Comedy / Drama Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.719,
+            "contentScore": 0.088,
+            "hybridScore": 0.467
+          },
+          "overview": "After she quits her lucrative job, Olivia finds herself unsure about her future and her relationships with her successful and wealthy friends.",
+          "runtime": 88,
+          "voteAverage": 5.1,
+          "tagline": ""
+        },
+        {
+          "rank": 3,
+          "movieId": 162,
+          "title": "The Devil Wears Prada",
+          "year": 2006,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "director": "David Frankel",
+          "cast": [
+            "Meryl Streep Anne Hathaway Emily Blunt Stanley Tucci Simon Baker"
+          ],
+          "predictedRating": 3.97,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZmM3ZDU3ODItZmY5Yi00OTQ2LWE5OTctZTA5NDBhMWJkOGY3XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Comedy and Drama alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. David Frankel",
+              "Comedy / Drama Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.742,
+            "contentScore": 0.051,
+            "hybridScore": 0.466
+          },
+          "overview": "The Devil Wears Prada is about a young journalist who moves to New York to work in the fashion industry. Her boss however is extremely demanding and cruel and won\u2019t let her succeed if she doesn\u2019t fit into the high class elegant look of their magazine when all she really wants to be a good journalist.",
+          "runtime": 109,
+          "voteAverage": 7.0,
+          "tagline": "Meet Andy Sachs. A million girls would kill to have her job. She's not one of them."
+        },
+        {
+          "rank": 4,
+          "movieId": 3983,
+          "title": "Maleficent",
+          "year": 2014,
+          "genres": [
+            "Fantasy",
+            "Adventure",
+            "Action",
+            "Family",
+            "Romance"
+          ],
+          "director": "Robert Stromberg",
+          "cast": [
+            "Angelina Jolie Elle Fanning Sharlto Copley Sam Riley Juno Temple"
+          ],
+          "predictedRating": 4.03,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjAwMzAzMzExOF5BMl5BanBnXkFtZTgwOTcwMDA5MTE@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Family alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. Robert Stromberg",
+              "Family Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.758,
+            "contentScore": 0.009,
+            "hybridScore": 0.458
+          },
+          "overview": "The untold story of Disney's most iconic villain from the 1959 classic 'Sleeping Beauty'. A beautiful, pure-hearted young woman, Maleficent has an idyllic life growing up in a peaceable forest kingdom, until one day when an invading army threatens the harmony of the land.  Maleficent rises to be the land's fiercest protector, but she ultimately suffers a ruthless betrayal \u2013 an act that begins to turn her heart into stone. Bent on revenge, Maleficent faces an epic battle with the invading King's successor and, as a result, places a curse upon his newborn infant Aurora. As the child grows, Maleficent realizes that Aurora holds the key to peace in the kingdom - and to Maleficent's true happiness as well.",
+          "runtime": 97,
+          "voteAverage": 7.0,
+          "tagline": "Don't believe the fairy tale."
+        },
+        {
+          "rank": 5,
+          "movieId": 1916,
+          "title": "A League of Their Own",
+          "year": 1992,
+          "genres": [
+            "Comedy"
+          ],
+          "director": "Penny Marshall",
+          "cast": [
+            "Tom Hanks Geena Davis Madonna Lori Petty Jon Lovitz"
+          ],
+          "predictedRating": 3.77,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMDgwZDJjNWQtMzBmNi00ZTNkLTk5NGQtMzE2ODJkZjUyYjRhXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Comedy alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Penny Marshall",
+              "Comedy Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.693,
+            "contentScore": 0.101,
+            "hybridScore": 0.456
+          },
+          "overview": "Small-town sisters Dottie and Kit join an all-female baseball league formed after World War II brings pro baseball to a standstill. When their team hits the road with its drunken coach, the siblings find troubles and triumphs on and off the field.",
+          "runtime": 128,
+          "voteAverage": 6.7,
+          "tagline": "To achieve the incredible, you have to attempt the impossible."
+        },
+        {
+          "rank": 6,
+          "movieId": 2686,
+          "title": "Zombieland",
+          "year": 2009,
+          "genres": [
+            "Comedy",
+            "Horror"
+          ],
+          "director": "Ruben Fleischer",
+          "cast": [
+            "Jesse Eisenberg Woody Harrelson Emma Stone Abigail Breslin Amber Heard"
+          ],
+          "predictedRating": 3.76,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTU5MDg0NTQ1N15BMl5BanBnXkFtZTcwMjA4Mjg3Mg@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Comedy alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Ruben Fleischer",
+              "Comedy Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.691,
+            "contentScore": 0.1,
+            "hybridScore": 0.455
+          },
+          "overview": "Columbus has made a habit of running from what scares him. Tallahassee doesn't have fears. If he did, he'd kick their ever-living ass. In a world overrun by zombies, these two are perfectly evolved survivors. But now, they're about to stare down the most terrifying prospect of all: each other.",
+          "runtime": 88,
+          "voteAverage": 7.2,
+          "tagline": "This place is so dead"
+        },
+        {
+          "rank": 7,
+          "movieId": 246,
+          "title": "Monsters, Inc.",
+          "year": 2001,
+          "genres": [
+            "Animation",
+            "Comedy",
+            "Family"
+          ],
+          "director": "",
+          "cast": [
+            "John Goodman Billy Crystal Mary Gibbs Steve Buscemi James Coburn"
+          ],
+          "predictedRating": 3.99,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTY1NTI0ODUyOF5BMl5BanBnXkFtZTgwNTEyNjQ0MDE@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Comedy and Family alignment with 90% peer agreement.",
+            "tags": [
+              "Comedy / Family Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.748,
+            "contentScore": 0.011,
+            "hybridScore": 0.453
+          },
+          "overview": "James Sullivan and Mike Wazowski are monsters, they earn their living scaring children and are the best in the business... even though they're more afraid of the children than they are of them. When a child accidentally enters their world, James and Mike suddenly find that kids are not to be afraid of and they uncover a conspiracy that could threaten all children across the world.",
+          "runtime": 92,
+          "voteAverage": 7.5,
+          "tagline": "We Scare Because We Care."
+        },
+        {
+          "rank": 8,
+          "movieId": 2391,
+          "title": "The Ultimate Gift",
+          "year": 2006,
+          "genres": [
+            "Romance",
+            "Drama",
+            "Family"
+          ],
+          "director": "Michael O. Sajbel",
+          "cast": [
+            "James Garner Drew Fuller Abigail Breslin Ali Hillis Bill Cobbs"
+          ],
+          "predictedRating": 3.74,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNTBlNmY5ZDItZmQyOS00ZGIyLWFmM2ItYmI0N2E4ZGQ3Mzc0XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Drama and Family alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Michael O. Sajbel",
+              "Drama / Family Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.685,
+            "contentScore": 0.101,
+            "hybridScore": 0.452
+          },
+          "overview": "When his wealthy grandfather finally dies, Jason Stevens fully expects to benefit when it comes to the reading of the will. But instead of a sizable inheritance, Jason receives a test, a series of tasks he must complete before he can get any money.",
+          "runtime": 114,
+          "voteAverage": 6.8,
+          "tagline": ""
+        },
+        {
+          "rank": 9,
+          "movieId": 110,
+          "title": "The Godfather",
+          "year": 1972,
+          "genres": [
+            "Drama",
+            "Crime"
+          ],
+          "director": "Francis Ford Coppola",
+          "cast": [
+            "Marlon Brando Al Pacino James Caan Richard S. Castellano Robert Duvall"
+          ],
+          "predictedRating": 3.95,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Drama alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. Francis Ford Coppola",
+              "Drama Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.738,
+            "contentScore": 0.012,
+            "hybridScore": 0.448
+          },
+          "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+          "runtime": 175,
+          "voteAverage": 8.4,
+          "tagline": "An offer you can't refuse."
+        },
+        {
+          "rank": 10,
+          "movieId": 1929,
+          "title": "Bowfinger",
+          "year": 1999,
+          "genres": [
+            "Comedy"
+          ],
+          "director": "Frank Oz",
+          "cast": [
+            "Steve Martin Eddie Murphy Heather Graham Christine Baranski Jamie Kennedy"
+          ],
+          "predictedRating": 3.64,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZGM3MmIzZWQtMTIwYi00Y2ZjLWI1MTktYjg5YzUyYWZhMWQxXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Comedy alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Frank Oz",
+              "Comedy Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.661,
+            "contentScore": 0.125,
+            "hybridScore": 0.447
+          },
+          "overview": "On the verge of bankruptcy and desperate for his big break, aspiring filmmaker Bobby Bowfinger concocts a crazy plan to make his ultimate dream movie. Rallying a ragtag team that includes a starry-eyed ingenue, a has-been diva and a film studio gofer, he sets out to shoot a blockbuster featuring the biggest star in Hollywood, Kit Ramsey -- only without letting Ramsey know he's in the picture.",
+          "runtime": 97,
+          "voteAverage": 6.0,
+          "tagline": "The con is on."
+        },
+        {
+          "rank": 11,
+          "movieId": 214,
+          "title": "One Flew Over the Cuckoo's Nest",
+          "year": 1975,
+          "genres": [
+            "Drama"
+          ],
+          "director": "Milo\\u0161 Forman",
+          "cast": [
+            "Jack Nicholson Louise Fletcher Danny DeVito William Redfield Scatman Crothers"
+          ],
+          "predictedRating": 3.97,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BYjBkMjgzMzYtNzRiMS00NDc3LWE4YTUtZjYxYjZhNjNhYzhhXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Drama alignment with 90% peer agreement.",
+            "tags": [
+              "Dir. Milo\\u0161 Forman",
+              "Drama Match",
+              "90% Peer Match"
+            ],
+            "peerAgreementPct": 90,
+            "collabScore": 0.742,
+            "contentScore": 0.001,
+            "hybridScore": 0.446
+          },
+          "overview": "While serving time for insanity at a state mental hospital, implacable rabble-rouser, Randle Patrick McMurphy inspires his fellow patients to rebel against the authoritarian rule of head nurse, Mildred Ratched.",
+          "runtime": 133,
+          "voteAverage": 8.2,
+          "tagline": "If he's crazy, what does that make you?"
+        },
+        {
+          "rank": 12,
+          "movieId": 1095,
+          "title": "Definitely, Maybe",
+          "year": 2008,
+          "genres": [
+            "Comedy",
+            "Romance"
+          ],
+          "director": "Adam Brooks",
+          "cast": [
+            "Ryan Reynolds Abigail Breslin Elizabeth Banks Isla Fisher Rachel Weisz"
+          ],
+          "predictedRating": 3.67,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTc1Mzc1ODMxMF5BMl5BanBnXkFtZTcwNDY1MzU1MQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Kit Kittredge: An American Girl. Strong Comedy alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Adam Brooks",
+              "Comedy Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.666,
+            "contentScore": 0.112,
+            "hybridScore": 0.445
+          },
+          "overview": "When Will decides to tell his daughter the story of how he met her mother, he discovers that a second look at the past might also give him a second chance at the future.",
+          "runtime": 112,
+          "voteAverage": 6.7,
+          "tagline": "Three relationships. Three disasters. One last chance."
+        }
+      ]
+    },
+    "84": {
+      "user": {
+        "userId": 84,
+        "persona": "Mystery & Crime Cinema Critic",
+        "description": "Discerning viewer with critical taste, focused on detective mysteries, neo-noir cinema, and plot twists.",
+        "engagement": {
+          "score": 60,
+          "cohort": "Casual Viewer",
+          "churnRisk": "Moderate (35%)",
+          "totalRatings": 57,
+          "meanRating": 3.42,
+          "ratingStdDev": 0.75,
+          "genresExplored": 14,
+          "genreDiversityPct": 70,
+          "retentionStrategy": "Moderate Retention. User sticks to 1-2 favorite genres. Recommend genre-adjacent popular titles and actor crossovers to broaden catalog discovery."
+        }
+      },
+      "watchlist": [
+        {
+          "rank": 1,
+          "movieId": 593,
+          "title": "Pirates of the Caribbean: On Stranger Tides",
+          "year": 2011,
+          "genres": [
+            "Adventure",
+            "Action",
+            "Fantasy"
+          ],
+          "director": "Rob Marshall",
+          "cast": [
+            "Johnny Depp Pen\\u00e9lope Cruz Ian McShane Kevin McNally Geoffrey Rush"
+          ],
+          "predictedRating": 4.06,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjE5MjkwODI3Nl5BMl5BanBnXkFtZTcwNjcwMDk4NA@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 91% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Rob Marshall",
+              "Adventure",
+              "91% Peer Match"
+            ],
+            "peerAgreementPct": 91,
+            "collabScore": 0.764,
+            "contentScore": 0,
+            "hybridScore": 0.459
+          },
+          "overview": "Captain Jack Sparrow crosses paths with a woman from his past, and he's not sure if it's love -- or if she's a ruthless con artist who's using him to find the fabled Fountain of Youth. When she forces him aboard the Queen Anne's Revenge, the ship of the formidable pirate Blackbeard, Jack finds himself on an unexpected adventure in which he doesn't know who to fear more: Blackbeard or the woman from his past.",
+          "runtime": 136,
+          "voteAverage": 6.4,
+          "tagline": "Live Forever Or Die Trying."
+        },
+        {
+          "rank": 2,
+          "movieId": 162,
+          "title": "The Devil Wears Prada",
+          "year": 2006,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "director": "David Frankel",
+          "cast": [
+            "Meryl Streep Anne Hathaway Emily Blunt Stanley Tucci Simon Baker"
+          ],
+          "predictedRating": 3.81,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZmM3ZDU3ODItZmY5Yi00OTQ2LWE5OTctZTA5NDBhMWJkOGY3XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. David Frankel",
+              "Comedy",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.702,
+            "contentScore": 0,
+            "hybridScore": 0.421
+          },
+          "overview": "The Devil Wears Prada is about a young journalist who moves to New York to work in the fashion industry. Her boss however is extremely demanding and cruel and won\u2019t let her succeed if she doesn\u2019t fit into the high class elegant look of their magazine when all she really wants to be a good journalist.",
+          "runtime": 109,
+          "voteAverage": 7.0,
+          "tagline": "Meet Andy Sachs. A million girls would kill to have her job. She's not one of them."
+        },
+        {
+          "rank": 3,
+          "movieId": 265,
+          "title": "Men in Black II",
+          "year": 2002,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Comedy",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Barry Sonnenfeld",
+          "cast": [
+            "Tommy Lee Jones Will Smith Rip Torn Lara Flynn Boyle Johnny Knoxville"
+          ],
+          "predictedRating": 3.75,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTMxNDA0NTMxMV5BMl5BanBnXkFtZTYwMDE2NzY2._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Barry Sonnenfeld",
+              "Action",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.689,
+            "contentScore": 0,
+            "hybridScore": 0.413
+          },
+          "overview": "Kay and Jay reunite to provide our best, last and only line of defense against a sinister seductress who levels the toughest challenge yet to the MIB's untarnished mission statement \u2013 protecting Earth from the scum of the universe. It's been four years since the alien-seeking agents averted an intergalactic disaster of epic proportions. Now it's a race against the clock as Jay must convince Kay \u2013 who not only has absolutely no memory of his time spent with the MIB, but is also the only living person left with the expertise to save the galaxy \u2013 to reunite with the MIB before the earth submits to ultimate destruction.",
+          "runtime": 88,
+          "voteAverage": 6.0,
+          "tagline": "Same Planet. New Scum."
+        },
+        {
+          "rank": 4,
+          "movieId": 214,
+          "title": "One Flew Over the Cuckoo's Nest",
+          "year": 1975,
+          "genres": [
+            "Drama"
+          ],
+          "director": "Milo\\u0161 Forman",
+          "cast": [
+            "Jack Nicholson Louise Fletcher Danny DeVito William Redfield Scatman Crothers"
+          ],
+          "predictedRating": 3.73,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BYjBkMjgzMzYtNzRiMS00NDc3LWE4YTUtZjYxYjZhNjNhYzhhXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Milo\\u0161 Forman",
+              "Drama",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.681,
+            "contentScore": 0,
+            "hybridScore": 0.409
+          },
+          "overview": "While serving time for insanity at a state mental hospital, implacable rabble-rouser, Randle Patrick McMurphy inspires his fellow patients to rebel against the authoritarian rule of head nurse, Mildred Ratched.",
+          "runtime": 133,
+          "voteAverage": 8.2,
+          "tagline": "If he's crazy, what does that make you?"
+        },
+        {
+          "rank": 5,
+          "movieId": 110,
+          "title": "The Godfather",
+          "year": 1972,
+          "genres": [
+            "Drama",
+            "Crime"
+          ],
+          "director": "Francis Ford Coppola",
+          "cast": [
+            "Marlon Brando Al Pacino James Caan Richard S. Castellano Robert Duvall"
+          ],
+          "predictedRating": 3.72,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Francis Ford Coppola",
+              "Drama",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.681,
+            "contentScore": 0,
+            "hybridScore": 0.408
+          },
+          "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge.",
+          "runtime": 175,
+          "voteAverage": 8.4,
+          "tagline": "An offer you can't refuse."
+        },
+        {
+          "rank": 6,
+          "movieId": 3983,
+          "title": "Maleficent",
+          "year": 2014,
+          "genres": [
+            "Fantasy",
+            "Adventure",
+            "Action",
+            "Family",
+            "Romance"
+          ],
+          "director": "Robert Stromberg",
+          "cast": [
+            "Angelina Jolie Elle Fanning Sharlto Copley Sam Riley Juno Temple"
+          ],
+          "predictedRating": 3.71,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjAwMzAzMzExOF5BMl5BanBnXkFtZTgwOTcwMDA5MTE@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Robert Stromberg",
+              "Fantasy",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.678,
+            "contentScore": 0,
+            "hybridScore": 0.407
+          },
+          "overview": "The untold story of Disney's most iconic villain from the 1959 classic 'Sleeping Beauty'. A beautiful, pure-hearted young woman, Maleficent has an idyllic life growing up in a peaceable forest kingdom, until one day when an invading army threatens the harmony of the land.  Maleficent rises to be the land's fiercest protector, but she ultimately suffers a ruthless betrayal \u2013 an act that begins to turn her heart into stone. Bent on revenge, Maleficent faces an epic battle with the invading King's successor and, as a result, places a curse upon his newborn infant Aurora. As the child grows, Maleficent realizes that Aurora holds the key to peace in the kingdom - and to Maleficent's true happiness as well.",
+          "runtime": 97,
+          "voteAverage": 7.0,
+          "tagline": "Don't believe the fairy tale."
+        },
+        {
+          "rank": 7,
+          "movieId": 246,
+          "title": "Monsters, Inc.",
+          "year": 2001,
+          "genres": [
+            "Animation",
+            "Comedy",
+            "Family"
+          ],
+          "director": "",
+          "cast": [
+            "John Goodman Billy Crystal Mary Gibbs Steve Buscemi James Coburn"
+          ],
+          "predictedRating": 3.68,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTY1NTI0ODUyOF5BMl5BanBnXkFtZTgwNTEyNjQ0MDE@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Animation",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.669,
+            "contentScore": 0,
+            "hybridScore": 0.402
+          },
+          "overview": "James Sullivan and Mike Wazowski are monsters, they earn their living scaring children and are the best in the business... even though they're more afraid of the children than they are of them. When a child accidentally enters their world, James and Mike suddenly find that kids are not to be afraid of and they uncover a conspiracy that could threaten all children across the world.",
+          "runtime": 92,
+          "voteAverage": 7.5,
+          "tagline": "We Scare Because We Care."
+        },
+        {
+          "rank": 8,
+          "movieId": 260,
+          "title": "The Matrix",
+          "year": 1999,
+          "genres": [
+            "Action",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Lilly Wachowski",
+          "cast": [
+            "Keanu Reeves Laurence Fishburne Carrie-Anne Moss Hugo Weaving Gloria Foster"
+          ],
+          "predictedRating": 3.67,
+          "matchPercentage": 74,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BN2NmN2VhMTQtMDNiOS00NDlhLTliMjgtODE2ZTY0ODQyNDRhXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Lilly Wachowski",
+              "Action",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.667,
+            "contentScore": 0,
+            "hybridScore": 0.4
+          },
+          "overview": "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.",
+          "runtime": 136,
+          "voteAverage": 7.9,
+          "tagline": "Welcome to the Real World."
+        },
+        {
+          "rank": 9,
+          "movieId": 3634,
+          "title": "Monsters University",
+          "year": 2013,
+          "genres": [
+            "Animation",
+            "Family"
+          ],
+          "director": "Dan Scanlon",
+          "cast": [
+            "Billy Crystal John Goodman Steve Buscemi Helen Mirren Noah Johnston"
+          ],
+          "predictedRating": 3.66,
+          "matchPercentage": 74,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTUyODgwMDU3M15BMl5BanBnXkFtZTcwOTM4MjcxOQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Dan Scanlon",
+              "Animation",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.666,
+            "contentScore": 0,
+            "hybridScore": 0.399
+          },
+          "overview": "A look at the relationship between Mike and Sulley during their days at Monsters University \u2014 when they weren't necessarily the best of friends.",
+          "runtime": 104,
+          "voteAverage": 7.0,
+          "tagline": "School never looked this scary."
+        },
+        {
+          "rank": 10,
+          "movieId": 2692,
+          "title": "Avatar",
+          "year": 2009,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy",
+            "Science",
+            "Fiction"
+          ],
+          "director": "James Cameron",
+          "cast": [
+            "Sam Worthington Zoe Saldana Sigourney Weaver Stephen Lang Michelle Rodriguez"
+          ],
+          "predictedRating": 3.66,
+          "matchPercentage": 74,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMDEzMmQwZjctZWU2My00MWNlLWE0NjItMDJlYTRlNGJiZjcyXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 89% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. James Cameron",
+              "Action",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.664,
+            "contentScore": 0,
+            "hybridScore": 0.399
+          },
+          "overview": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.",
+          "runtime": 162,
+          "voteAverage": 7.2,
+          "tagline": "Enter the World of Pandora."
+        },
+        {
+          "rank": 11,
+          "movieId": 3801,
+          "title": "Jupiter Ascending",
+          "year": 2015,
+          "genres": [
+            "Science",
+            "Fiction",
+            "Fantasy",
+            "Action",
+            "Adventure"
+          ],
+          "director": "Lilly Wachowski",
+          "cast": [
+            "Mila Kunis Channing Tatum Sean Bean Eddie Redmayne Douglas Booth"
+          ],
+          "predictedRating": 3.63,
+          "matchPercentage": 74,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTQyNzk2MjA2NF5BMl5BanBnXkFtZTgwMjEwNzk3MjE@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 88% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Lilly Wachowski",
+              "Science",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.657,
+            "contentScore": 0,
+            "hybridScore": 0.394
+          },
+          "overview": "In a universe where human genetic material is the most precious commodity, an impoverished young Earth woman becomes the key to strategic maneuvers and internal strife within a powerful dynasty\u2026",
+          "runtime": 124,
+          "voteAverage": 5.2,
+          "tagline": "Expand your universe."
+        },
+        {
+          "rank": 12,
+          "movieId": 223,
+          "title": "Psycho",
+          "year": 1960,
+          "genres": [
+            "Drama",
+            "Horror",
+            "Thriller"
+          ],
+          "director": "Alfred Hitchcock",
+          "cast": [
+            "Anthony Perkins Vera Miles John Gavin Janet Leigh Martin Balsam"
+          ],
+          "predictedRating": 3.63,
+          "matchPercentage": 74,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BYjZhMzFiZjItODA3ZC00MmRhLWIzMGYtMmVjOWUwYTA3MTRjXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 88% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Alfred Hitchcock",
+              "Drama",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.657,
+            "contentScore": 0,
+            "hybridScore": 0.394
+          },
+          "overview": "When larcenous real estate clerk Marion Crane goes on the lam with a wad of cash and hopes of starting a new life, she ends up at the notorious Bates Motel, where manager Norman Bates cares for his housebound mother. The place seems quirky, but fine\u2026 until Marion decides to take a shower.",
+          "runtime": 109,
+          "voteAverage": 8.2,
+          "tagline": "The master of suspense moves his cameras into the icy blackness of the unexplored!"
+        }
+      ]
+    },
+    "99": {
+      "user": {
+        "userId": 99,
+        "persona": "Sporadic / Dormant Account",
+        "description": "Infrequent subscriber at risk of cancellation. Has not initiated an active viewing session in weeks.",
+        "engagement": {
+          "score": 55,
+          "cohort": "Casual Viewer",
+          "churnRisk": "Moderate (35%)",
+          "totalRatings": 18,
+          "meanRating": 3.53,
+          "ratingStdDev": 0.89,
+          "genresExplored": 16,
+          "genreDiversityPct": 80,
+          "retentionStrategy": "Moderate Retention. User sticks to 1-2 favorite genres. Recommend genre-adjacent popular titles and actor crossovers to broaden catalog discovery."
+        }
+      },
+      "watchlist": [
+        {
+          "rank": 1,
+          "movieId": 1200,
+          "title": "The Importance of Being Earnest",
+          "year": 2002,
+          "genres": [
+            "Comedy",
+            "Drama",
+            "History",
+            "Romance"
+          ],
+          "director": "Oliver Parker",
+          "cast": [
+            "Rupert Everett Colin Firth Reese Witherspoon Judi Dench Tom Wilkinson"
+          ],
+          "predictedRating": 3.62,
+          "matchPercentage": 78,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BOGUwMDcyNDctNTY3NS00YjUzLThlYjQtOTAxNzcwMWM5OTY5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Comedy alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Oliver Parker",
+              "Comedy Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.656,
+            "contentScore": 0.176,
+            "hybridScore": 0.464
+          },
+          "overview": "Two young gentlemen living in 1890s England use the same pseudonym (\"Ernest\") on the sly, which is fine until they both fall in love with women using that name, which leads to a comedy of mistaken identities...",
+          "runtime": 97,
+          "voteAverage": 6.7,
+          "tagline": "Everybody Loves Ernest... But Nobody's Quite Sure Who He Really Is."
+        },
+        {
+          "rank": 2,
+          "movieId": 1227,
+          "title": "S.W.A.T.",
+          "year": 2003,
+          "genres": [
+            "Action",
+            "Thriller",
+            "Crime"
+          ],
+          "director": "Clark Johnson",
+          "cast": [
+            "Samuel L. Jackson Colin Farrell Michelle Rodriguez LL Cool J Josh Charles"
+          ],
+          "predictedRating": 3.82,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNmMwYjNhYTEtNGM3ZS00ZTNjLWE1ZWItOWU0MGU4YTUwNjk0XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Action alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. Clark Johnson",
+              "Action Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.706,
+            "contentScore": 0.091,
+            "hybridScore": 0.46
+          },
+          "overview": "Hondo Harrelson recruits Jim Street to join an elite unit of the Los Angeles Police Department. Together they seek out more members, including tough Deke Kay and single mom Chris Sanchez. The team's first big assignment is to escort crime boss Alex Montel to prison. It seems routine, but when Montel offers a huge reward to anyone who can break him free, criminals of various stripes step up for the prize.",
+          "runtime": 117,
+          "voteAverage": 5.8,
+          "tagline": "You're either S.W.A.T. or you're not."
+        },
+        {
+          "rank": 3,
+          "movieId": 1914,
+          "title": "Nanny McPhee",
+          "year": 2005,
+          "genres": [
+            "Fantasy",
+            "Comedy",
+            "Family"
+          ],
+          "director": "Kirk Jones",
+          "cast": [
+            "Emma Thompson Colin Firth Kelly Macdonald Thomas Brodie-Sangster Eliza Bennett"
+          ],
+          "predictedRating": 3.64,
+          "matchPercentage": 77,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMjAwNDUxODEwMF5BMl5BanBnXkFtZTcwMzgyMTIzMQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Family and Comedy alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Kirk Jones",
+              "Family / Comedy Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.659,
+            "contentScore": 0.116,
+            "hybridScore": 0.442
+          },
+          "overview": "Widower Cedric Brown (Colin Firth) hires Nanny McPhee (Emma Thompson) to care for his seven rambunctious children, who have chased away all previous nannies. Taunted by Simon (Thomas Sangster) and his siblings, Nanny McPhee uses mystical powers to instill discipline. And when the children's great-aunt and benefactor, Lady Adelaide Stitch (Angela Lansbury), threatens to separate the kids, the family pulls together under the guidance of Nanny McPhee.",
+          "runtime": 97,
+          "voteAverage": 6.4,
+          "tagline": "You'll Learn To Love Her. Warts And All."
+        },
+        {
+          "rank": 4,
+          "movieId": 2692,
+          "title": "Avatar",
+          "year": 2009,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy",
+            "Science",
+            "Fiction"
+          ],
+          "director": "James Cameron",
+          "cast": [
+            "Sam Worthington Zoe Saldana Sigourney Weaver Stephen Lang Michelle Rodriguez"
+          ],
+          "predictedRating": 3.77,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMDEzMmQwZjctZWU2My00MWNlLWE0NjItMDJlYTRlNGJiZjcyXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Action and Fantasy alignment with 89% peer agreement.",
+            "tags": [
+              "Dir. James Cameron",
+              "Action / Fantasy Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.693,
+            "contentScore": 0.037,
+            "hybridScore": 0.43
+          },
+          "overview": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.",
+          "runtime": 162,
+          "voteAverage": 7.2,
+          "tagline": "Enter the World of Pandora."
+        },
+        {
+          "rank": 5,
+          "movieId": 1244,
+          "title": "The Longest Yard",
+          "year": 2005,
+          "genres": [
+            "Comedy",
+            "Drama"
+          ],
+          "director": "Peter Segal",
+          "cast": [
+            "Adam Sandler Chris Rock Burt Reynolds Michael Irvin Nelly"
+          ],
+          "predictedRating": 3.63,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTc1NTQyNDk2NV5BMl5BanBnXkFtZTcwOTE2OTQzMw@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Comedy alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Peter Segal",
+              "Comedy Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.658,
+            "contentScore": 0.088,
+            "hybridScore": 0.43
+          },
+          "overview": "Pro quarter-back, Paul Crewe and former college champion and coach, Nate Scarboro are doing time in the same prison. Asked to put together a team of inmates to take on the guards, Crewe enlists the help of Scarboro to coach the inmates to victory in a football game 'fixed' to turn out quite another way.",
+          "runtime": 113,
+          "voteAverage": 6.2,
+          "tagline": "If you can't get out, get even."
+        },
+        {
+          "rank": 6,
+          "movieId": 2495,
+          "title": "Whatever It Takes",
+          "year": 2000,
+          "genres": [
+            "Drama",
+            "Comedy",
+            "Romance"
+          ],
+          "director": "David Raynr",
+          "cast": [
+            "Jodi Lyn O'Keefe Shane West Marla Sokoloff James Franco Aaron Paul"
+          ],
+          "predictedRating": 3.5,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BOTcyNzgxODctOTA1My00NDg3LWFkOWQtMmYzZTliY2IxMzdlXkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Comedy alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. David Raynr",
+              "Comedy Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.625,
+            "contentScore": 0.126,
+            "hybridScore": 0.425
+          },
+          "overview": "A nerdy teen, Ryan Woodman is smitten with the popular and gorgeous Ashley Grant, who apparently has no interest in him. Meanwhile, dim star athlete Chris Campbell has his eye on Ryan's brainy and beautiful friend, Maggie Carter. The two agree to help each other in their romantic quests, but, as they come closer to their goals, both Ryan and Chris suspect that they might be pursuing the wrong girls.",
+          "runtime": 94,
+          "voteAverage": 5.0,
+          "tagline": "How low will they go to get the girls of their dreams?"
+        },
+        {
+          "rank": 7,
+          "movieId": 1243,
+          "title": "Crocodile Dundee in Los Angeles",
+          "year": 2001,
+          "genres": [
+            "Adventure",
+            "Comedy"
+          ],
+          "director": "Simon Wincer",
+          "cast": [
+            "Paul Hogan Linda Kozlowski Jere Burns Jonathan Banks Alec Wilson"
+          ],
+          "predictedRating": 3.52,
+          "matchPercentage": 76,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BZjU1YjY5OWQtMTI2OS00NTlhLWFlNTUtY2I3YmEzZTg4MzM0XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Comedy alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Simon Wincer",
+              "Comedy Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.629,
+            "contentScore": 0.115,
+            "hybridScore": 0.424
+          },
+          "overview": "After settling in the tiny Australian town of Walkabout Creek with his significant other and his young son, Mick \"Crocodile\" Dundee is thrown for a loop when a prestigious Los Angeles newspaper offers his honey a job. The family migrates back to the United States, and Croc and son soon find themselves learning some lessons about American life -- many of them inadvertent",
+          "runtime": 92,
+          "voteAverage": 4.7,
+          "tagline": "He heard there was wildlife in L.A. He didn't know how wild."
+        },
+        {
+          "rank": 8,
+          "movieId": 2927,
+          "title": "Aberdeen",
+          "year": 2000,
+          "genres": [
+            "Drama",
+            "Comedy",
+            "Foreign"
+          ],
+          "director": "Hans Petter Moland",
+          "cast": [
+            "Stellan Skarsg\\u00e5rd Lena Headey Ian Hart Charlotte Rampling Louise Goodall"
+          ],
+          "predictedRating": 3.51,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMmI1ZTExM2QtMzQ4MC00OWU5LWI2YjItODUzMWMxNzhiNWI5XkEyXkFqcGc@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Comedy alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Hans Petter Moland",
+              "Comedy Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.628,
+            "contentScore": 0.095,
+            "hybridScore": 0.415
+          },
+          "overview": "Kaisa is a Scot, a successful London lawyer, who snorts coke and has one-night stands with strangers. Her mother calls from Aberdeen with some story begging her to fly to Norway and collect her alcoholic dad whom she hasn't seen in years.",
+          "runtime": 113,
+          "voteAverage": 7.0,
+          "tagline": ""
+        },
+        {
+          "rank": 9,
+          "movieId": 246,
+          "title": "Monsters, Inc.",
+          "year": 2001,
+          "genres": [
+            "Animation",
+            "Comedy",
+            "Family"
+          ],
+          "director": "",
+          "cast": [
+            "John Goodman Billy Crystal Mary Gibbs Steve Buscemi James Coburn"
+          ],
+          "predictedRating": 3.7,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTY1NTI0ODUyOF5BMl5BanBnXkFtZTgwNTEyNjQ0MDE@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Family and Comedy alignment with 89% peer agreement.",
+            "tags": [
+              "Family / Comedy Match",
+              "89% Peer Match"
+            ],
+            "peerAgreementPct": 89,
+            "collabScore": 0.676,
+            "contentScore": 0.021,
+            "hybridScore": 0.414
+          },
+          "overview": "James Sullivan and Mike Wazowski are monsters, they earn their living scaring children and are the best in the business... even though they're more afraid of the children than they are of them. When a child accidentally enters their world, James and Mike suddenly find that kids are not to be afraid of and they uncover a conspiracy that could threaten all children across the world.",
+          "runtime": 92,
+          "voteAverage": 7.5,
+          "tagline": "We Scare Because We Care."
+        },
+        {
+          "rank": 10,
+          "movieId": 265,
+          "title": "Men in Black II",
+          "year": 2002,
+          "genres": [
+            "Action",
+            "Adventure",
+            "Comedy",
+            "Science",
+            "Fiction"
+          ],
+          "director": "Barry Sonnenfeld",
+          "cast": [
+            "Tommy Lee Jones Will Smith Rip Torn Lara Flynn Boyle Johnny Knoxville"
+          ],
+          "predictedRating": 3.6,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTMxNDA0NTMxMV5BMl5BanBnXkFtZTYwMDE2NzY2._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Comedy and Action alignment with 88% peer agreement.",
+            "tags": [
+              "Dir. Barry Sonnenfeld",
+              "Comedy / Action Match",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.65,
+            "contentScore": 0.052,
+            "hybridScore": 0.411
+          },
+          "overview": "Kay and Jay reunite to provide our best, last and only line of defense against a sinister seductress who levels the toughest challenge yet to the MIB's untarnished mission statement \u2013 protecting Earth from the scum of the universe. It's been four years since the alien-seeking agents averted an intergalactic disaster of epic proportions. Now it's a race against the clock as Jay must convince Kay \u2013 who not only has absolutely no memory of his time spent with the MIB, but is also the only living person left with the expertise to save the galaxy \u2013 to reunite with the MIB before the earth submits to ultimate destruction.",
+          "runtime": 88,
+          "voteAverage": 6.0,
+          "tagline": "Same Planet. New Scum."
+        },
+        {
+          "rank": 11,
+          "movieId": 2575,
+          "title": "The Adventures of Tintin",
+          "year": 2011,
+          "genres": [
+            "Adventure",
+            "Animation",
+            "Mystery"
+          ],
+          "director": "Steven Spielberg",
+          "cast": [
+            "Jamie Bell Andy Serkis Daniel Craig Nick Frost Simon Pegg"
+          ],
+          "predictedRating": 3.58,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BNDE5MDExNTQ1OF5BMl5BanBnXkFtZTcwMDIxMTM5Ng@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "High-confidence match: 88% of subscribers with viewing habits similar to yours rated this title highly.",
+            "tags": [
+              "Dir. Steven Spielberg",
+              "Adventure",
+              "88% Peer Match"
+            ],
+            "peerAgreementPct": 88,
+            "collabScore": 0.646,
+            "contentScore": 0.054,
+            "hybridScore": 0.409
+          },
+          "overview": "Intrepid young reporter, Tintin and his loyal dog, Snowy are thrust into a world of high adventure when they discover a ship carrying an explosive secret. As Tintin is drawn into a centuries-old mystery, Ivan Ivanovitch Sakharine suspects him of stealing a priceless treasure. Tintin and Snowy, with the help of salty, cantankerous Captain Haddock and bumbling detectives, Thompson &amp; Thomson, travel half the world, one step ahead of their enemies as Tintin endeavors to find The Unicorn, a sunken ship that may hold a vast fortune, but also an ancient curse.",
+          "runtime": 107,
+          "voteAverage": 6.7,
+          "tagline": "This year, discover how far adventure will take you."
+        },
+        {
+          "rank": 12,
+          "movieId": 2949,
+          "title": "King's Ransom",
+          "year": 2005,
+          "genres": [
+            "Comedy",
+            "Crime"
+          ],
+          "director": "Jeffrey W. Byrd",
+          "cast": [
+            "Anthony Anderson Jay Mohr Kellita Smith Brooke D'Orsay Donald Faison"
+          ],
+          "predictedRating": 3.4,
+          "matchPercentage": 75,
+          "posterPath": "https://m.media-amazon.com/images/M/MV5BMTQ5ODk3NzI1MF5BMl5BanBnXkFtZTcwODk2NTgyMQ@@._V1_SX500.jpg",
+          "explanation": {
+            "text": "Recommended based on your high affinity for Skyline. Strong Comedy alignment with 87% peer agreement.",
+            "tags": [
+              "Dir. Jeffrey W. Byrd",
+              "Comedy Match",
+              "87% Peer Match"
+            ],
+            "peerAgreementPct": 87,
+            "collabScore": 0.599,
+            "contentScore": 0.119,
+            "hybridScore": 0.407
+          },
+          "overview": "Hoping to foil his own gold-digging wife's plan, a loathsome businessman arranges his own kidnapping, only to realize that there are plenty of other people interested in his wealth as well.",
+          "runtime": 95,
+          "voteAverage": 5.1,
+          "tagline": ""
+        }
+      ]
+    }
+  }
+}
