@@ -163,32 +163,34 @@ export default function HackathonDashboard() {
   }, [watchlist]);
 
   // Fetch recommendations whenever persona changes
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/hackathon/recommend?userId=${selectedUserId}`);
-        const data = await res.json();
-        if (data.success) {
-          setCurrentUser(data.user);
-          setWatchlist(data.watchlist);
-          setAvailablePersonas(data.availablePersonas || []);
-          setMetadata(data.metadata || null);
-        }
-      } catch (err) {
-        console.error('Failed to load recommendation data', err);
-      } finally {
-        setLoading(false);
+  const fetchData = React.useCallback(async (userIdToFetch: number) => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/hackathon/recommend?userId=${userIdToFetch}`);
+      const data = await res.json();
+      if (data.success) {
+        setCurrentUser(data.user);
+        setWatchlist(data.watchlist);
+        setAvailablePersonas(data.availablePersonas || []);
+        setMetadata(data.metadata || null);
       }
+    } catch (err) {
+      console.error('Failed to load recommendation data', err);
+    } finally {
+      setLoading(false);
     }
-    fetchData();
-  }, [selectedUserId]);
+  }, []);
+
+  useEffect(() => {
+    fetchData(selectedUserId);
+  }, [selectedUserId, fetchData]);
 
   const handleCustomSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const id = parseInt(customInputId.trim(), 10);
     if (!isNaN(id) && id > 0) {
       setSelectedUserId(id);
+      fetchData(id);
     }
   };
 
@@ -296,10 +298,20 @@ export default function HackathonDashboard() {
               </div>
               <button
                 type="submit"
-                className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs transition-all shadow-md shadow-cyan-500/20 flex items-center gap-1 cursor-pointer"
+                disabled={loading}
+                className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 disabled:opacity-50 text-black font-bold text-xs transition-all shadow-md shadow-cyan-500/20 flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
               >
-                <Search className="w-3.5 h-3.5" />
-                <span>Analyze</span>
+                {loading ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Analyzing...</span>
+                  </>
+                ) : (
+                  <>
+                    <Search className="w-3.5 h-3.5" />
+                    <span>Analyze</span>
+                  </>
+                )}
               </button>
             </form>
           </div>
