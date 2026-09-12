@@ -112,11 +112,20 @@ export async function searchMovies(
   });
 }
 
-/** Get full movie details (with credits + videos) */
+/** Get full movie details (with credits + videos + watch providers) */
 export async function getMovieDetails(id: number): Promise<MovieDetail> {
-  return tmdbFetch<MovieDetail>(`/movie/${id}`, {
-    append_to_response: "credits,videos",
+  const data = await tmdbFetch<any>(`/movie/${id}`, {
+    append_to_response: "credits,videos,watch/providers",
   });
+  if (data["watch/providers"]) {
+    data.watch_providers = data["watch/providers"];
+  }
+  return data as MovieDetail;
+}
+
+/** Get watch providers directly for a movie */
+export async function getMovieWatchProviders(id: number): Promise<any> {
+  return tmdbFetch<any>(`/movie/${id}/watch/providers`);
 }
 
 /** Get the official genre list */

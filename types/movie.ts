@@ -35,6 +35,26 @@ export interface Video {
   type: string; // e.g., "Trailer", "Teaser", "Featurette"
 }
 
+export interface WatchProvider {
+  logo_path: string | null;
+  provider_id: number;
+  provider_name: string;
+  display_priority: number;
+}
+
+export interface CountryWatchProviders {
+  link?: string;
+  flatrate?: WatchProvider[];
+  rent?: WatchProvider[];
+  buy?: WatchProvider[];
+  free?: WatchProvider[];
+  ads?: WatchProvider[];
+}
+
+export interface WatchProvidersResponse {
+  results: Record<string, CountryWatchProviders>;
+}
+
 export interface MovieDetail extends Movie {
   genres: Genre[];
   runtime: number; // in minutes
@@ -45,6 +65,8 @@ export interface MovieDetail extends Movie {
   videos: {
     results: Video[];
   };
+  "watch/providers"?: WatchProvidersResponse;
+  watch_providers?: WatchProvidersResponse;
 }
 
 // =============================================================================
@@ -71,6 +93,14 @@ export function getBackdropUrl(path: string | null, size: TMDBBackdropSize = "w1
 
 export function getProfileUrl(path: string | null, size: TMDBProfileSize = "w185"): string {
   if (!path) return "/placeholder-profile.svg";
+  if (path.startsWith("http")) return path;
+  return `${TMDB_IMAGE_BASE}/${size}${path}`;
+}
+
+export type TMDBProviderLogoSize = "w45" | "w92" | "w154" | "original";
+
+export function getProviderLogoUrl(path: string | null, size: TMDBProviderLogoSize = "w92"): string {
+  if (!path) return "/placeholder-poster.svg";
   if (path.startsWith("http")) return path;
   return `${TMDB_IMAGE_BASE}/${size}${path}`;
 }

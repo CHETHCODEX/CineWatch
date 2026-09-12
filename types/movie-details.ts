@@ -3,7 +3,94 @@
 // Rich detail data shaped to TMDB API responses for future integration.
 // =============================================================================
 
-import type { MovieDetail } from "./movie";
+import type { MovieDetail, WatchProvidersResponse } from "./movie";
+
+export const MOCK_WATCH_PROVIDERS: WatchProvidersResponse = {
+  results: {
+    IN: {
+      link: "https://www.themoviedb.org/watch?locale=IN",
+      flatrate: [
+        {
+          logo_path: "/gMZdpavHmxFNnLpMHwVxfqeux2g.png",
+          provider_id: 119,
+          provider_name: "Amazon Prime Video",
+          display_priority: 1,
+        },
+        {
+          logo_path: "/ledoS6EgdjTNq8F1e6wubUQer18.png",
+          provider_id: 2336,
+          provider_name: "JioHotstar",
+          display_priority: 2,
+        },
+        {
+          logo_path: "/pbpMk2JmcoNnQwx5JGpXngfoWtp.png",
+          provider_id: 8,
+          provider_name: "Netflix",
+          display_priority: 3,
+        },
+      ],
+      rent: [
+        {
+          logo_path: "/aZRENwYILujqs0RVOZutTh0BVGV.png",
+          provider_id: 3,
+          provider_name: "Google Play Movies",
+          display_priority: 1,
+        },
+        {
+          logo_path: "/5Maob4o5w8oZnNeYpCDyVFD3M7X.png",
+          provider_id: 192,
+          provider_name: "YouTube",
+          display_priority: 2,
+        },
+        {
+          logo_path: "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+          provider_id: 2,
+          provider_name: "Apple TV Store",
+          display_priority: 3,
+        },
+      ],
+      buy: [
+        {
+          logo_path: "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+          provider_id: 2,
+          provider_name: "Apple TV Store",
+          display_priority: 1,
+        },
+        {
+          logo_path: "/jn6TLbtaTZntTRX9UYucHJvpQx1.png",
+          provider_id: 10,
+          provider_name: "Amazon Video",
+          display_priority: 2,
+        },
+      ],
+    },
+    US: {
+      link: "https://www.themoviedb.org/watch?locale=US",
+      flatrate: [
+        {
+          logo_path: "/pbpMk2JmcoNnQwx5JGpXngfoWtp.png",
+          provider_id: 8,
+          provider_name: "Netflix",
+          display_priority: 1,
+        },
+        {
+          logo_path: "/7rwYrTKvbT8995HG89JioPdIzSV.png",
+          provider_id: 384,
+          provider_name: "Max",
+          display_priority: 2,
+        },
+      ],
+      rent: [
+        {
+          logo_path: "/qdEGArH3lKfFnAtYXMkSYk5wxuG.png",
+          provider_id: 2,
+          provider_name: "Apple TV",
+          display_priority: 1,
+        },
+      ],
+    },
+  },
+};
 
 export const MOCK_MOVIE_DETAILS: Record<number, MovieDetail> = {
   27205: {

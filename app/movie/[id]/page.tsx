@@ -9,7 +9,7 @@ import path from "path";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMovieDetails, getSimilarMovies } from "@/lib/tmdb";
-import { MOCK_MOVIE_DETAILS } from "@/types/movie-details";
+import { MOCK_MOVIE_DETAILS, MOCK_WATCH_PROVIDERS } from "@/types/movie-details";
 import { MOCK_MOVIES } from "@/types/movie";
 import type { MovieDetail, Movie } from "@/types/movie";
 import MovieDetailClient from "@/components/movie/movie-detail-client";
@@ -30,7 +30,13 @@ const getMovie = cache(async (id: number): Promise<{ movie: MovieDetail; similar
     const mock = MOCK_MOVIE_DETAILS[id];
     if (mock) {
       const similar = MOCK_MOVIES.filter((m) => m.id !== id).slice(0, 6);
-      return { movie: mock, similar };
+      return {
+        movie: {
+          ...mock,
+          watch_providers: mock.watch_providers || MOCK_WATCH_PROVIDERS,
+        },
+        similar,
+      };
     }
 
     // 2. Resilient fallback for hackathon cache (for offline / ISP timeouts)
@@ -74,6 +80,7 @@ const getMovie = cache(async (id: number): Promise<{ movie: MovieDetail; similar
                   },
                 ],
               },
+              watch_providers: MOCK_WATCH_PROVIDERS,
             };
             const similar = MOCK_MOVIES.filter((m) => m.id !== id).slice(0, 6);
             return { movie: fallbackDetail, similar };

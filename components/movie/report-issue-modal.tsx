@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
@@ -40,6 +40,7 @@ interface ReportIssueModalProps {
   onClose: () => void;
   movieId: number;
   movieTitle: string;
+  initialCategory?: string;
 }
 
 export default function ReportIssueModal({
@@ -47,14 +48,22 @@ export default function ReportIssueModal({
   onClose,
   movieId,
   movieTitle,
+  initialCategory,
 }: ReportIssueModalProps) {
   const { user } = useAuth();
-  const [selectedCategory, setSelectedCategory] = useState("Bad Recommendation");
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory || "Bad Recommendation");
   const [urgency, setUrgency] = useState<"1" | "2" | "3">("2");
   const [description, setDescription] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [copied, setCopied] = useState(false);
+
+  // Sync initialCategory if opened with specific category
+  React.useEffect(() => {
+    if (isOpen && initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [isOpen, initialCategory]);
 
   // Success result from ServiceNow API
   const [createdIncident, setCreatedIncident] = useState<{
@@ -67,7 +76,7 @@ export default function ReportIssueModal({
   if (!isOpen) return null;
 
   const handleReset = () => {
-    setSelectedCategory("Bad Recommendation");
+    setSelectedCategory(initialCategory || "Bad Recommendation");
     setUrgency("2");
     setDescription("");
     setErrorMsg("");

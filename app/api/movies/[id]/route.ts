@@ -4,7 +4,7 @@
 // =============================================================================
 
 import { getMovieDetails, getSimilarMovies } from "@/lib/tmdb";
-import { MOCK_MOVIE_DETAILS } from "@/types/movie-details";
+import { MOCK_MOVIE_DETAILS, MOCK_WATCH_PROVIDERS } from "@/types/movie-details";
 import { MOCK_MOVIES } from "@/types/movie";
 
 export async function GET(
@@ -41,7 +41,10 @@ export async function GET(
     const similar = MOCK_MOVIES.filter((m) => m.id !== movieId).slice(0, 6);
 
     return Response.json({
-      movie: mockDetail,
+      movie: {
+        ...mockDetail,
+        watch_providers: mockDetail.watch_providers || MOCK_WATCH_PROVIDERS,
+      },
       similar,
     });
   }

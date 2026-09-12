@@ -21,11 +21,13 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import ReportIssueModal from "@/components/movie/report-issue-modal";
+import WhereToWatch from "@/components/movie/where-to-watch";
 import type { MovieDetail, Movie } from "@/types/movie";
 import {
   getBackdropUrl,
   getPosterUrl,
   getProfileUrl,
+  getProviderLogoUrl,
   MOCK_GENRES,
 } from "@/types/movie";
 import { useAuth } from "@/components/providers/auth-provider";
@@ -65,7 +67,13 @@ export default function MovieDetailClient({
   const { isInWatchlist, toggleWatchlist } = useAuth();
   const [showTrailer, setShowTrailer] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [reportCategory, setReportCategory] = useState("Bad Recommendation");
   const castScrollRef = useRef<HTMLDivElement>(null);
+
+  const handleOpenReport = (category = "Bad Recommendation") => {
+    setReportCategory(category);
+    setShowReportModal(true);
+  };
 
   const inWatchlist = isInWatchlist(movie.id);
 
@@ -107,6 +115,11 @@ export default function MovieDetailClient({
   // Genre map for similar movies
   const genreMap: Record<number, string> = {};
   MOCK_GENRES.forEach((g) => (genreMap[g.id] = g.name));
+
+  // Quick OTT streaming preview for Hero section
+  const watchResults = movie.watch_providers?.results || movie["watch/providers"]?.results;
+  const inProviders = watchResults?.["IN"]?.flatrate || watchResults?.["US"]?.flatrate || [];
+  const heroQuickProviders = inProviders.slice(0, 3);
 
   return (
     <>
@@ -314,7 +327,7 @@ export default function MovieDetailClient({
                 {/* Report Issue / ServiceNow ITSM */}
                 <button
                   type="button"
-                  onClick={() => setShowReportModal(true)}
+                  onClick={() => handleOpenReport("Bad Recommendation")}
                   className="flex items-center gap-2 font-semibold px-5 py-3 rounded-xl transition-all duration-300 border bg-white/5 border-white/10 text-foreground/80 hover:bg-white/10 hover:border-white/20 hover:text-white cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
                   title="Report an issue or recommendation feedback to ServiceNow ITSM"
                 >
@@ -322,6 +335,42 @@ export default function MovieDetailClient({
                   Report Issue
                 </button>
               </div>
+
+              {/* Quick OTT streaming preview in Hero */}
+              {heroQuickProviders.length > 0 && (
+                <div className="mt-5 flex flex-wrap items-center gap-2.5 pt-4 border-t border-white/[0.08]">
+                  <span className="text-xs text-muted-foreground font-medium flex items-center gap-1.5">
+                    <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Stream now on:
+                  </span>
+                  <div className="flex flex-wrap items-center gap-2">
+                    {heroQuickProviders.map((p) => (
+                      <a
+                        key={p.provider_id}
+                        href="#where-to-watch"
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cine-surface border border-white/[0.08] hover:border-cine-amber/50 hover:bg-cine-surface-hover transition-all text-xs font-semibold text-foreground/90 hover:text-foreground"
+                      >
+                        <div className="relative w-4 h-4 rounded overflow-hidden shrink-0">
+                          <Image
+                            src={getProviderLogoUrl(p.logo_path, "w45")}
+                            alt={p.provider_name}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                        </div>
+                        <span>{p.provider_name}</span>
+                      </a>
+                    ))}
+                  </div>
+                  <a
+                    href="#where-to-watch"
+                    className="text-xs font-semibold text-cine-amber hover:underline ml-1"
+                  >
+                    View all options &darr;
+                  </a>
+                </div>
+              )}
             </motion.div>
           </div>
 
@@ -438,6 +487,15 @@ export default function MovieDetailClient({
               </div>
             </motion.section>
           )}
+
+          {/* ================================================================= */}
+          {/* Where to Watch (OTT Availability) */}
+          {/* ================================================================= */}
+          <WhereToWatch
+            watchProviders={movie.watch_providers || movie["watch/providers"]}
+            movieTitle={movie.title}
+            onReportWrongOtt={() => handleOpenReport("Wrong OTT Platform")}
+          />
 
           {/* ================================================================= */}
           {/* Cast Carousel */}
@@ -620,6 +678,7 @@ export default function MovieDetailClient({
         onClose={() => setShowReportModal(false)}
         movieId={movie.id}
         movieTitle={movie.title}
+        initialCategory={reportCategory}
       />
     </>
   );
