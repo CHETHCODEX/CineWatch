@@ -28,6 +28,7 @@ import {
   getPosterUrl,
   getProfileUrl,
   getProviderLogoUrl,
+  getDirectWatchUrl,
   MOCK_GENRES,
 } from "@/types/movie";
 import { useAuth } from "@/components/providers/auth-provider";
@@ -347,8 +348,11 @@ export default function MovieDetailClient({
                     {heroQuickProviders.map((p) => (
                       <a
                         key={p.provider_id}
-                        href="#where-to-watch"
-                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cine-surface border border-white/[0.08] hover:border-cine-amber/50 hover:bg-cine-surface-hover transition-all text-xs font-semibold text-foreground/90 hover:text-foreground"
+                        href={getDirectWatchUrl(p.provider_name, movie.title)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`Stream ${movie.title} directly on ${p.provider_name}`}
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-cine-surface border border-white/[0.08] hover:border-cine-amber/50 hover:bg-cine-surface-hover transition-all text-xs font-semibold text-foreground/90 hover:text-foreground cursor-pointer"
                       >
                         <div className="relative w-4 h-4 rounded overflow-hidden shrink-0">
                           <Image

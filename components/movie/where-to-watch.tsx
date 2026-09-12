@@ -13,7 +13,7 @@ import {
   Info,
 } from "lucide-react";
 import type { WatchProvidersResponse, WatchProvider, CountryWatchProviders } from "@/types/movie";
-import { getProviderLogoUrl } from "@/types/movie";
+import { getProviderLogoUrl, getDirectWatchUrl } from "@/types/movie";
 
 interface WhereToWatchProps {
   watchProviders?: WatchProvidersResponse;
@@ -268,9 +268,10 @@ export default function WhereToWatch({
             {displayedProviders.map((provider) => (
               <a
                 key={provider.provider_id}
-                href={tmdbWatchLink || `https://www.google.com/search?q=watch+${encodeURIComponent(movieTitle)}+on+${encodeURIComponent(provider.provider_name)}`}
+                href={getDirectWatchUrl(provider.provider_name, movieTitle)}
                 target="_blank"
                 rel="noopener noreferrer"
+                title={`Open ${movieTitle} on ${provider.provider_name}`}
                 className="group relative flex items-center gap-3 p-3 rounded-2xl bg-zinc-950/70 hover:bg-zinc-800/80 border border-zinc-800/80 hover:border-cine-amber/40 transition-all duration-300 shadow-md hover:shadow-cine-amber/5 hover:scale-[1.02] cursor-pointer"
               >
                 {/* Logo */}

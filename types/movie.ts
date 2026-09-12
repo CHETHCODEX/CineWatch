@@ -105,6 +105,57 @@ export function getProviderLogoUrl(path: string | null, size: TMDBProviderLogoSi
   return `${TMDB_IMAGE_BASE}/${size}${path}`;
 }
 
+export function getDirectWatchUrl(providerName: string, movieTitle: string): string {
+  const name = providerName.toLowerCase();
+  const encodedTitle = encodeURIComponent(movieTitle);
+
+  if (name.includes("netflix")) {
+    return `https://www.netflix.com/search?q=${encodedTitle}`;
+  }
+  if (name.includes("hotstar") || name.includes("disney")) {
+    return `https://www.hotstar.com/in/explore?search_query=${encodedTitle}`;
+  }
+  if (name.includes("prime") || name.includes("amazon")) {
+    return `https://www.primevideo.com/search/ref=atv_nb_sr?phrase=${encodedTitle}`;
+  }
+  if (name.includes("apple") || name.includes("itunes")) {
+    return `https://tv.apple.com/search?term=${encodedTitle}`;
+  }
+  if (name.includes("google play") || name.includes("google tv")) {
+    return `https://play.google.com/store/search?q=${encodedTitle}&c=movies`;
+  }
+  if (name.includes("youtube")) {
+    return `https://www.youtube.com/results?search_query=${encodedTitle}+full+movie`;
+  }
+  if (name.includes("jiocinema") || name.includes("jio cinema")) {
+    return `https://www.jiocinema.com/search/${encodedTitle}`;
+  }
+  if (name.includes("zee5")) {
+    return `https://www.zee5.com/search?q=${encodedTitle}`;
+  }
+  if (name.includes("sonyliv") || name.includes("sony liv")) {
+    return `https://www.sonyliv.com/search?q=${encodedTitle}`;
+  }
+  if (name.includes("hulu")) {
+    return `https://www.hulu.com/search?q=${encodedTitle}`;
+  }
+  if (name.includes("max") || name.includes("hbo")) {
+    return `https://www.max.com/search?q=${encodedTitle}`;
+  }
+  if (name.includes("paramount")) {
+    return `https://www.paramountplus.com/search/?query=${encodedTitle}`;
+  }
+  if (name.includes("peacock")) {
+    return `https://www.peacocktv.com/search?q=${encodedTitle}`;
+  }
+  if (name.includes("crunchyroll")) {
+    return `https://www.crunchyroll.com/search?q=${encodedTitle}`;
+  }
+
+  // Fallback to targeted search for that movie on that platform
+  return `https://www.google.com/search?q=watch+${encodedTitle}+on+${encodeURIComponent(providerName)}`;
+}
+
 // =============================================================================
 // Mock Data — Genres (matches TMDB genre IDs)
 // =============================================================================
