@@ -14,6 +14,17 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { useAuth } from "@/components/providers/auth-provider";
+import {
+  Field,
+  FieldGroup,
+  FieldSet,
+  FieldLegend,
+  FieldLabel,
+  FieldDescription,
+  FieldSeparator,
+} from "@/components/ui/field-1";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 interface ReportIssueModalProps {
   isOpen: boolean;
@@ -158,13 +169,13 @@ export default function ReportIssueModal({
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.95, opacity: 0, y: 20 }}
           transition={{ type: "spring", damping: 25, stiffness: 300 }}
-          className="relative w-full max-w-xl rounded-3xl bg-zinc-950 border border-white/10 shadow-2xl overflow-hidden p-6 sm:p-8"
+          className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-3xl bg-zinc-950 border border-white/10 shadow-2xl p-6 sm:p-8 custom-scrollbar"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Close button */}
           <button
             onClick={handleReset}
-            className="absolute top-5 right-5 p-2 rounded-full text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors cursor-pointer"
+            className="absolute top-5 right-5 p-2 rounded-full text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 transition-colors cursor-pointer z-10"
             aria-label="Close"
           >
             <X className="w-5 h-5" />
@@ -179,127 +190,145 @@ export default function ReportIssueModal({
           </div>
 
           {!createdIncident ? (
-            /* ---- Form View ---- */
+            /* ---- Form View using shadcn Field Primitives ---- */
             <div>
               <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                 Report Issue / Feedback
               </h2>
-              <p className="text-sm text-zinc-400 mt-1 mb-5">
-                Regarding <span className="text-white font-medium">&quot;{movieTitle}&quot;</span>. A ticket will be created directly in ServiceNow.
+              <p className="text-sm text-zinc-400 mt-1 mb-6">
+                Regarding <span className="text-white font-medium">&quot;{movieTitle}&quot;</span>. A ticket will be routed directly to ServiceNow.
               </p>
 
               {errorMsg && (
-                <div className="mb-4 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2">
+                <div className="mb-5 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-xs flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   <span>{errorMsg}</span>
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Category Selection */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
-                    Issue Category
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {ISSUE_CATEGORIES.map((cat) => {
-                      const isSelected = selectedCategory === cat.id;
-                      return (
-                        <button
-                          key={cat.id}
-                          type="button"
-                          onClick={() => setSelectedCategory(cat.id)}
-                          className={`flex items-start gap-2.5 p-3 rounded-xl text-left transition-all border cursor-pointer ${
-                            isSelected
-                              ? "bg-cine-amber/15 border-cine-amber/50 text-white"
-                              : "bg-zinc-900/60 border-white/5 text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
-                          }`}
-                        >
-                          <span className="text-lg leading-none">{cat.icon}</span>
-                          <div>
-                            <p className="text-xs font-semibold leading-tight text-zinc-200">
-                              {cat.label}
-                            </p>
-                            <p className="text-[10px] text-zinc-500 leading-tight mt-0.5 line-clamp-1">
-                              {cat.desc}
-                            </p>
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
+              <form onSubmit={handleSubmit}>
+                <FieldGroup className="gap-5">
+                  {/* Category FieldSet */}
+                  <FieldSet>
+                    <FieldLegend variant="label" className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                      Issue Category
+                    </FieldLegend>
+                    <FieldDescription className="text-xs text-zinc-500 -mt-2">
+                      Choose what aspect of the recommendation or metadata needs attention
+                    </FieldDescription>
+                    <div className="grid grid-cols-2 gap-2 mt-1">
+                      {ISSUE_CATEGORIES.map((cat) => {
+                        const isSelected = selectedCategory === cat.id;
+                        return (
+                          <button
+                            key={cat.id}
+                            type="button"
+                            onClick={() => setSelectedCategory(cat.id)}
+                            className={`flex items-start gap-2.5 p-3 rounded-xl text-left transition-all border cursor-pointer ${
+                              isSelected
+                                ? "bg-cine-amber/15 border-cine-amber/50 text-white shadow-sm shadow-cine-amber/10"
+                                : "bg-zinc-900/60 border-white/5 text-zinc-400 hover:bg-zinc-900 hover:text-zinc-200"
+                            }`}
+                          >
+                            <span className="text-lg leading-none">{cat.icon}</span>
+                            <div>
+                              <p className="text-xs font-semibold leading-tight text-zinc-200">
+                                {cat.label}
+                              </p>
+                              <p className="text-[10px] text-zinc-500 leading-tight mt-0.5 line-clamp-1">
+                                {cat.desc}
+                              </p>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </FieldSet>
 
-                {/* Urgency */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
-                    Urgency
-                  </label>
-                  <div className="flex gap-2">
-                    {[
-                      { val: "3", label: "Low (P3)", color: "text-blue-400" },
-                      { val: "2", label: "Medium (P2)", color: "text-amber-400" },
-                      { val: "1", label: "High (P1)", color: "text-rose-400" },
-                    ].map((item) => (
-                      <button
-                        key={item.val}
-                        type="button"
-                        onClick={() => setUrgency(item.val as "1" | "2" | "3")}
-                        className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
-                          urgency === item.val
-                            ? "bg-white/10 border-white/30 text-white"
-                            : "bg-zinc-900/60 border-white/5 text-zinc-500 hover:text-zinc-300"
-                        }`}
-                      >
-                        <span className={urgency === item.val ? item.color : ""}>
-                          {item.label}
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                  <FieldSeparator />
 
-                {/* Description */}
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
-                    Description & Details
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Provide details about why the recommendation didn't fit, or describe the problem..."
-                    className="w-full rounded-xl bg-zinc-900/80 border border-white/10 p-3 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-cine-amber/50 transition-colors resize-none"
-                  />
-                </div>
+                  {/* Urgency & Description FieldSet */}
+                  <FieldSet>
+                    <Field orientation="vertical">
+                      <FieldLabel className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                        Urgency & Priority
+                      </FieldLabel>
+                      <FieldDescription className="text-xs text-zinc-500 -mt-1">
+                        Determines the incident SLA tier in the ServiceNow queue
+                      </FieldDescription>
+                      <div className="flex gap-2 mt-1">
+                        {[
+                          { val: "3", label: "Low (P3)", color: "text-blue-400" },
+                          { val: "2", label: "Medium (P2)", color: "text-amber-400" },
+                          { val: "1", label: "High (P1)", color: "text-rose-400" },
+                        ].map((item) => (
+                          <button
+                            key={item.val}
+                            type="button"
+                            onClick={() => setUrgency(item.val as "1" | "2" | "3")}
+                            className={`flex-1 py-2 px-3 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                              urgency === item.val
+                                ? "bg-white/10 border-white/30 text-white shadow-sm"
+                                : "bg-zinc-900/60 border-white/5 text-zinc-500 hover:text-zinc-300"
+                            }`}
+                          >
+                            <span className={urgency === item.val ? item.color : ""}>
+                              {item.label}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </Field>
 
-                {/* Submit button */}
-                <div className="pt-2 flex justify-end gap-3">
-                  <button
-                    type="button"
-                    onClick={handleReset}
-                    className="px-4 py-2.5 rounded-xl text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold text-zinc-950 bg-cine-amber hover:bg-cine-amber/90 transition-all shadow-lg shadow-cine-amber/20 disabled:opacity-50 cursor-pointer"
-                  >
-                    {submitting ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Logging Incident...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        Submit to ServiceNow
-                      </>
-                    )}
-                  </button>
-                </div>
+                    <Field orientation="vertical" className="mt-3">
+                      <FieldLabel htmlFor="issue-description" className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
+                        Description & Details
+                      </FieldLabel>
+                      <FieldDescription className="text-xs text-zinc-500 -mt-1">
+                        Explain why the recommendation didn&apos;t fit your taste or describe the bug
+                      </FieldDescription>
+                      <Textarea
+                        id="issue-description"
+                        rows={3}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="e.g. Recommended because of Interstellar, but this felt too horror-focused rather than sci-fi mystery..."
+                        className="w-full rounded-xl bg-zinc-900/80 border-white/10 p-3 text-sm text-zinc-100 placeholder-zinc-500 focus-visible:ring-cine-amber/50 transition-colors resize-none"
+                      />
+                    </Field>
+                  </FieldSet>
+
+                  <FieldSeparator />
+
+                  {/* Actions Field */}
+                  <Field orientation="horizontal" className="justify-end gap-3 pt-1">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleReset}
+                      className="border-white/10 bg-transparent text-zinc-400 hover:text-white hover:bg-white/5"
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      disabled={submitting}
+                      className="bg-cine-amber text-zinc-950 hover:bg-cine-amber/90 font-semibold shadow-lg shadow-cine-amber/20 disabled:opacity-50"
+                    >
+                      {submitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                          Logging Incident...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2" />
+                          Submit to ServiceNow
+                        </>
+                      )}
+                    </Button>
+                  </Field>
+                </FieldGroup>
               </form>
             </div>
           ) : (
@@ -313,7 +342,7 @@ export default function ReportIssueModal({
                 Incident Successfully Logged!
               </h2>
               <p className="text-sm text-zinc-400 mt-1 max-w-sm mx-auto">
-                Your feedback has been routed to the ServiceNow ITSM queue for triaging and resolution.
+                Your report has been routed to the ServiceNow ITSM incident queue for triaging.
               </p>
 
               {/* Ticket Card */}
@@ -368,13 +397,13 @@ export default function ReportIssueModal({
                     Open in ServiceNow PDI
                   </a>
                 )}
-                <button
+                <Button
                   type="button"
                   onClick={handleReset}
-                  className="px-6 py-2.5 rounded-xl bg-cine-amber text-zinc-950 hover:bg-cine-amber/90 text-sm font-semibold transition-all cursor-pointer"
+                  className="bg-cine-amber text-zinc-950 hover:bg-cine-amber/90 font-semibold"
                 >
                   Done
-                </button>
+                </Button>
               </div>
             </div>
           )}
