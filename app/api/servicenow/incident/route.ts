@@ -12,9 +12,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const instanceUrl = (process.env.SERVICENOW_INSTANCE_URL || "").replace(/\/$/, "");
+    const defaultInstance = "https://dev375082.service-now.com";
+    const instanceUrl = (process.env.SERVICENOW_INSTANCE_URL || defaultInstance).replace(/\/$/, "");
     const username = process.env.SERVICENOW_USERNAME || "admin";
-    const password = process.env.SERVICENOW_PASSWORD || "";
+    const password = process.env.SERVICENOW_PASSWORD || "!csSx7-DuOX9";
 
     const shortDescription = `[CineWatch OTT] ${category}: ${movieTitle || "General Issue"}`;
     const fullDescription = [
@@ -66,7 +67,7 @@ export async function POST(req: NextRequest) {
               urgency: result.urgency || urgency,
               short_description: result.short_description || shortDescription,
               created_on: result.sys_created_on || new Date().toISOString(),
-              instance_url: `${instanceUrl}/nav_to.do?uri=incident.do?sys_id=${result.sys_id}`,
+              instance_url: `${instanceUrl}/now/nav/ui/classic/params/target/incident.do%3Fsys_id%3D${result.sys_id}`,
             },
           });
         } else {
@@ -89,7 +90,7 @@ export async function POST(req: NextRequest) {
         urgency: urgency,
         short_description: shortDescription,
         created_on: new Date().toISOString(),
-        instance_url: `${instanceUrl || "https://dev375082.service-now.com"}/incident.list`,
+        instance_url: `${instanceUrl}/now/nav/ui/classic/params/target/incident_list.do`,
       },
     });
   } catch (error: any) {
