@@ -14,7 +14,9 @@ import {
   ThumbsUp, 
   ThumbsDown, 
   Info,
-  Gift
+  Gift,
+  Bot,
+  Smartphone
 } from "lucide-react";
 import { HoverButton } from "@/components/ui/hover-glow-button";
 import { RippleButton } from "@/components/ui/ripple-button";
@@ -704,14 +706,6 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
               <span className="text-gradient-cine relative">
                 Movie Matcher
               </span>
-              <div className="flex items-center gap-3 ml-3">
-                <span className="inline-block animate-bounce drop-shadow-[0_0_12px_rgba(168,85,247,0.75)] hover:scale-120 transition-all duration-300 cursor-default text-4xl sm:text-5xl select-none" style={{ animationDuration: '3s' }}>
-                  🍿
-                </span>
-                <span className="inline-block animate-pulse drop-shadow-[0_0_12px_rgba(244,63,94,0.75)] hover:scale-120 transition-all duration-300 cursor-default text-4xl sm:text-5xl select-none">
-                  💖
-                </span>
-              </div>
             </h2>
             
             {/* High-end Editorial Glassmorphism Explainer */}
@@ -727,13 +721,13 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
               </div>
 
               <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6 font-medium font-premium">
-                Solve the eternal couple/friends argument: <strong className="text-white font-semibold">"What should we watch tonight?"</strong>. Swipe Tinder-style (Right to Like, Left to Skip) through a curated movie deck in absolute secret.
+                Solve the eternal couple or friends argument: <strong className="text-white font-semibold">&quot;What should we watch tonight?&quot;</strong>. Swipe Tinder-style (Right to Like, Left to Skip) through a curated movie deck in absolute secret.
               </p>
               
               <div className="space-y-4">
                 <div className="flex gap-4 items-start group/item">
                   <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-400 text-xs font-black shadow-[0_0_15px_rgba(168,85,247,0.15)] group-hover/item:bg-purple-500/30 group-hover/item:scale-110 transition-all duration-300">
-                    ✨
+                    <Sparkles className="w-3.5 h-3.5" />
                   </span>
                   <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-medium font-premium">
                     Generate a synchronized <span className="text-white font-extrabold bg-gradient-to-r from-purple-400 to-cine-blue bg-clip-text text-transparent group-hover/item:from-purple-300 group-hover/item:to-cine-blue transition-all">Invite Link</span> to vote in real-time from separate screens.
@@ -742,19 +736,19 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                 
                 <div className="flex gap-4 items-start group/item">
                   <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-cine-blue/15 border border-cine-blue/30 text-cine-blue text-xs font-black shadow-[0_0_15px_rgba(99,102,241,0.15)] group-hover/item:bg-cine-blue/30 group-hover/item:scale-110 transition-all duration-300">
-                    🛋️
+                    <Smartphone className="w-3.5 h-3.5" />
                   </span>
                   <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-medium font-premium">
-                    Or select <span className="text-white font-extrabold bg-gradient-to-r from-cine-blue to-teal-400 bg-clip-text text-transparent group-hover/item:from-cine-blue group-hover/item:to-teal-300 transition-all">Pass & Play Mode</span> to share a single device on the couch.
+                    Or select <span className="text-white font-extrabold bg-gradient-to-r from-cine-blue to-teal-400 bg-clip-text text-transparent group-hover/item:from-cine-blue group-hover/item:to-teal-300 transition-all">Pass &amp; Play Mode</span> to share a single device on the couch.
                   </p>
                 </div>
                 
                 <div className="flex gap-4 items-start group/item">
                   <span className="flex items-center justify-center w-6 h-6 rounded-lg bg-yellow-500/15 border border-yellow-500/30 text-yellow-400 text-xs font-black shadow-[0_0_15px_rgba(234,179,8,0.15)] group-hover/item:bg-yellow-500/30 group-hover/item:scale-110 transition-all duration-300">
-                    🍿
+                    <Film className="w-3.5 h-3.5" />
                   </span>
                   <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed font-medium font-premium">
-                    The magic: The instant both of you vote <span className="text-white font-extrabold bg-gradient-to-r from-yellow-400 to-rose-400 bg-clip-text text-transparent group-hover/item:from-yellow-300 group-hover/item:to-rose-300 transition-all">"Right"</span> on the same film, the screen explodes in celebration and recommends a tailored snack/drink pairing for your movie!
+                    The magic: The instant both of you vote <span className="text-white font-extrabold bg-gradient-to-r from-yellow-400 to-rose-400 bg-clip-text text-transparent group-hover/item:from-yellow-300 group-hover/item:to-rose-300 transition-all">&quot;Right&quot;</span> on the same film, the screen celebrates and recommends a tailored snack and drink pairing for your movie!
                   </p>
                 </div>
               </div>
@@ -776,7 +770,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                   <span>Invite Partner</span> 
                 </h4>
                 <p className="text-xs text-zinc-400 leading-relaxed font-medium">
-                  Generate a synchronized rooms invite link, or select **Pass & Play** to share one screen, or play with virtual companions (Yoda, Wednesday, Jack Sparrow) with specialized genre tastes.
+                  Generate a synchronized room invite link, select <strong className="text-zinc-200 font-semibold">Pass &amp; Play</strong> to share one screen, or play with virtual companions (Yoda, Wednesday, Jack Sparrow) with specialized genre tastes.
                 </p>
                 <div className="absolute inset-0 bg-gradient-to-tr from-cine-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
@@ -794,7 +788,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                   <span>Swipe Tinder-Style</span> 
                 </h4>
                 <p className="text-xs text-zinc-400 leading-relaxed font-medium">
-                  Swipe **Right (Like)** to save a film, or **Left (Skip)** to pass. Both users vote secretly on separate screens or sequentially. Desktop supports Left / Right arrow keys!
+                  Swipe <strong className="text-emerald-400 font-semibold">Right (Like)</strong> to save a film, or <strong className="text-rose-400 font-semibold">Left (Skip)</strong> to pass. Both users vote secretly on separate screens or sequentially. Desktop supports Left / Right arrow keys!
                 </p>
                 <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
@@ -812,7 +806,7 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                   <span>Snacking Pairings</span> 
                 </h4>
                 <p className="text-xs text-zinc-400 leading-relaxed font-medium">
-                  The moment a mutual like triggers: **It's a CineWatch Match!** Unlocks a detailed recommendations screen paired with a custom snack menu (e.g. Alien popcorn + space cider).
+                  The moment a mutual like triggers: <strong className="text-cine-amber font-semibold">It&apos;s a CineWatch Match!</strong> Unlocks a detailed recommendations screen paired with a custom snack menu (e.g. Alien popcorn + space cider).
                 </p>
                 <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </div>
@@ -830,10 +824,6 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                     <Users className="w-4 h-4 text-white animate-pulse" />
                   </div>
                   <span className="tracking-wider">Invite Partner (Live Synced Room)</span>
-                  <span className="inline-flex gap-1 items-center shrink-0 ml-1">
-                    <span className="animate-pulse">🍿</span>
-                    <span className="animate-bounce" style={{ animationDuration: '1.5s' }}>💖</span>
-                  </span>
                 </div>
               </HoverButton>
 
@@ -845,8 +835,10 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                   className="w-full bg-zinc-950/45 border border-white/[0.05] hover:border-cine-blue/40 text-zinc-300 font-bold h-12.5 rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center text-xs hover:text-white font-premium shadow-lg py-0"
                 >
                   <span className="flex items-center justify-center gap-2.5 w-full h-full">
-                    <span className="inline-flex items-center justify-center size-7 rounded-lg bg-cine-blue/15 text-cine-blue border border-cine-blue/30 text-xs shadow-md">📱</span>
-                    <span className="tracking-wide">Pass & Play (Couch Mode)</span>
+                    <span className="inline-flex items-center justify-center size-7 rounded-lg bg-cine-blue/15 text-cine-blue border border-cine-blue/30 text-xs shadow-md">
+                      <Smartphone className="w-3.5 h-3.5 text-cine-blue" />
+                    </span>
+                    <span className="tracking-wide">Pass &amp; Play (Couch Mode)</span>
                   </span>
                 </RippleButton>
 
@@ -857,7 +849,9 @@ export function CoWatchSection({ movies }: CoWatchSectionProps) {
                   className="w-full bg-zinc-950/45 border border-white/[0.05] hover:border-purple-500/40 text-zinc-300 font-bold h-12.5 rounded-2xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 cursor-pointer flex items-center justify-center text-xs hover:text-white font-premium shadow-lg py-0"
                 >
                   <span className="flex items-center justify-center gap-2.5 w-full h-full">
-                    <span className="inline-flex items-center justify-center size-7 rounded-lg bg-purple-500/15 text-purple-300 border border-purple-500/30 text-xs shadow-md">🤖</span>
+                    <span className="inline-flex items-center justify-center size-7 rounded-lg bg-purple-500/15 text-purple-300 border border-purple-500/30 text-xs shadow-md">
+                      <Bot className="w-3.5 h-3.5 text-purple-300" />
+                    </span>
                     <span className="tracking-wide">Play with AI Persona</span>
                   </span>
                 </RippleButton>
