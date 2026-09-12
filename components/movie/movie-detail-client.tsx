@@ -18,7 +18,9 @@ import {
   ExternalLink,
   Sparkles,
   Flame,
+  ShieldAlert,
 } from "lucide-react";
+import ReportIssueModal from "@/components/movie/report-issue-modal";
 import type { MovieDetail, Movie } from "@/types/movie";
 import {
   getBackdropUrl,
@@ -62,6 +64,7 @@ export default function MovieDetailClient({
 }: MovieDetailClientProps) {
   const { isInWatchlist, toggleWatchlist } = useAuth();
   const [showTrailer, setShowTrailer] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
   const castScrollRef = useRef<HTMLDivElement>(null);
 
   const inWatchlist = isInWatchlist(movie.id);
@@ -306,6 +309,17 @@ export default function MovieDetailClient({
                     <Plus className="w-5 h-5" />
                   )}
                   {inWatchlist ? "In Watchlist" : "Add to Watchlist"}
+                </button>
+
+                {/* Report Issue / ServiceNow ITSM */}
+                <button
+                  type="button"
+                  onClick={() => setShowReportModal(true)}
+                  className="flex items-center gap-2 font-semibold px-5 py-3 rounded-xl transition-all duration-300 border bg-white/5 border-white/10 text-foreground/80 hover:bg-white/10 hover:border-white/20 hover:text-white cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+                  title="Report an issue or recommendation feedback to ServiceNow ITSM"
+                >
+                  <ShieldAlert className="w-5 h-5 text-rose-400" />
+                  Report Issue
                 </button>
               </div>
             </motion.div>
@@ -599,6 +613,14 @@ export default function MovieDetailClient({
           )}
         </div>
       </div>
+
+      {/* ServiceNow Incident Reporting Modal */}
+      <ReportIssueModal
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        movieId={movie.id}
+        movieTitle={movie.title}
+      />
     </>
   );
 }
