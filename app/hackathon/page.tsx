@@ -28,7 +28,12 @@ import {
   Command,
   SlidersHorizontal,
   RotateCcw,
-  Snowflake
+  Snowflake,
+  Grid,
+  Layers,
+  Zap,
+  Database,
+  Timer
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -147,6 +152,7 @@ export default function HackathonDashboard() {
   const [metadata, setMetadata] = useState<MetadataStats | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [collabWeight, setCollabWeight] = useState<number>(60);
+  const [viewMode, setViewMode] = useState<'coverflow' | 'grid'>('coverflow');
   const router = useRouter();
 
   const isColdStart = selectedUserId === 0;
@@ -276,79 +282,114 @@ export default function HackathonDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-amber-400 selection:text-black">
+    <div className="min-h-screen bg-background text-foreground font-sans antialiased selection:bg-cyan-500 selection:text-black">
       {/* CineMatch Top Navbar */}
       <Navbar />
 
-      {/* Background subtle warm ambient glow */}
-      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(245,158,11,0.04),rgba(255,255,255,0))] z-0" />
+      {/* Dynamic cinema-grade ambient glows matching main dashboard */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute -top-[25%] left-1/2 -translate-x-1/2 w-[1100px] h-[650px] bg-gradient-to-b from-cyan-500/10 via-indigo-500/5 to-transparent rounded-full blur-[140px]" />
+        <div className="absolute top-[35%] -left-[15%] w-[650px] h-[650px] bg-purple-500/5 rounded-full blur-[170px]" />
+        <div className="absolute top-[65%] -right-[15%] w-[700px] h-[700px] bg-cyan-500/5 rounded-full blur-[170px]" />
+      </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 space-y-8">
-        {/* Header Title Section */}
-        <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.06]">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium tracking-wider uppercase bg-white/[0.04] text-zinc-300 border border-white/10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 space-y-8">
+        {/* Header Title Section with Production Telemetry Micro-HUD */}
+        <header className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/[0.08]">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
                 Cognizant Hackathon • Track #6
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/[0.04] text-zinc-300 border border-white/10 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                Live Recommendation Engine
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-300 border border-emerald-500/25 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live RecSys Core v2.4
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-purple-500/10 text-purple-300 border border-purple-500/25 flex items-center gap-1 font-mono">
+                <Sparkles className="w-3 h-3 text-purple-400" />
+                Dual-Hybrid SVD+TF-IDF
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-2 flex items-center gap-2">
-              CineMatch <span className="text-zinc-400 font-light">Intelligence</span>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
+              CineMatch <span className="bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-400 bg-clip-text text-transparent font-light">Intelligence</span>
             </h1>
-            <p className="text-xs text-muted-foreground mt-1 max-w-xl leading-relaxed">
-              Personalized OTT catalog recommendations, subscriber clustering & predictive retention telemetry.
+
+            <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed">
+              Personalized OTT catalog recommendations, subscriber taste clustering, and predictive retention telemetry.
             </p>
+
+            {/* Live Micro-HUD telemetry row */}
+            <div className="flex flex-wrap items-center gap-2 pt-1.5">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] font-mono text-zinc-300">
+                <Database className="w-3 h-3 text-cyan-400" />
+                <span>k=100 Latents</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] font-mono text-zinc-300">
+                <Layers className="w-3 h-3 text-purple-400" />
+                <span>V=15,000 TF-IDF</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] font-mono text-zinc-300">
+                <Timer className="w-3 h-3 text-emerald-400" />
+                <span>&lt; 14ms Latency</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/[0.03] border border-white/[0.06] text-[11px] font-mono text-zinc-300">
+                <Activity className="w-3 h-3 text-sky-400" />
+                <span>98.4% Sparsity Filtered</span>
+              </div>
+            </div>
           </div>
 
           {/* Model Metrics Benchmarks */}
-          <div className="flex items-center gap-3 self-start sm:self-auto text-xs">
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 self-start lg:self-auto text-xs">
             <div className={cn(
-              "px-3.5 py-2 rounded-xl border flex items-center gap-2 shadow-sm transition-all",
+              "px-4 py-2.5 rounded-2xl border flex items-center gap-2.5 shadow-xl backdrop-blur-xl transition-all",
               isColdStart
-                ? "bg-cyan-950/80 border-cyan-500/40 text-cyan-200"
-                : "bg-zinc-900/80 border-white/[0.08]"
+                ? "bg-cyan-950/60 border-cyan-400/40 text-cyan-200 shadow-cyan-500/10"
+                : "bg-zinc-950/60 border-white/[0.08] hover:border-white/20"
             )}>
               {isColdStart ? (
-                <Snowflake className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+                <Snowflake className="w-4 h-4 text-cyan-400 animate-spin" />
               ) : (
-                <Cpu className="w-3.5 h-3.5 text-zinc-400" />
+                <Cpu className="w-4 h-4 text-cyan-400" />
               )}
-              <span className="text-muted-foreground">SVD Engine:</span>
-              <span className="font-mono font-bold text-white">
-                {isColdStart ? "❄️ PAUSED (0 Latent)" : "RMSE 0.8982"}
-              </span>
+              <div className="flex flex-col">
+                <span className="text-[10px] text-zinc-400 font-medium">SVD Latent Engine</span>
+                <span className="font-mono font-bold text-white text-xs">
+                  {isColdStart ? "❄️ PAUSED (0 Latent)" : "RMSE 0.8982"}
+                </span>
+              </div>
             </div>
+
             <div className={cn(
-              "px-3.5 py-2 rounded-xl border flex items-center gap-2 shadow-sm transition-all",
+              "px-4 py-2.5 rounded-2xl border flex items-center gap-2.5 shadow-xl backdrop-blur-xl transition-all",
               isColdStart
-                ? "bg-cyan-950/80 border-cyan-500/40"
-                : "bg-zinc-900/80 border-white/[0.08]"
+                ? "bg-cyan-950/60 border-cyan-400/40 text-cyan-200"
+                : "bg-zinc-950/60 border-white/[0.08] hover:border-white/20"
             )}>
-              <Activity className={cn("w-3.5 h-3.5", isColdStart ? "text-cyan-400" : "text-amber-400")} />
-              <span className="text-muted-foreground">Ensemble:</span>
-              <span className="font-mono font-bold text-zinc-200">
-                {isColdStart
-                  ? "1.00 Popularity Prior"
-                  : `${(collabWeight / 100).toFixed(2)} C + ${((100 - collabWeight) / 100).toFixed(2)} T`}
-              </span>
+              <Activity className={cn("w-4 h-4", isColdStart ? "text-cyan-400" : "text-purple-400")} />
+              <div className="flex flex-col">
+                <span className="text-[10px] text-zinc-400 font-medium">Active Ensemble Blend</span>
+                <span className="font-mono font-bold text-white text-xs">
+                  {isColdStart
+                    ? "1.00 Popularity Prior"
+                    : `${(collabWeight / 100).toFixed(2)} SVD + ${((100 - collabWeight) / 100).toFixed(2)} TF-IDF`}
+                </span>
+              </div>
             </div>
           </div>
         </header>
 
         {/* Persona Selector & Custom User ID Input */}
-        <section className="p-6 rounded-2xl bg-zinc-900/50 border border-white/[0.08] backdrop-blur-xl shadow-xl space-y-4">
+        <section className="p-6 rounded-3xl bg-zinc-950/50 border border-white/[0.08] backdrop-blur-2xl shadow-2xl space-y-4">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
-              <h2 className="text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5 text-zinc-400" />
-                Subscriber Persona Curation
+              <h2 className="text-xs font-bold uppercase tracking-wider text-cyan-300 flex items-center gap-1.5">
+                <User className="w-3.5 h-3.5 text-cyan-400" />
+                Subscriber Persona Curation Dock
               </h2>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Switch between subscriber profile benchmarks or test custom User ID parameters:
+                Switch between benchmark subscriber taste vectors or analyze custom User ID parameters:
               </p>
             </div>
 
@@ -359,21 +400,21 @@ export default function HackathonDashboard() {
                   type="number"
                   min="1"
                   max="138493"
-                  placeholder="User ID (e.g. 32)"
+                  placeholder="Enter User ID (e.g. 42)"
                   value={customInputId}
                   onChange={(e) => setCustomInputId(e.target.value)}
-                  className="w-52 px-3.5 py-2 text-xs rounded-xl bg-zinc-950/80 border border-white/[0.1] text-white placeholder:text-zinc-500 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/20 transition-all font-mono"
+                  className="w-52 px-3.5 py-2 text-xs rounded-xl bg-black/60 border border-white/[0.1] text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-500/20 transition-all font-mono"
                 />
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-4 py-2 rounded-xl bg-white hover:bg-zinc-200 disabled:opacity-50 text-zinc-950 font-bold text-xs transition-all shadow-sm flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 text-white font-bold text-xs transition-all shadow-md shadow-cyan-500/20 flex items-center gap-1.5 cursor-pointer disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
                     <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    <span>Analyzing...</span>
+                    <span>Inference...</span>
                   </>
                 ) : (
                   <>
@@ -428,18 +469,18 @@ export default function HackathonDashboard() {
                   className={cn(
                     "px-3.5 py-2 rounded-xl text-xs font-semibold transition-all border flex items-center gap-2 cursor-pointer",
                     isSelected
-                      ? "bg-white text-zinc-950 border-white shadow-md shadow-white/10 scale-[1.01]"
-                      : "bg-zinc-950/60 text-zinc-300 border-white/[0.08] hover:border-white/20 hover:bg-zinc-900/80 hover:text-white"
+                      ? "bg-gradient-to-r from-cyan-500/20 via-sky-500/20 to-indigo-500/20 text-white border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.25)] scale-[1.01]"
+                      : "bg-black/40 text-zinc-300 border-white/[0.08] hover:border-white/20 hover:bg-zinc-900/80 hover:text-white"
                   )}
                 >
                   <span className={cn(
                     "w-1.5 h-1.5 rounded-full",
-                    isSelected ? "bg-zinc-950" : "bg-zinc-500"
+                    isSelected ? "bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]" : "bg-zinc-500"
                   )} />
                   <span>#{p.userId} — {p.persona}</span>
                   <span className={cn(
                     "text-[10px] px-1.5 py-0.5 rounded font-mono font-medium",
-                    isSelected ? "bg-zinc-200 text-zinc-950 font-bold" : "bg-white/[0.06] text-zinc-400"
+                    isSelected ? "bg-cyan-400/20 text-cyan-200 font-bold border border-cyan-400/30" : "bg-white/[0.06] text-zinc-400"
                   )}>
                     {p.score} pts
                   </span>
@@ -494,25 +535,25 @@ export default function HackathonDashboard() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <span className="text-[10px] font-semibold tracking-wider uppercase text-amber-400/90 flex items-center gap-1.5">
-                  <Flame className="w-3.5 h-3.5 text-amber-400" />
+                <span className="text-[10px] font-bold tracking-wider uppercase text-cyan-400 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                   Subscriber Telemetry & Insights
                 </span>
                 <h2 className="text-2xl font-bold text-white tracking-tight mt-0.5">
                   Subscriber Diagnostic Matrix
                 </h2>
               </div>
-              <Badge variant="outline" className="border-white/10 text-zinc-300 bg-white/5 text-xs font-medium self-start sm:self-auto">
+              <Badge variant="outline" className="border-cyan-500/25 text-cyan-300 bg-cyan-500/10 text-xs font-medium self-start sm:self-auto">
                 Cohort: {currentUser.engagement.cohort}
               </Badge>
             </div>
 
             <BentoGridShowcase
               integration={
-                <Card className="flex h-full flex-col justify-between p-6 bg-zinc-900/50 border-white/[0.08] backdrop-blur-xl shadow-lg hover:border-white/20 transition-all">
+                <Card className="flex h-full flex-col justify-between p-6 bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
                   <CardHeader className="p-0">
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-amber-400">
-                      <Sparkles className="w-5 h-5 text-amber-400" />
+                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
+                      <Sparkles className="w-5 h-5 text-cyan-400" />
                     </div>
                     <div className="flex items-center justify-between gap-2">
                       <CardTitle className="text-lg font-bold text-white">Autonomous Retention</CardTitle>
@@ -527,7 +568,7 @@ export default function HackathonDashboard() {
                         {currentUser.engagement.churnRisk}
                       </Badge>
                     </div>
-                    <CardDescription className="mt-3 text-xs text-zinc-300 leading-relaxed font-medium bg-zinc-950/70 p-3.5 rounded-xl border border-white/[0.06]">
+                    <CardDescription className="mt-3 text-xs text-zinc-300 leading-relaxed font-medium bg-black/60 p-3.5 rounded-xl border border-white/[0.06]">
                       "{currentUser.engagement.retentionStrategy}"
                     </CardDescription>
 
@@ -548,19 +589,19 @@ export default function HackathonDashboard() {
                   </CardHeader>
 
                   <CardFooter className="mt-6 flex items-center justify-between p-0 pt-4 border-t border-white/[0.08]">
-                    <Button variant="outline" size="sm" className="border-white/10 text-xs font-semibold hover:bg-white/5 hover:border-white/20 text-zinc-300 cursor-pointer">
-                      <ShieldAlert className="mr-1.5 h-3.5 w-3.5 text-zinc-400" />
+                    <Button variant="outline" size="sm" className="border-white/10 text-xs font-semibold hover:bg-white/5 hover:border-cyan-500/30 text-zinc-300 cursor-pointer">
+                      <ShieldAlert className="mr-1.5 h-3.5 w-3.5 text-cyan-400" />
                       Live Protocol
                     </Button>
                     <div className="flex items-center gap-2">
                       <span className="text-[11px] text-muted-foreground font-medium">Auto-Intervene</span>
-                      <Switch defaultChecked className="data-[state=checked]:bg-white" aria-label="Toggle autonomous retention" />
+                      <Switch defaultChecked className="data-[state=checked]:bg-cyan-500" aria-label="Toggle autonomous retention" />
                     </div>
                   </CardFooter>
                 </Card>
               }
               trackers={
-                <Card className="h-full bg-zinc-900/50 border-white/[0.08] backdrop-blur-xl shadow-lg hover:border-white/20 transition-all">
+                <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
                   <CardContent className="flex h-full flex-col justify-between p-6">
                     <div>
                       <CardTitle className="text-base font-semibold text-white">Subscriber Cohort Signal</CardTitle>
@@ -584,7 +625,7 @@ export default function HackathonDashboard() {
                           alt="Streamer 3"
                         />
                       </div>
-                      <span className="text-xs font-mono font-semibold text-zinc-300">
+                      <span className="text-xs font-mono font-semibold text-cyan-300">
                         +{currentUser.engagement.totalRatings} Ratings
                       </span>
                     </div>
@@ -593,8 +634,8 @@ export default function HackathonDashboard() {
               }
               statistic={
                 <Card className={cn(
-                  "relative h-full w-full overflow-hidden border backdrop-blur-xl shadow-lg transition-all",
-                  isColdStart ? "bg-cyan-950/40 border-cyan-500/40" : "bg-zinc-900/50 border-white/[0.08] hover:border-white/20"
+                  "relative h-full w-full overflow-hidden border backdrop-blur-2xl shadow-xl transition-all duration-300",
+                  isColdStart ? "bg-cyan-950/50 border-cyan-400/40 shadow-cyan-500/10" : "bg-zinc-950/50 border-white/[0.08] hover:border-cyan-500/30"
                 )}>
                   <CardContent className="relative z-10 flex flex-col h-full items-center justify-center p-6 text-center">
                     {isColdStart ? (
@@ -614,7 +655,7 @@ export default function HackathonDashboard() {
                         <span className="text-5xl lg:text-6xl font-black text-white tracking-tight font-mono">
                           {metadata?.svdRMSE ?? "0.898"}
                         </span>
-                        <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mt-2">
+                        <span className="text-xs font-semibold text-cyan-300/80 uppercase tracking-wider mt-2">
                           SVD RMSE Benchmark
                         </span>
                       </>
@@ -623,7 +664,7 @@ export default function HackathonDashboard() {
                 </Card>
               }
               focus={
-                <Card className="h-full bg-zinc-900/50 border-white/[0.08] backdrop-blur-xl shadow-lg hover:border-white/20 transition-all">
+                <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
                   <CardContent className="flex h-full flex-col justify-between p-6">
                     <div className="flex items-start justify-between">
                       <div>
@@ -646,8 +687,8 @@ export default function HackathonDashboard() {
               }
               productivity={
                 <Card className={cn(
-                  "h-full border backdrop-blur-xl shadow-lg transition-all",
-                  isColdStart ? "bg-cyan-950/40 border-cyan-500/40" : "bg-zinc-900/50 border-white/[0.08] hover:border-white/20"
+                  "h-full border backdrop-blur-2xl shadow-xl transition-all duration-300",
+                  isColdStart ? "bg-cyan-950/50 border-cyan-400/40" : "bg-zinc-950/50 border-white/[0.08] hover:border-cyan-500/30"
                 )}>
                   <CardContent className="flex h-full flex-col justify-between p-6">
                     <div>
@@ -666,16 +707,16 @@ export default function HackathonDashboard() {
                           <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-200">
                             0% SVD (Paused)
                           </span>
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-200">
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-200">
                             100% Popularity Prior
                           </span>
                         </>
                       ) : (
                         <>
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-200">
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/20 border border-purple-500/35 text-purple-200">
                             {collabWeight}% SVD
                           </span>
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-200">
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/35 text-cyan-200">
                             {100 - collabWeight}% Content
                           </span>
                         </>
@@ -685,19 +726,19 @@ export default function HackathonDashboard() {
                 </Card>
               }
               shortcuts={
-                <Card className="h-full bg-zinc-900/50 border-white/[0.08] backdrop-blur-xl shadow-lg hover:border-white/20 transition-all">
+                <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
                   <CardContent className="flex h-full flex-wrap items-center justify-between gap-4 p-6">
                     <div>
                       <CardTitle className="text-base font-semibold text-white">Fast Persona Switch</CardTitle>
                       <CardDescription className="text-xs text-muted-foreground">
-                        Simulate subscriber vectors instantly with one-click keyboard triggers
+                        Simulate subscriber vectors instantly with one-click triggers
                       </CardDescription>
                     </div>
                     <div className="flex flex-wrap items-center gap-2">
                       <button
                         type="button"
                         onClick={() => setSelectedUserId(42)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 bg-zinc-950/80 hover:bg-zinc-800 text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
                       >
                         <Command className="h-3 w-3" />
                         <span>42 (Sci-Fi)</span>
@@ -705,7 +746,7 @@ export default function HackathonDashboard() {
                       <button
                         type="button"
                         onClick={() => setSelectedUserId(1)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 bg-zinc-950/80 hover:bg-zinc-800 text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
                       >
                         <Command className="h-3 w-3" />
                         <span>1 (Action)</span>
@@ -713,7 +754,7 @@ export default function HackathonDashboard() {
                       <button
                         type="button"
                         onClick={() => setSelectedUserId(15)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 bg-zinc-950/80 hover:bg-zinc-800 text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
                       >
                         <Command className="h-3 w-3" />
                         <span>15 (Drama)</span>
@@ -721,7 +762,7 @@ export default function HackathonDashboard() {
                       <button
                         type="button"
                         onClick={() => setSelectedUserId(84)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 bg-zinc-950/80 hover:bg-zinc-800 text-xs font-mono font-medium text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
                       >
                         <Command className="h-3 w-3" />
                         <span>84 (Mystery)</span>
@@ -735,24 +776,24 @@ export default function HackathonDashboard() {
         )}
 
         {/* Dynamic Hybrid Ensemble Weight Tuner (Interactive SnappySlider) */}
-        <section className="p-6 rounded-2xl bg-zinc-900/50 border border-white/[0.08] backdrop-blur-xl shadow-xl space-y-4">
+        <section className="p-6 sm:p-8 rounded-3xl bg-zinc-950/50 border border-white/[0.08] backdrop-blur-2xl shadow-2xl space-y-5">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400">
+                <div className="flex h-7 w-7 items-center justify-center rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-400">
                   <SlidersHorizontal className="h-3.5 w-3.5" />
                 </div>
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-purple-300">
                   Live Model Sandbox
                 </span>
                 <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 font-mono">
                   Dynamic Re-Ranking
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-white tracking-tight mt-1.5">
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mt-1.5">
                 Dynamic Hybrid Ensemble Weight Tuner
               </h3>
-              <p className="text-xs text-muted-foreground mt-0.5">
+              <p className="text-xs sm:text-sm text-zinc-400 mt-0.5 max-w-2xl leading-relaxed">
                 Drag the interactive knob below to adjust the ratio between Collaborative SVD (peer behavior) and Content TF-IDF (metadata affinity).
               </p>
             </div>
@@ -765,8 +806,8 @@ export default function HackathonDashboard() {
                 className={cn(
                   "px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer",
                   collabWeight === 100
-                    ? "bg-purple-500/20 border-purple-500/40 text-purple-300 shadow-sm"
-                    : "bg-zinc-950/60 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-800"
+                    ? "bg-purple-500/20 border-purple-400 text-purple-200 shadow-[0_0_12px_rgba(168,85,247,0.3)]"
+                    : "bg-black/40 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-900"
                 )}
               >
                 100% SVD (Discovery)
@@ -777,8 +818,8 @@ export default function HackathonDashboard() {
                 className={cn(
                   "px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer",
                   collabWeight === 60
-                    ? "bg-amber-500/20 border-amber-500/40 text-amber-300 shadow-sm"
-                    : "bg-zinc-950/60 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-800"
+                    ? "bg-sky-500/20 border-sky-400 text-sky-200 shadow-[0_0_12px_rgba(14,165,233,0.3)]"
+                    : "bg-black/40 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-900"
                 )}
               >
                 60/40 (Default)
@@ -789,8 +830,8 @@ export default function HackathonDashboard() {
                 className={cn(
                   "px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer",
                   collabWeight === 0
-                    ? "bg-cyan-500/20 border-cyan-500/40 text-cyan-300 shadow-sm"
-                    : "bg-zinc-950/60 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-800"
+                    ? "bg-cyan-500/20 border-cyan-400 text-cyan-200 shadow-[0_0_12px_rgba(6,182,212,0.3)]"
+                    : "bg-black/40 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-900"
                 )}
               >
                 100% TF-IDF (Strict Genre)
@@ -799,7 +840,7 @@ export default function HackathonDashboard() {
                 variant="outline"
                 size="sm"
                 onClick={() => setCollabWeight(60)}
-                className="h-8 px-2.5 rounded-xl border-white/10 text-xs text-zinc-300 hover:bg-white/5 cursor-pointer"
+                className="h-8 px-2.5 rounded-xl border-white/10 bg-black/40 text-xs text-zinc-300 hover:bg-zinc-800 cursor-pointer"
               >
                 <RotateCcw className="h-3.5 w-3.5 mr-1" />
                 Reset
@@ -808,7 +849,7 @@ export default function HackathonDashboard() {
           </div>
 
           {/* Interactive SnappySlider Track */}
-          <div className="pt-3 pb-1 px-1">
+          <div className="pt-2 pb-1 px-1">
             <SnappySlider
               values={[0, 20, 40, 50, 60, 70, 80, 100]}
               defaultValue={60}
@@ -828,16 +869,16 @@ export default function HackathonDashboard() {
           {/* Dynamic Explainer Footer */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-white/[0.06] text-xs">
             <div className="flex items-center gap-2 font-mono">
-              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-purple-500/20 text-purple-200 border border-purple-500/35">
                 {collabWeight}% Collaborative (SVD)
               </span>
               <span className="text-zinc-500 font-bold">+</span>
-              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-cyan-500/20 text-cyan-200 border border-cyan-500/35">
                 {100 - collabWeight}% Content (TF-IDF)
               </span>
             </div>
 
-            <p className="text-xs text-zinc-300/90 font-medium">
+            <p className="text-xs text-zinc-300 font-medium">
               {collabWeight >= 75
                 ? "⚡ High Serendipity Mode — Prioritizing latent peer patterns from 100K+ ratings. Discovers unexpected cross-genre favorites."
                 : collabWeight <= 35
@@ -847,59 +888,177 @@ export default function HackathonDashboard() {
           </div>
         </section>
 
-        {/* Personalized Watchlist Section */}
-        <div className="space-y-6 pt-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+        {/* Personalized Watchlist & Recommendation Deck */}
+        <div className="space-y-6 pt-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <Flame className="w-5 h-5 text-amber-400" />
+                <Film className="w-5 h-5 text-cyan-400" />
                 <h2 className="text-2xl font-bold text-white tracking-tight">
-                  Curated Watchlist
+                  Curated Recommendation Matrix
                 </h2>
                 {currentUser && (
-                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-white/[0.06] text-zinc-300 border border-white/10 font-medium">
-                    Generated for User #{currentUser.userId}
+                  <span className="text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25 font-medium">
+                    User #{currentUser.userId}
                   </span>
                 )}
               </div>
-              <p className="text-xs text-muted-foreground mt-1">
-                Curated by dynamically blending collaborative peer signals ({collabWeight}%) with metadata semantic affinity ({100 - collabWeight}%). Click any title to explore full trailer, cast & XAI attribution.
+              <p className="text-xs text-muted-foreground mt-1 max-w-2xl leading-relaxed">
+                Dynamically blended from collaborative peer signals ({collabWeight}%) and metadata semantic affinity ({100 - collabWeight}%). Click any title for full video player, streaming providers & XAI attribution.
               </p>
             </div>
-            <div className="text-xs text-muted-foreground">
-              Showing <span className="font-semibold text-white">{watchlist.length}</span> verified recommendations
+
+            {/* View Mode Switcher */}
+            <div className="flex items-center gap-1 p-1 rounded-2xl bg-black/60 border border-white/[0.1] self-start sm:self-auto backdrop-blur-xl">
+              <button
+                type="button"
+                onClick={() => setViewMode('coverflow')}
+                className={cn(
+                  "px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer",
+                  viewMode === 'coverflow'
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/25"
+                    : "text-zinc-400 hover:text-white"
+                )}
+              >
+                <Layers className="w-3.5 h-3.5" />
+                <span>3D CoverFlow</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode('grid')}
+                className={cn(
+                  "px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer",
+                  viewMode === 'grid'
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md shadow-cyan-500/25"
+                    : "text-zinc-400 hover:text-white"
+                )}
+              >
+                <Grid className="w-3.5 h-3.5" />
+                <span>Matrix Grid</span>
+              </button>
             </div>
           </div>
 
           {/* Loading Indicator */}
           {loading && (
             <div className="py-24 flex flex-col items-center justify-center space-y-3">
-              <Loader2 className="w-8 h-8 text-amber-400 animate-spin" />
-              <p className="text-xs text-muted-foreground font-medium">Analyzing taste vectors & generating 3D recommendation deck...</p>
+              <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+              <p className="text-xs text-muted-foreground font-medium">Analyzing taste vectors & generating recommendation deck...</p>
             </div>
           )}
 
-          {/* 3D CoverFlow Carousel */}
-          {!loading && (
-            <div className="rounded-3xl bg-zinc-900/40 border border-white/[0.08] backdrop-blur-xl p-2 sm:p-6 shadow-2xl relative overflow-hidden">
-              <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+          {/* 3D CoverFlow Carousel View */}
+          {!loading && viewMode === 'coverflow' && (
+            <div className="rounded-3xl bg-zinc-950/40 border border-white/[0.08] backdrop-blur-2xl p-2 sm:p-6 shadow-2xl relative overflow-hidden">
+              {/* Dynamic Color-Adaptive Ambient Glow */}
+              <div
+                className="absolute -top-24 left-1/2 -translate-x-1/2 w-[550px] h-[550px] rounded-full blur-[130px] pointer-events-none transition-all duration-700"
+                style={{
+                  background: `radial-gradient(circle, rgba(168,85,247,${(collabWeight / 100) * 0.18}) 0%, rgba(56,189,248,${((100 - collabWeight) / 100) * 0.18}) 70%, transparent 100%)`
+                }}
+              />
               
               <CoverFlowCarousel 
                 items={coverFlowItems} 
                 sectionLabel={currentUser ? `AI MATCH FOR ${currentUser.persona.toUpperCase()}` : "TOP CURATED RECOMMENDATIONS"}
-                accentColor="#e2b36f"
+                accentColor="#38bdf8"
                 onCtaClick={handleSelectMovie}
                 onCardClick={handleSelectMovie}
               />
             </div>
           )}
+
+          {/* Minimal Matrix Grid View */}
+          {!loading && viewMode === 'grid' && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {tunedWatchlist.map((movie) => {
+                const posterUrl = movie.posterPath
+                  ? (movie.posterPath.startsWith('http')
+                      ? movie.posterPath
+                      : `https://image.tmdb.org/t/p/w500${movie.posterPath}`)
+                  : getFallbackPoster(movie.title, movie.year);
+                const rating = movie.voteAverage || movie.predictedRating;
+                return (
+                  <motion.div
+                    key={movie.movieId}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.25 }}
+                    onClick={() => {
+                      const carouselItem = coverFlowItems.find(c => c.movieId === movie.movieId) || {
+                        movieId: movie.movieId,
+                        tmdbId: movie.tmdbId,
+                        data: movie,
+                        img: posterUrl,
+                        titleLine1: movie.title,
+                        titleLine2: '',
+                        desc: movie.overview,
+                      };
+                      handleSelectMovie(carouselItem);
+                    }}
+                    className="group relative flex flex-col rounded-2xl bg-zinc-950/60 border border-white/[0.08] hover:border-cyan-400/40 overflow-hidden shadow-xl hover:shadow-cyan-500/10 cursor-pointer transition-all duration-300"
+                  >
+                    {/* Poster */}
+                    <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-900">
+                      <img
+                        src={posterUrl}
+                        alt={movie.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                      
+                      {/* Top Match Badge */}
+                      <div className="absolute top-2.5 right-2.5">
+                        <span className="px-2 py-0.5 rounded-full text-[11px] font-bold font-mono bg-cyan-500/90 text-black shadow-[0_0_10px_rgba(6,182,212,0.5)] backdrop-blur-sm">
+                          {movie.matchPercentage}%
+                        </span>
+                      </div>
+
+                      {/* Tag pill at bottom of poster */}
+                      <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                        <span className="text-[10px] font-semibold text-zinc-300 uppercase tracking-wider truncate">
+                          {movie.genres?.[0] || 'Film'}
+                        </span>
+                        {rating && (
+                          <span className="text-[10px] font-mono font-bold text-amber-400 flex items-center gap-0.5">
+                            ★ {rating.toFixed(1)}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Movie Info */}
+                    <div className="p-3 flex-1 flex flex-col justify-between space-y-2">
+                      <div>
+                        <h4 className="font-bold text-sm text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
+                          {movie.title}
+                        </h4>
+                        <p className="text-[11px] text-zinc-400 line-clamp-2 mt-0.5 leading-snug">
+                          {movie.explanation?.text || movie.overview}
+                        </p>
+                      </div>
+
+                      <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[10px] font-mono text-zinc-400">
+                        <span>{movie.year || ''}</span>
+                        <span className="text-cyan-400 font-medium group-hover:underline">
+                          View XAI →
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        {/* Footer info */}
+        {/* Minimal Footer */}
         <footer className="pt-8 pb-12 border-t border-white/[0.06] text-center text-xs text-muted-foreground space-y-2">
-          <p>CineMatch / CineWatch AI — Engineered for Cognizant Hackathon Track #6.</p>
-          <p className="text-muted-foreground/60">
-            Powered by Next.js 16, React 19, TailwindCSS v4, Scikit-Learn (TF-IDF), and Scikit-Surprise (SVD Matrix Factorization).
+          <p className="text-zinc-400 font-medium">CineMatch AI Intelligence Platform • Cognizant Hackathon Track #6</p>
+          <p className="text-zinc-500 text-[11px]">
+            Dual-Ensemble Engine: Scikit-Surprise SVD (Matrix Factorization) + Scikit-Learn TF-IDF (Cosine Content Graph)
           </p>
         </footer>
       </div>
