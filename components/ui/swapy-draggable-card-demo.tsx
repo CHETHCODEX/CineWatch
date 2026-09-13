@@ -7,43 +7,43 @@ import { Heart, PlusCircle } from "lucide-react";
 
 export function ProjectViewsCard() {
   return (
-    <div className="bg-emerald-600 rounded-2xl h-full p-6 flex flex-col justify-center items-center text-center shadow-md relative">
-      <DragHandle />
-      <div className="flex gap-2">
-        <h2 className="text-yellow-200 2xl:text-5xl text-3xl font-bold mb-2">4.875</h2>
-        <div className="text-yellow-200 flex items-center gap-1 mb-1">
-          <span className="text-xl"><Heart className="fill-yellow-200" size={24}/></span>
-        </div>
+    <div className="bg-[#059669] text-[#fef08a] rounded-[24px] h-full p-6 flex flex-col justify-center items-center text-center shadow-lg relative select-none">
+      <DragHandle className="bg-black/20 border-white/10 text-white/80 hover:text-white" />
+      <div className="flex items-center gap-2 mb-1">
+        <h2 className="text-[#fef08a] 2xl:text-6xl text-4xl font-extrabold tracking-tight">4.875</h2>
+        <span className="text-2xl">
+          <Heart className="fill-[#fef08a] text-[#fef08a]" size={28} />
+        </span>
       </div>
-      <p className="text-yellow-200 font-medium">Project Views</p>
-      <p className="text-yellow-200/80 text-sm">last year</p>
+      <p className="text-[#fef08a] font-bold text-base tracking-wide mt-1">Project Views</p>
+      <p className="text-[#fef08a]/80 text-xs font-medium">last year</p>
     </div>
   );
 }
 
 export function NewUsersCard() {
   return (
-    <div className="bg-gray-800 rounded-2xl h-full p-6 flex flex-col justify-center shadow-md relative border border-white/10">
-      <DragHandle />
-      <p className="text-cyan-300 mb-1 font-medium">New Users</p>
-      <h2 className="text-white 2xl:text-6xl text-4xl font-bold leading-none">57K</h2>
-      <p className="text-emerald-400 font-medium mt-2">+10%</p>
+    <div className="bg-[#374151] rounded-[24px] h-full p-6 flex flex-col justify-center shadow-lg relative select-none">
+      <DragHandle className="bg-black/20 border-white/10 text-white/80 hover:text-white" />
+      <p className="text-[#fef08a] mb-2 font-bold text-sm tracking-wide">New Users</p>
+      <h2 className="text-[#fef08a] 2xl:text-6xl text-5xl font-black leading-none tracking-tight">57K</h2>
+      <p className="text-[#4ade80] font-bold text-sm mt-3">+10%</p>
     </div>
   );
 }
 
 export function TeamCard() {
   return (
-    <div className="bg-indigo-950/70 border border-indigo-500/20 rounded-2xl p-6 h-full flex flex-col justify-between relative overflow-hidden shadow-md">
-      <DragHandle />
-      <div className="bg-indigo-500/20 text-indigo-300 font-medium px-4 py-2 rounded-xl inline-block mb-4 max-w-fit text-xs border border-indigo-500/30">
+    <div className="bg-[#dbeafe] rounded-[24px] p-6 h-full flex flex-col justify-between relative overflow-hidden shadow-lg select-none">
+      <DragHandle className="bg-blue-300/40 border-blue-400/30 text-blue-900 hover:text-black" />
+      <div className="bg-[#93c5fd] text-slate-900 font-bold px-4 py-2.5 rounded-2xl inline-block mb-4 max-w-fit text-xs sm:text-sm tracking-tight shadow-sm">
         Team of passionate designers and developers
       </div>
       <div>
-        <p className="font-bold text-zinc-300">Daily New clients</p>
-        <div className="flex items-end gap-2">
-          <span className="text-5xl font-bold text-white">54</span>
-          <span className="text-emerald-400 font-medium mb-1">+40%</span>
+        <p className="font-bold text-slate-800 text-sm tracking-tight">Daily New clients</p>
+        <div className="flex items-end gap-2 mt-1">
+          <span className="text-6xl font-black text-slate-950 tracking-tighter leading-none">54</span>
+          <span className="text-emerald-600 font-bold text-sm mb-1">+40%</span>
         </div>
       </div>
     </div>
@@ -52,15 +52,16 @@ export function TeamCard() {
 
 export function AgencyCard() {
   return (
-    <div className="bg-purple-950/60 border border-purple-500/20 rounded-2xl h-full p-4 relative overflow-hidden shadow-md flex flex-col justify-between">
-      <DragHandle />
-      <div className="bg-zinc-900 text-purple-200 text-sm font-medium px-4 py-2 rounded-lg inline-block mb-4 w-full border border-purple-500/30">
-        <p className="font-bold">Smart Digital</p>
-        <p>Agency For Your Business</p>
+    <div className="bg-[#d8b4fe] rounded-[24px] h-full p-5 relative overflow-hidden shadow-lg flex flex-col justify-between select-none">
+      <DragHandle className="bg-purple-400/40 border-purple-500/30 text-purple-950 hover:text-black" />
+      <div className="bg-[#111827] text-[#fef08a] text-base sm:text-lg font-black px-4 py-3 rounded-2xl inline-block mb-3 w-full leading-snug shadow-md">
+        <p>Smart Digital</p>
+        <p>Agency For Your</p>
+        <p>Business</p>
       </div>
-      <div className="flex gap-2 h-16">
-        <div className="w-full rounded-xl bg-purple-600/40 border border-purple-500/30 overflow-hidden"></div>
-        <div className="w-full rounded-xl bg-cyan-600/40 border border-cyan-500/30 overflow-hidden ml-2"></div>
+      <div className="flex gap-3 h-16 sm:h-20">
+        <div className="w-full rounded-2xl bg-[#c084fc] shadow-inner"></div>
+        <div className="w-full rounded-2xl bg-[#fef08a] shadow-inner ml-2"></div>
       </div>
     </div>
   );
@@ -68,59 +69,62 @@ export function AgencyCard() {
 
 export function LogoCard() {
   return (
-    <div className="bg-zinc-900 border border-white/10 rounded-2xl h-full p-6 flex flex-col items-center justify-center shadow-md relative">
-      <DragHandle />
-      <div className="w-14 h-14 mb-3">
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          <circle cx="33" cy="33" r="25" fill="#38bdf8" />
-          <circle cx="67" cy="33" r="25" fill="#818cf8" />
-          <circle cx="50" cy="67" r="25" fill="#a855f7" />
+    <div className="bg-[#fbcfe8] rounded-[24px] h-full p-6 flex flex-col items-center justify-center shadow-lg relative select-none">
+      <DragHandle className="bg-pink-300/50 border-pink-400/40 text-pink-950 hover:text-black" />
+      <div className="w-16 h-16 mb-3 relative">
+        <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-md">
+          <circle cx="33" cy="33" r="25" fill="#1b0ddd" />
+          <circle cx="67" cy="33" r="25" fill="#0904ff" />
+          <circle cx="50" cy="67" r="25" fill="#013de2" />
         </svg>
       </div>
-      <h2 className="2xl:text-2xl text-lg font-bold text-white">UI-Layouts</h2>
+      <h2 className="2xl:text-3xl text-2xl font-black text-slate-950 tracking-tight">UI-Layouts</h2>
     </div>
   );
 }
 
 export function UserTrustCard() {
   return (
-    <div className="bg-blue-600 rounded-2xl h-full p-4 flex flex-col justify-center items-center text-white shadow-lg relative">
-      <DragHandle />
-      <h3 className="text-xl font-bold mb-1">Trusted By</h3>
-      <p className="text-2xl font-bold mb-3">500+ Users</p>
+    <div className="bg-[#2563eb] rounded-[24px] h-full p-5 flex flex-col justify-center items-center text-white shadow-xl relative select-none text-center">
+      <DragHandle className="bg-blue-700/60 border-white/20 text-white/90 hover:text-white" />
+      <h3 className="text-xl font-bold mb-0.5 tracking-tight text-white/95">Trusted By</h3>
+      <p className="text-3xl font-black mb-3 tracking-tight">500+ Users</p>
 
       <div className="flex -space-x-2 mb-3">
-        <div className="w-8 h-8 rounded-xl overflow-hidden border-2 border-blue-600 bg-gray-200">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&q=80" alt="avatar" className="w-full h-full object-cover" />
+        <div className="w-9 h-9 rounded-xl overflow-hidden border-2 border-[#2563eb] bg-slate-200 shadow-md">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80" alt="avatar" className="w-full h-full object-cover" />
         </div>
-        <div className="w-8 h-8 rounded-xl overflow-hidden border-2 border-blue-600 bg-gray-200">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80" alt="avatar" className="w-full h-full object-cover" />
+        <div className="w-9 h-9 rounded-xl overflow-hidden border-2 border-[#2563eb] bg-slate-200 shadow-md">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="avatar" className="w-full h-full object-cover" />
         </div>
-        <div className="w-8 h-8 rounded-xl overflow-hidden border-2 border-blue-600 bg-gray-200">
-          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=80&q=80" alt="avatar" className="w-full h-full object-cover" />
+        <div className="w-9 h-9 rounded-xl overflow-hidden border-2 border-[#2563eb] bg-slate-200 shadow-md">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&q=80" alt="avatar" className="w-full h-full object-cover" />
         </div>
-        <div className="w-8 h-8 rounded-xl bg-yellow-500 border-2 border-blue-600 flex items-center justify-center">
-          <PlusCircle className="w-4 h-4 text-white" />
+        <div className="w-9 h-9 rounded-xl overflow-hidden border-2 border-[#2563eb] bg-slate-200 shadow-md">
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&q=80" alt="avatar" className="w-full h-full object-cover" />
+        </div>
+        <div className="w-9 h-9 rounded-xl bg-[#eab308] border-2 border-[#2563eb] flex items-center justify-center shadow-md">
+          <PlusCircle className="w-5 h-5 text-white" />
         </div>
       </div>
 
-      <p className="text-xs text-white/80">Don&apos;t Take Our Words For It...</p>
+      <p className="text-xs font-semibold text-blue-100">Don&apos;t Take Our Words For It...</p>
     </div>
   );
 }
 
 export function FontCard() {
   return (
-    <div className="bg-zinc-900 border border-white/10 rounded-2xl h-full p-6 shadow-md relative">
-      <DragHandle />
-      <h2 className="text-2xl font-bold mb-0.5 text-white">Font</h2>
-      <p className="mb-4 text-zinc-400 text-xs font-mono">Geist / Inter</p>
+    <div className="bg-[#fef08a] rounded-[24px] h-full p-6 shadow-lg relative select-none">
+      <DragHandle className="bg-yellow-300/60 border-yellow-400/40 text-yellow-950 hover:text-black" />
+      <h2 className="text-3xl font-black mb-0.5 text-slate-950 tracking-tight">Font</h2>
+      <p className="mb-4 text-slate-700 font-bold text-sm">SK-Modernist</p>
 
-      <div className="flex gap-2 mt-2">
-        <div className="w-8 h-8 bg-cyan-500 rounded-md"></div>
-        <div className="w-8 h-8 bg-indigo-500 rounded-md"></div>
-        <div className="w-8 h-8 bg-purple-500 rounded-md"></div>
-        <div className="w-8 h-8 bg-pink-500 rounded-md"></div>
+      <div className="flex gap-2.5 mt-4">
+        <div className="w-10 h-10 bg-[#1e293b] rounded-xl shadow-sm"></div>
+        <div className="w-10 h-10 bg-[#94a3b8] rounded-xl shadow-sm"></div>
+        <div className="w-10 h-10 bg-[#f87171] rounded-xl shadow-sm"></div>
+        <div className="w-10 h-10 bg-[#f472b6] rounded-xl shadow-sm"></div>
       </div>
     </div>
   );
@@ -128,31 +132,31 @@ export function FontCard() {
 
 export function DesignIndustryCard() {
   return (
-    <div className="bg-emerald-950/70 border border-emerald-500/20 text-emerald-300 rounded-2xl h-full p-6 flex flex-col justify-center relative shadow-md">
-      <DragHandle />
-      <p className="text-xl font-bold">We Build Future of</p>
-      <p className="text-xl font-bold text-white">Design Industry</p>
+    <div className="bg-[#059669] text-[#fef08a] rounded-[24px] h-full p-6 flex flex-col justify-between relative shadow-lg select-none">
+      <DragHandle className="bg-black/20 border-white/10 text-white/80 hover:text-white" />
+      <p className="text-2xl font-black tracking-tight leading-snug">We Build Future of</p>
+      <p className="text-2xl font-black tracking-tight leading-snug">Design Industry</p>
     </div>
   );
 }
 
 export function CardBalanceCard() {
   return (
-    <div className="bg-zinc-900 border border-white/10 rounded-2xl h-full p-6 shadow-lg relative flex flex-col justify-between">
-      <DragHandle />
+    <div className="bg-[#fef08a] rounded-[24px] h-full p-6 shadow-xl relative flex flex-col justify-between select-none">
+      <DragHandle className="bg-yellow-300/60 border-yellow-400/40 text-yellow-950 hover:text-black" />
       <div>
-        <h3 className="text-sm font-medium mb-1 text-zinc-400">Cards balance</h3>
-        <h2 className="text-2xl font-bold text-white">$ 12,457</h2>
+        <h3 className="text-base font-bold mb-1 text-slate-900 tracking-tight">Cards balance</h3>
+        <h2 className="text-3xl font-black text-slate-950 tracking-tight">$ 12,457</h2>
       </div>
 
-      <div className="bg-black text-white rounded-xl p-3 border border-white/10 mt-3">
-        <div className="flex justify-between text-xs text-zinc-400 mb-1">
+      <div className="bg-black text-white rounded-2xl p-4 shadow-md mt-4">
+        <div className="flex justify-between text-xs text-slate-400 font-semibold mb-1">
           <span>Card Holder</span>
           <span>Expires</span>
         </div>
-        <div className="flex justify-between text-xs font-medium">
+        <div className="flex justify-between font-bold text-sm text-white tracking-wide">
           <span>Robert Fox</span>
-          <span>07/28</span>
+          <span>07/22</span>
         </div>
       </div>
     </div>
@@ -209,19 +213,19 @@ export default function SwapyDemo() {
         setSlotItemMap(event.newSlotItemMap.asArray);
       }}
     >
-      <div className="grid w-full grid-cols-12 gap-3 md:gap-4 py-4">
+      <div className="grid w-full grid-cols-12 gap-3 md:gap-5 py-4">
         {slottedItems.map(({ slotId, itemId }) => {
           const item = initialItems.find((i) => i.id === itemId);
 
           return (
             <SwapySlot
               key={slotId}
-              className={`swapyItem rounded-2xl h-56 ${item?.className}`}
+              className={`swapyItem rounded-[26px] h-64 ${item?.className}`}
               id={slotId}
             >
               <SwapyItem
                 id={itemId}
-                className="relative rounded-2xl w-full h-full text-sm"
+                className="relative rounded-[26px] w-full h-full text-sm"
                 key={itemId}
               >
                 {item?.widgets}

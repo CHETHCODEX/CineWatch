@@ -45,6 +45,7 @@ import { SnappySlider } from '@/components/ui/snappy-slider';
 import { CoverFlowCarousel, type CarouselItem } from '@/components/ui/3-d-coverflow-carousel';
 import { BentoGridShowcase } from '@/components/ui/bento-product-features';
 import { SwapyLayout, SwapySlot, SwapyItem, DragHandle } from '@/components/ui/swapy-draggable-card';
+import SwapyDemo from '@/components/ui/swapy-draggable-card-demo';
 import {
   Card,
   CardHeader,
@@ -157,7 +158,7 @@ export default function HackathonDashboard() {
   const [loading, setLoading] = useState<boolean>(true);
   const [collabWeight, setCollabWeight] = useState<number>(60);
   const [viewMode, setViewMode] = useState<'coverflow' | 'grid'>('coverflow');
-  const [diagnosticLayout, setDiagnosticLayout] = useState<'swapy' | 'bento'>('swapy');
+  const [diagnosticLayout, setDiagnosticLayout] = useState<'swapy' | 'bento' | 'demo'>('swapy');
   const router = useRouter();
 
   const isColdStart = selectedUserId === 0;
@@ -818,6 +819,18 @@ export default function HackathonDashboard() {
                       <LayoutGrid className="w-3.5 h-3.5" />
                       <span>Classic Bento</span>
                     </button>
+                    <button
+                      type="button"
+                      onClick={() => setDiagnosticLayout('demo')}
+                      className={cn(
+                        "px-2.5 py-1 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer",
+                        diagnosticLayout === 'demo'
+                          ? "bg-gradient-to-r from-emerald-500 via-pink-500 to-yellow-500 text-black font-bold shadow-sm shadow-emerald-500/30"
+                          : "text-zinc-400 hover:text-white"
+                      )}
+                    >
+                      <span>🎨 UI-Layouts Original</span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -879,6 +892,18 @@ export default function HackathonDashboard() {
                       </SwapySlot>
                     </div>
                   </SwapyLayout>
+                </div>
+              ) : diagnosticLayout === 'demo' ? (
+                <div className="rounded-3xl bg-zinc-950 p-4 sm:p-6 border border-white/10 shadow-2xl space-y-3">
+                  <div className="flex items-center justify-between px-2">
+                    <p className="text-xs text-yellow-200 font-bold uppercase tracking-wider">
+                      ✨ 21st.dev UI-Layouts Original Showcase (Emerald, Pink, Yellow, Lilac & SK-Modernist Palette)
+                    </p>
+                    <span className="text-[10px] text-zinc-400 font-mono">
+                      Drag any card to swap slots live
+                    </span>
+                  </div>
+                  <SwapyDemo />
                 </div>
               ) : (
                 <BentoGridShowcase
