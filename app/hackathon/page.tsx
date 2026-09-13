@@ -300,19 +300,6 @@ export default function HackathonDashboard() {
         {/* Header Title Section with Production Telemetry Micro-HUD */}
         <header className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/[0.08]">
           <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-[#059669]/20 text-[#34d399] border border-[#059669]/40 shadow-sm">
-                Cognizant Hackathon • Track #6
-              </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#fef08a]/15 text-[#fef08a] border border-[#fef08a]/30 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#fef08a] animate-pulse" />
-                Live RecSys Core v2.4
-              </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#d8b4fe]/20 text-[#d8b4fe] border border-[#d8b4fe]/30 flex items-center gap-1 font-mono">
-                <Sparkles className="w-3 h-3 text-[#d8b4fe]" />
-                Dual-Hybrid SVD+TF-IDF
-              </span>
-            </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight flex items-center gap-2.5">
               CineMatch <span className="bg-gradient-to-r from-[#fef08a] via-[#34d399] to-[#d8b4fe] bg-clip-text text-transparent">Intelligence</span>
