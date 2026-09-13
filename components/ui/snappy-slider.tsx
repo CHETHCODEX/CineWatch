@@ -251,8 +251,8 @@ const SnappySlider = React.forwardRef<
         <div 
             ref={ref}
             className={cn(
-                "[--mark-slider-gap:0.25rem] [--mark-slider-height:0.5rem] [--mark-slider-track-height:0.375rem] [--mark-slider-marker-width:1px]",
-                "flex flex-col gap-[--mark-slider-gap] pb-7", 
+                "[--mark-slider-gap:0.5rem] [--mark-slider-height:2rem] [--mark-slider-track-height:0.75rem] [--mark-slider-marker-width:2px]",
+                "flex flex-col gap-3 pb-6 select-none", 
                 className
             )} 
             {...props}
@@ -269,14 +269,13 @@ const SnappySlider = React.forwardRef<
                     className={cn(isOutOfBounds && "opacity-75")}
                 />
             </SnappySliderHeader>
-            <div className="relative h-[--mark-slider-height]">
-                <div ref={sliderRef} className="absolute inset-0">
-                    <div className="absolute top-1/2 -translate-y-1/2 w-full h-[--mark-slider-track-height] bg-primary/10 rounded-sm overflow-hidden">
+            <div className="relative h-8 flex items-center">
+                <div ref={sliderRef} className="absolute inset-0 flex items-center cursor-pointer">
+                    {/* Track Container */}
+                    <div className="relative w-full h-3 bg-zinc-950 border border-white/20 rounded-full overflow-hidden shadow-inner">
                         {/* Progress overlay */}
                         <div
-                            className={cn(
-                                "absolute top-0 h-full z-[1] bg-primary"
-                            )}
+                            className="absolute top-0 h-full z-[1] bg-gradient-to-r from-purple-600 via-indigo-500 to-cyan-400 rounded-full shadow-[0_0_12px_rgba(168,85,247,0.7)] transition-all duration-75"
                             style={{ width: `${sliderPercentage}%` }}
                         />
                         
@@ -288,10 +287,7 @@ const SnappySlider = React.forwardRef<
                             return (
                                 <div
                                     key={`${mark}-${index}`}
-                                    className={cn(
-                                        "absolute top-0 w-[--mark-slider-marker-width] z-[2] h-full -translate-x-[calc(var(--mark-slider-marker-width)/2)]",
-                                        "bg-white/90 dark:bg-black/90"
-                                    )}
+                                    className="absolute top-0 w-[2px] z-[2] h-full -translate-x-1/2 bg-white/40"
                                     style={{ left: `${markPercentage}%` }}
                                 />
                             )
@@ -304,44 +300,59 @@ const SnappySlider = React.forwardRef<
                             className="absolute top-1/2 -translate-y-1/2 z-20"
                             style={{ left: `${((0 - sliderMin) / (sliderMax - sliderMin)) * 100}%` }}
                         >
-                            <div className="h-3 w-[--mark-slider-marker-width] bg-red-600 -translate-x-[calc(var(--mark-slider-marker-width)/2)]" />
+                            <div className="h-4 w-[2px] bg-red-500 -translate-x-1/2 rounded-full" />
                         </div>
                     )}
 
                     {/* Thumb */}
                     <div
                         className={cn(
-                            "absolute z-30 top-1/2 -translate-y-[35%] -translate-x-1/2 cursor-grab active:cursor-grabbing",
+                            "absolute z-30 top-1/2 -translate-y-1/2 -translate-x-1/2 cursor-grab active:cursor-grabbing group transition-transform",
                             isOutOfBounds && "opacity-75"
                         )}
                         style={{ left: `${sliderPercentage}%` }}
                     >
-                        {/* Triangle */}
-                        <div className={cn(
-                            "w-0 h-0 border-[5px] border-transparent border-b-primary mt-2",
-                            isOutOfBounds && "border-b-primary/20"
-                        )} />
-                        {/* Square */}
-                        <div className={cn(
-                            "w-[10px] h-[10px]",
-                            isOutOfBounds ? "bg-primary/20" : "bg-primary"
-                        )} />
-                        {/* Text */}
-                        <div className="absolute top-[22px] left-1/2 -translate-x-1/2 whitespace-nowrap">
-                            <span className={cn(
-                                "text-xs font-medium",
-                                isOutOfBounds && "opacity-75"
-                            )}>
+                        {/* Glowing Circular Thumb Knob */}
+                        <div className="relative flex items-center justify-center w-6 h-6 rounded-full bg-white border-2 border-purple-500 shadow-[0_0_16px_rgba(168,85,247,0.9)] group-hover:scale-110 group-active:scale-95 transition-all">
+                            <div className="w-2 h-2 rounded-full bg-purple-600" />
+                        </div>
+
+                        {/* Value Badge Under Thumb */}
+                        <div className="absolute top-[28px] left-1/2 -translate-x-1/2 whitespace-nowrap pointer-events-none">
+                            <span className="px-2 py-0.5 rounded-md bg-zinc-900/95 border border-purple-500/40 text-[11px] font-mono font-bold text-white shadow-xl">
                                 {isOutOfBounds 
                                     ? currentValue < sliderMin 
                                         ? `<${formatNumber(sliderMin, computedStep)}`
                                         : `>${formatNumber(sliderMax, computedStep)}`
-                                    : formatNumber(currentValue, computedStep)}
+                                    : `${formatNumber(currentValue, computedStep)}${suffix ? suffix.replace(/&nbsp;/g, ' ') : ''}`}
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Snap point ticks labels */}
+            {sliderValues.length > 0 && (
+                <div className="relative w-full h-4 text-[10px] font-mono text-zinc-400 mt-2 pointer-events-none">
+                    {sliderValues.filter((v, i, arr) => arr.indexOf(v) === i && v >= sliderMin && v <= sliderMax).map((val) => {
+                        const pct = ((val - sliderMin) / (sliderMax - sliderMin)) * 100;
+                        return (
+                            <div
+                                key={`label-${val}`}
+                                className="absolute -translate-x-1/2 flex flex-col items-center"
+                                style={{ left: `${pct}%` }}
+                            >
+                                <span className={cn(
+                                    "transition-colors",
+                                    Math.abs(currentValue - val) < 2 ? "text-amber-400 font-bold" : "text-zinc-500"
+                                )}>
+                                    {val}%
+                                </span>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
         </div>
     )
 })
@@ -365,7 +376,7 @@ const SnappySliderLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
     <label
         ref={ref}
-        className={cn("text-xs font-medium text-primary/50", className)}
+        className={cn("text-xs font-semibold text-zinc-200 tracking-wide", className)}
         {...props}
     />
 ))
@@ -413,10 +424,10 @@ const SnappySliderValue = React.forwardRef<
 
     return (
         <div 
-            className="group inline-flex items-center bg-primary/5 rounded px-0.5 focus-within:ring-1 focus-within:ring-primary cursor-text w-20"
+            className="group inline-flex items-center bg-zinc-950/90 border border-white/20 rounded-lg px-2.5 py-1 focus-within:ring-2 focus-within:ring-purple-500/50 focus-within:border-purple-500 cursor-text shadow-inner"
             onClick={handleContainerClick}
         >
-            {prefix && <span className="text-xs text-primary/75 select-none shrink-0">{prefix}</span>}
+            {prefix && <span className="text-xs text-zinc-400 font-medium select-none shrink-0 mr-1">{prefix}</span>}
             <input
                 ref={(node) => {
                     if (typeof ref === 'function') ref(node)
@@ -427,14 +438,14 @@ const SnappySliderValue = React.forwardRef<
                 inputMode="decimal"
                 onKeyDown={handleKeyDown}
                 className={cn(
-                    "w-full min-w-0 text-right text-xs bg-transparent border-none focus:outline-none",
+                    "w-12 text-right text-xs font-mono font-bold bg-transparent border-none text-white focus:outline-none",
                     "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
-                    "tabular-nums text-primary",
+                    "tabular-nums",
                     className
                 )}
                 {...props}
             />
-            {suffix && <span className="text-xs text-primary/75 select-none shrink-0">{suffix}</span>}
+            {suffix && <span className="text-xs text-purple-400 font-mono font-semibold select-none shrink-0 ml-1">{suffix.replace(/&nbsp;/g, ' ')}</span>}
         </div>
     )
 })
