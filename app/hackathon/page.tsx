@@ -34,8 +34,7 @@ import {
   Zap, 
   Database, 
   Timer, 
-  GripVertical, 
-  LayoutGrid 
+  GripVertical
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -43,10 +42,7 @@ import { Navbar } from '@/components/sections/navbar';
 import { Footer } from '@/components/sections/footer';
 import { SnappySlider } from '@/components/ui/snappy-slider';
 import { CoverFlowCarousel, type CarouselItem } from '@/components/ui/3-d-coverflow-carousel';
-import { BentoGridShowcase } from '@/components/ui/bento-product-features';
 import { SwapyLayout, SwapySlot, SwapyItem, DragHandle } from '@/components/ui/swapy-draggable-card';
-import SwapyDemo from '@/components/ui/swapy-draggable-card-demo';
-import BentoDemo from '@/components/ui/bento-grid-demo';
 import {
   Card,
   CardHeader,
@@ -159,7 +155,6 @@ export default function HackathonDashboard() {
   const [loading, setLoading] = useState<boolean>(true);
   const [collabWeight, setCollabWeight] = useState<number>(60);
   const [viewMode, setViewMode] = useState<'coverflow' | 'grid'>('coverflow');
-  const [diagnosticLayout, setDiagnosticLayout] = useState<'swapy' | 'bento' | 'demo' | 'radix-bento'>('swapy');
   const router = useRouter();
 
   const isColdStart = selectedUserId === 0;
@@ -820,159 +815,70 @@ export default function HackathonDashboard() {
                   </h2>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                <div className="flex items-center gap-2 self-start sm:self-auto">
                   <Badge variant="outline" className="border-white/10 text-zinc-300 bg-zinc-950 text-xs font-semibold">
                     Cohort: {currentUser.engagement.cohort}
                   </Badge>
-
-                  {/* Diagnostic Layout Switcher */}
-                  <div className="flex items-center gap-1 p-1 rounded-2xl bg-zinc-950 border border-white/[0.1] backdrop-blur-xl">
-                    <button
-                      type="button"
-                      onClick={() => setDiagnosticLayout('swapy')}
-                      className={cn(
-                        "px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
-                        diagnosticLayout === 'swapy'
-                          ? "bg-[#fef08a] text-black shadow-sm"
-                          : "text-zinc-400 hover:text-white"
-                      )}
-                    >
-                      <GripVertical className="w-3.5 h-3.5" />
-                      <span>Swapy Drag & Swap</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDiagnosticLayout('bento')}
-                      className={cn(
-                        "px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
-                        diagnosticLayout === 'bento'
-                          ? "bg-[#059669] text-[#fef08a] shadow-sm"
-                          : "text-zinc-400 hover:text-white"
-                      )}
-                    >
-                      <LayoutGrid className="w-3.5 h-3.5" />
-                      <span>Classic Bento</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDiagnosticLayout('demo')}
-                      className={cn(
-                        "px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
-                        diagnosticLayout === 'demo'
-                          ? "bg-[#d8b4fe] text-black shadow-sm"
-                          : "text-zinc-400 hover:text-white"
-                      )}
-                    >
-                      <span>🎨 21st.dev UI-Layouts</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDiagnosticLayout('radix-bento')}
-                      className={cn(
-                        "px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
-                        diagnosticLayout === 'radix-bento'
-                          ? "bg-[#fbcfe8] text-slate-950 shadow-sm"
-                          : "text-zinc-400 hover:text-white"
-                      )}
-                    >
-                      <span>✨ Magic Bento</span>
-                    </button>
-                  </div>
                 </div>
               </div>
 
-              {/* Swapy Draggable Layout */}
-              {diagnosticLayout === 'swapy' ? (
-                <div className="space-y-2">
-                  <p className="text-[11px] text-zinc-400 flex items-center gap-1.5 px-1 font-medium">
-                    <GripVertical className="w-3.5 h-3.5 text-[#fef08a]" />
-                    <span>Interactive Workspace: Grab any card by the handle in the top right to rearrange and swap your cockpit metrics live.</span>
-                  </p>
+              {/* Swapy Draggable Matrix (Dedicated View) */}
+              <div className="space-y-2">
+                <p className="text-[11px] text-zinc-400 flex items-center gap-1.5 px-1 font-medium">
+                  <GripVertical className="w-3.5 h-3.5 text-[#fef08a]" />
+                  <span>Interactive Workspace: Grab any card by the handle in the top right to rearrange and swap your cockpit metrics live.</span>
+                </p>
 
-                  <SwapyLayout
-                    id="diagnostic-swapy-matrix"
-                    className="w-full"
-                    config={{ swapMode: "hover" }}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                      <SwapySlot id="slot-retention" className="h-full">
-                        <SwapyItem id="item-retention" className="h-full relative group">
-                          <DragHandle className="bg-black/30 border-white/20 text-[#fef08a] hover:text-white" />
-                          {retentionNode}
-                        </SwapyItem>
-                      </SwapySlot>
+                <SwapyLayout
+                  id="diagnostic-swapy-matrix"
+                  className="w-full"
+                  config={{ swapMode: "hover" }}
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <SwapySlot id="slot-retention" className="h-full">
+                      <SwapyItem id="item-retention" className="h-full relative group">
+                        <DragHandle className="bg-black/30 border-white/20 text-[#fef08a] hover:text-white" />
+                        {retentionNode}
+                      </SwapyItem>
+                    </SwapySlot>
 
-                      <SwapySlot id="slot-statistic" className="h-full">
-                        <SwapyItem id="item-statistic" className="h-full relative group">
-                          <DragHandle className="bg-pink-400/40 border-pink-500/30 text-pink-950 hover:text-black" />
-                          {statisticNode}
-                        </SwapyItem>
-                      </SwapySlot>
+                    <SwapySlot id="slot-statistic" className="h-full">
+                      <SwapyItem id="item-statistic" className="h-full relative group">
+                        <DragHandle className="bg-pink-400/40 border-pink-500/30 text-pink-950 hover:text-black" />
+                        {statisticNode}
+                      </SwapyItem>
+                    </SwapySlot>
 
-                      <SwapySlot id="slot-productivity" className="h-full">
-                        <SwapyItem id="item-productivity" className="h-full relative group">
-                          <DragHandle className="bg-purple-400/40 border-purple-500/30 text-purple-950 hover:text-black" />
-                          {productivityNode}
-                        </SwapyItem>
-                      </SwapySlot>
+                    <SwapySlot id="slot-productivity" className="h-full">
+                      <SwapyItem id="item-productivity" className="h-full relative group">
+                        <DragHandle className="bg-purple-400/40 border-purple-500/30 text-purple-950 hover:text-black" />
+                        {productivityNode}
+                      </SwapyItem>
+                    </SwapySlot>
 
-                      <SwapySlot id="slot-focus" className="h-full">
-                        <SwapyItem id="item-focus" className="h-full relative group">
-                          <DragHandle className="bg-blue-300/40 border-blue-400/30 text-blue-900 hover:text-black" />
-                          {focusNode}
-                        </SwapyItem>
-                      </SwapySlot>
+                    <SwapySlot id="slot-focus" className="h-full">
+                      <SwapyItem id="item-focus" className="h-full relative group">
+                        <DragHandle className="bg-blue-300/40 border-blue-400/30 text-blue-900 hover:text-black" />
+                        {focusNode}
+                      </SwapyItem>
+                    </SwapySlot>
 
-                      <SwapySlot id="slot-cohort" className="h-full">
-                        <SwapyItem id="item-cohort" className="h-full relative group">
-                          <DragHandle className="bg-black/30 border-white/10 text-white/80 hover:text-white" />
-                          {cohortNode}
-                        </SwapyItem>
-                      </SwapySlot>
+                    <SwapySlot id="slot-cohort" className="h-full">
+                      <SwapyItem id="item-cohort" className="h-full relative group">
+                        <DragHandle className="bg-black/30 border-white/10 text-white/80 hover:text-white" />
+                        {cohortNode}
+                      </SwapyItem>
+                    </SwapySlot>
 
-                      <SwapySlot id="slot-shortcuts" className="h-full">
-                        <SwapyItem id="item-shortcuts" className="h-full relative group">
-                          <DragHandle className="bg-yellow-300/60 border-yellow-400/40 text-yellow-950 hover:text-black" />
-                          {shortcutsNode}
-                        </SwapyItem>
-                      </SwapySlot>
-                    </div>
-                  </SwapyLayout>
-                </div>
-              ) : diagnosticLayout === 'demo' ? (
-                <div className="rounded-3xl bg-zinc-950 p-4 sm:p-6 border border-white/10 shadow-2xl space-y-3">
-                  <div className="flex items-center justify-between px-2">
-                    <p className="text-xs text-yellow-200 font-bold uppercase tracking-wider">
-                      ✨ 21st.dev UI-Layouts Original Showcase (Emerald, Pink, Yellow, Lilac & SK-Modernist Palette)
-                    </p>
-                    <span className="text-[10px] text-zinc-400 font-mono">
-                      Drag any card to swap slots live
-                    </span>
+                    <SwapySlot id="slot-shortcuts" className="h-full">
+                      <SwapyItem id="item-shortcuts" className="h-full relative group">
+                        <DragHandle className="bg-yellow-300/60 border-yellow-400/40 text-yellow-950 hover:text-black" />
+                        {shortcutsNode}
+                      </SwapyItem>
+                    </SwapySlot>
                   </div>
-                  <SwapyDemo />
-                </div>
-              ) : diagnosticLayout === 'radix-bento' ? (
-                <div className="rounded-[24px] bg-zinc-950 p-4 sm:p-6 border border-white/10 shadow-2xl space-y-4">
-                  <div className="flex items-center justify-between px-2">
-                    <p className="text-xs text-[#fef08a] font-bold uppercase tracking-wider">
-                      ✨ Magic UI Minimal Bento Grid Showcase
-                    </p>
-                    <span className="text-[10px] text-zinc-400 font-mono">
-                      Hover card to reveal smooth action buttons
-                    </span>
-                  </div>
-                  <BentoDemo />
-                </div>
-              ) : (
-                <BentoGridShowcase
-                  integration={retentionNode}
-                  trackers={cohortNode}
-                  statistic={statisticNode}
-                  focus={focusNode}
-                  productivity={productivityNode}
-                  shortcuts={shortcutsNode}
-                />
-              )}
+                </SwapyLayout>
+              </div>
             </div>
           );
         })()}
