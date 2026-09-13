@@ -88,14 +88,14 @@ export function Footer() {
     <footer className="border-white/10 mx-auto w-full border-t px-2 mt-20">
       {/* Top Section — Logo + Description */}
       <div className="relative mx-auto grid max-w-7xl items-center justify-center gap-6 p-10 pb-0 md:flex">
-        <Link href="/" className="group flex items-center gap-3">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-black/60 border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.25)] group-hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] group-hover:border-purple-500/40 transition-all duration-300 overflow-hidden">
+        <Link href="/" className="group flex items-center gap-2.5">
+          <div className="relative flex h-10 w-10 items-center justify-center transition-all duration-300">
             <Image
               src="/logo-icon.png"
               alt="CineMatch AI Logo"
               width={40}
               height={40}
-              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="h-10 w-10 object-contain drop-shadow-[0_0_12px_rgba(168,85,247,0.55)] group-hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.85)] group-hover:scale-105 transition-all duration-300"
             />
           </div>
           <div className="flex items-center">
