@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   keywords: ["movies", "recommendations", "AI", "cinema", "film", "streaming"],
   icons: {
     icon: "/favicon.ico",
-    apple: "/logo-icon.png",
+    apple: "/logo-icon-transparent.png",
   },
 };
 

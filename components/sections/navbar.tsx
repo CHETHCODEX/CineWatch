@@ -104,12 +104,13 @@ export function Navbar() {
         <Link href="/" className="group flex items-center gap-2.5">
           <div className="relative flex h-10 w-10 items-center justify-center transition-all duration-300">
             <Image
-              src="/logo-icon.png"
+              src="/logo-icon-transparent.png"
               alt="CineMatch AI Logo"
               width={40}
               height={40}
               className="h-10 w-10 object-contain drop-shadow-[0_0_12px_rgba(168,85,247,0.55)] group-hover:drop-shadow-[0_0_20px_rgba(168,85,247,0.85)] group-hover:scale-105 transition-all duration-300"
               priority
+              unoptimized
             />
           </div>
 
@@ -255,11 +256,12 @@ export function Navbar() {
                     <SheetTitle className="flex items-center gap-2">
                       <div className="relative flex h-8 w-8 items-center justify-center">
                         <Image
-                          src="/logo-icon.png"
+                          src="/logo-icon-transparent.png"
                           alt="CineMatch AI"
                           width={32}
                           height={32}
                           className="h-8 w-8 object-contain drop-shadow-[0_0_10px_rgba(168,85,247,0.55)]"
+                          unoptimized
                         />
                       </div>
                       <div className="flex items-center">
