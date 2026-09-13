@@ -40,6 +40,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/sections/navbar';
+import { Footer } from '@/components/sections/footer';
 import { SnappySlider } from '@/components/ui/snappy-slider';
 import { CoverFlowCarousel, type CarouselItem } from '@/components/ui/3-d-coverflow-carousel';
 import { BentoGridShowcase } from '@/components/ui/bento-product-features';
@@ -1172,13 +1173,10 @@ export default function HackathonDashboard() {
           )}
         </div>
 
-        {/* Minimal Footer */}
-        <footer className="pt-8 pb-12 border-t border-white/[0.06] text-center text-xs text-muted-foreground space-y-2">
-          <p className="text-zinc-400 font-medium">CineMatch AI Intelligence Platform • Cognizant Hackathon Track #6</p>
-          <p className="text-zinc-500 text-[11px]">
-            Dual-Ensemble Engine: Scikit-Surprise SVD (Matrix Factorization) + Scikit-Learn TF-IDF (Cosine Content Graph)
-          </p>
-        </footer>
+        {/* CineMatch Platform Footer */}
+        <div className="pt-12">
+          <Footer />
+        </div>
       </div>
     </div>
   );
