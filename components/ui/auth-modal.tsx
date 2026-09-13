@@ -454,13 +454,13 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
         if (data.user) {
           const isConfirmed = data.session !== null;
           if (isConfirmed) {
-            setSuccessMsg("Welcome! Your CineWatch AI account is created.");
+            setSuccessMsg("Welcome! Your CineMatch AI account is created.");
             setTimeout(() => {
               onClose();
               resetForm();
             }, 1500);
           } else {
-            setSuccessMsg("Awesome! Please check your email to verify your CineWatch AI account.");
+            setSuccessMsg("Awesome! Please check your email to verify your CineMatch AI account.");
           }
         }
       } else {
@@ -472,7 +472,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
         if (error) throw error;
 
-        setSuccessMsg("Welcome back to CineWatch AI!");
+        setSuccessMsg("Welcome back to CineMatch AI!");
         setTimeout(() => {
           onClose();
           resetForm();
@@ -504,7 +504,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <div className="size-7 rounded-lg bg-white/5 backdrop-blur-sm flex items-center justify-center border border-white/[0.08]">
                   <Sparkles className="size-4 text-cine-blue" />
                 </div>
-                <span>CineWatch AI Interactive</span>
+                <span>CineMatch AI Interactive</span>
               </div>
             </div>
 
@@ -723,7 +723,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <Film className="h-5 w-5 text-white" />
               </div>
               <DialogTitle className="text-xl font-bold tracking-tight text-zinc-100 flex items-center gap-1.5 justify-center lg:justify-start">
-                {isSignUp ? "Create CineWatch AI Account" : "Welcome Back"}
+                {isSignUp ? "Create CineMatch AI Account" : "Welcome Back"}
                 <Sparkles className="w-4 h-4 text-cine-blue animate-pulse" />
               </DialogTitle>
               <DialogDescription className="text-xs text-zinc-400 mt-1.5 max-w-[320px]">

@@ -257,7 +257,7 @@ const FloatingAiAssistant = () => {
                 <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
                 <div className="flex flex-col">
                   <span className="text-sm font-semibold text-zinc-100 flex items-center gap-1.5">
-                    CineWatch AI Assistant
+                    CineMatch AI Assistant
                     <Sparkles className="w-3.5 h-3.5 text-purple-400 animate-pulse" />
                   </span>
                   <span className="text-[10px] text-zinc-400 font-medium">Gemini + Cohere Enabled</span>
@@ -332,7 +332,7 @@ const FloatingAiAssistant = () => {
                         {msg.role === 'assistant' ? (
                           <>
                             <Bot className="w-3.5 h-3.5 text-indigo-400" />
-                            <span className="font-semibold text-zinc-300">CineWatch AI Bot</span>
+                            <span className="font-semibold text-zinc-300">CineMatch AI Bot</span>
                           </>
                         ) : (
                           <span className="font-semibold text-zinc-400">You</span>
@@ -413,7 +413,7 @@ const FloatingAiAssistant = () => {
                     <div className="flex flex-col items-start space-y-1.5">
                       <div className="flex items-center gap-1.5 text-[10px] text-zinc-400">
                         <Bot className="w-3.5 h-3.5 text-indigo-400" />
-                        <span className="font-semibold text-zinc-300">CineWatch AI Bot is thinking...</span>
+                        <span className="font-semibold text-zinc-300">CineMatch AI Bot is thinking...</span>
                       </div>
                       <div className="flex items-center gap-2 px-4 py-3 rounded-2xl rounded-tl-none bg-zinc-800/40 border border-zinc-800 text-zinc-400 text-sm">
                         <Loader2 className="w-4 h-4 animate-spin text-indigo-400" />
@@ -435,7 +435,7 @@ const FloatingAiAssistant = () => {
                 onKeyDown={handleKeyDown}
                 rows={2}
                 className="w-full px-6 py-4 bg-transparent border-none outline-none resize-none text-sm font-normal leading-relaxed min-h-[70px] max-h-[140px] text-zinc-100 placeholder-zinc-500 scrollbar-none"
-                placeholder="Ask CineWatch AI for suggestions, explore genres..."
+                placeholder="Ask CineMatch AI for suggestions, explore genres..."
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               />
               <div 

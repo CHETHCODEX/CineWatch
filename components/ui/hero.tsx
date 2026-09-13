@@ -82,7 +82,7 @@ const CircularBadge = () => (
           fill="black"
         >
           <textPath href="#circlePath" startOffset="0%">
-            CINEWATCH AI • FIND YOUR MATCH •{" "}
+            CINEMATCH AI • FIND YOUR MATCH •{" "}
           </textPath>
         </text>
       </svg>

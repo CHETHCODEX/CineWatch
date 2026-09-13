@@ -111,7 +111,7 @@ export default function ReportIssueModal({
           category: selectedCategory,
           urgency,
           description: description.trim(),
-          userEmail: user?.email || "anonymous@cinewatch.ai",
+          userEmail: user?.email || "anonymous@cinematch.ai",
         }),
       });
 

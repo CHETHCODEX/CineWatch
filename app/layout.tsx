@@ -13,10 +13,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CineWatch AI — Next-Gen Movie Discovery",
+  title: "CineMatch AI — Next-Gen Movie Discovery",
   description:
-    "Discover your next favorite film with CineWatch AI. Next-generation movie recommendations, curated collections, and a cinematic browsing experience.",
+    "Discover your next favorite film with CineMatch AI. Next-generation movie recommendations, curated collections, and a cinematic browsing experience.",
   keywords: ["movies", "recommendations", "AI", "cinema", "film", "streaming"],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/logo-icon.png",
+  },
 };
 
 export default function RootLayout({

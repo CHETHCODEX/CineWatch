@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { DIcons } from "dicons";
 import { Film } from "lucide-react";
 
@@ -13,8 +14,8 @@ import ThemeToggle from "@/components/ui/footer";
 const navigation = {
   categories: [
     {
-      id: "cinewatch",
-      name: "CineWatch AI",
+      id: "cinematch",
+      name: "CineMatch AI",
       sections: [
         {
           id: "discover",
@@ -87,31 +88,35 @@ export function Footer() {
     <footer className="border-white/10 mx-auto w-full border-t px-2 mt-20">
       {/* Top Section — Logo + Description */}
       <div className="relative mx-auto grid max-w-7xl items-center justify-center gap-6 p-10 pb-0 md:flex">
-        <Link href="/" className="group flex items-center gap-2.5">
-          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-black/40 border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(6,182,212,0.15)] group-hover:shadow-[0_0_30px_rgba(168,85,247,0.3)] transition-all duration-500 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/10 via-purple-500/5 to-transparent opacity-100 group-hover:opacity-80 transition-opacity duration-500" />
-            <div className="absolute inset-0 rounded-xl border border-transparent bg-gradient-to-r from-cyan-500 via-pink-500 to-purple-600 opacity-20 group-hover:opacity-60 transition-opacity duration-500 [mask-image:linear-gradient(white,transparent)] group-hover:animate-[spin_4s_linear_infinite]" />
-            <div className="relative z-10 flex items-center justify-center">
-              <div className="relative h-6 w-6">
-                <span className="absolute top-0 left-0 h-2 w-2 border-t-2 border-l-2 border-cyan-400" />
-                <span className="absolute top-0 right-0 h-2 w-2 border-t-2 border-r-2 border-cyan-400" />
-                <span className="absolute bottom-0 left-0 h-2 w-2 border-b-2 border-l-2 border-purple-500" />
-                <span className="absolute bottom-0 right-0 h-2 w-2 border-b-2 border-r-2 border-purple-500" />
-                <div className="absolute inset-1.5 rounded-full border border-white/40 bg-gradient-to-br from-cyan-500/20 to-purple-500/20 backdrop-blur-sm flex items-center justify-center">
-                  <div className="h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,1)]" />
-                </div>
-              </div>
-            </div>
-            <div className="absolute inset-0 rounded-xl bg-cyan-500/10 blur-md group-hover:bg-purple-500/20 transition-colors duration-500" />
+        <Link href="/" className="group flex items-center gap-3">
+          <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-black/60 border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.25)] group-hover:shadow-[0_0_30px_rgba(168,85,247,0.5)] group-hover:border-purple-500/40 transition-all duration-300 overflow-hidden">
+            <Image
+              src="/logo-icon.png"
+              alt="CineMatch AI Logo"
+              width={40}
+              height={40}
+              className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
+          <div className="flex items-center">
+            <span className="text-lg font-black tracking-[0.12em] bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-500 bg-clip-text text-transparent uppercase">
+              Cine
+            </span>
+            <span className="text-lg font-light tracking-[0.08em] text-white/90 ml-1 uppercase">
+              Match
+            </span>
+            <span className="ml-1.5 text-[9px] uppercase font-bold px-1.5 py-0.5 rounded-md bg-gradient-to-r from-purple-500 via-purple-600 to-pink-500 text-white tracking-wider">
+              AI
+            </span>
           </div>
         </Link>
         <p className="bg-transparent text-center text-xs leading-5 text-primary/60 md:text-left max-w-4xl">
-          Welcome to <span className="text-white font-semibold">CineWatch AI</span>, where AI meets cinema to help you discover your
+          Welcome to <span className="text-white font-semibold">CineMatch AI</span>, where AI meets cinema to help you discover your
           next favorite film. We&apos;re passionate about connecting moviegoers
           with the perfect movies for every mood. Our AI-powered recommendation
           engine analyzes your preferences, mood, and viewing history to suggest
           films that resonate with you. From timeless classics to the latest
-          blockbusters, <span className="text-white font-semibold">CineWatch AI</span> curates a personalized cinematic journey — no
+          blockbusters, <span className="text-white font-semibold">CineMatch AI</span> curates a personalized cinematic journey — no
           more endless scrolling, just great movies tailored to you.
         </p>
       </div>
@@ -221,8 +226,8 @@ export function Footer() {
           <DIcons.Heart className="text-red-600 mx-1 h-4 w-4 animate-pulse" />
           <span>by</span>
           <span className="cursor-pointer text-black dark:text-white hover:text-cine-blue dark:hover:text-cine-blue">
-            <Link aria-label="CineWatch AI" className="font-bold" href="/">
-              CineWatch AI
+            <Link aria-label="CineMatch AI" className="font-bold" href="/">
+              CineMatch AI
             </Link>
           </span>
           <span>—</span>
