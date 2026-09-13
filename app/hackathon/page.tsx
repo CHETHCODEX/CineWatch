@@ -33,7 +33,9 @@ import {
   Layers,
   Zap,
   Database,
-  Timer
+  Timer,
+  GripVertical,
+  LayoutGrid
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -41,6 +43,7 @@ import { Navbar } from '@/components/sections/navbar';
 import { SnappySlider } from '@/components/ui/snappy-slider';
 import { CoverFlowCarousel, type CarouselItem } from '@/components/ui/3-d-coverflow-carousel';
 import { BentoGridShowcase } from '@/components/ui/bento-product-features';
+import { SwapyLayout, SwapySlot, SwapyItem, DragHandle } from '@/components/ui/swapy-draggable-card';
 import {
   Card,
   CardHeader,
@@ -153,6 +156,7 @@ export default function HackathonDashboard() {
   const [loading, setLoading] = useState<boolean>(true);
   const [collabWeight, setCollabWeight] = useState<number>(60);
   const [viewMode, setViewMode] = useState<'coverflow' | 'grid'>('coverflow');
+  const [diagnosticLayout, setDiagnosticLayout] = useState<'swapy' | 'bento'>('swapy');
   const router = useRouter();
 
   const isColdStart = selectedUserId === 0;
@@ -530,250 +534,363 @@ export default function HackathonDashboard() {
           </motion.section>
         )}
 
-        {/* Subscriber Engagement & Retention Diagnostic Bento Grid */}
-        {currentUser && (
-          <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div>
-                <span className="text-[10px] font-bold tracking-wider uppercase text-cyan-400 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                  Subscriber Telemetry & Insights
-                </span>
-                <h2 className="text-2xl font-bold text-white tracking-tight mt-0.5">
-                  Subscriber Diagnostic Matrix
-                </h2>
-              </div>
-              <Badge variant="outline" className="border-cyan-500/25 text-cyan-300 bg-cyan-500/10 text-xs font-medium self-start sm:self-auto">
-                Cohort: {currentUser.engagement.cohort}
-              </Badge>
-            </div>
+        {/* Subscriber Engagement & Retention Diagnostic Matrix (Swapy Draggable + Bento) */}
+        {currentUser && (() => {
+          const retentionNode = (
+            <Card className="flex h-full flex-col justify-between p-6 bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
+              <CardHeader className="p-0">
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
+                  <Sparkles className="w-5 h-5 text-cyan-400" />
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <CardTitle className="text-lg font-bold text-white">Autonomous Retention</CardTitle>
+                  <Badge variant="outline" className={cn(
+                    "font-semibold text-[10px]",
+                    currentUser.engagement.churnRisk.includes('Low')
+                      ? "border-emerald-500/20 text-emerald-400 bg-emerald-500/10"
+                      : currentUser.engagement.churnRisk.includes('Moderate')
+                      ? "border-amber-500/20 text-amber-400 bg-amber-500/10"
+                      : "border-rose-500/20 text-rose-400 bg-rose-500/10"
+                  )}>
+                    {currentUser.engagement.churnRisk}
+                  </Badge>
+                </div>
+                <CardDescription className="mt-3 text-xs text-zinc-300 leading-relaxed font-medium bg-black/60 p-3.5 rounded-xl border border-white/[0.06]">
+                  "{currentUser.engagement.retentionStrategy}"
+                </CardDescription>
 
-            <BentoGridShowcase
-              integration={
-                <Card className="flex h-full flex-col justify-between p-6 bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
-                  <CardHeader className="p-0">
-                    <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/10 border border-cyan-500/30 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.25)]">
-                      <Sparkles className="w-5 h-5 text-cyan-400" />
-                    </div>
-                    <div className="flex items-center justify-between gap-2">
-                      <CardTitle className="text-lg font-bold text-white">Autonomous Retention</CardTitle>
-                      <Badge variant="outline" className={cn(
-                        "font-semibold text-[10px]",
-                        currentUser.engagement.churnRisk.includes('Low')
-                          ? "border-emerald-500/20 text-emerald-400 bg-emerald-500/10"
-                          : currentUser.engagement.churnRisk.includes('Moderate')
-                          ? "border-amber-500/20 text-amber-400 bg-amber-500/10"
-                          : "border-rose-500/20 text-rose-400 bg-rose-500/10"
-                      )}>
-                        {currentUser.engagement.churnRisk}
-                      </Badge>
-                    </div>
-                    <CardDescription className="mt-3 text-xs text-zinc-300 leading-relaxed font-medium bg-black/60 p-3.5 rounded-xl border border-white/[0.06]">
-                      "{currentUser.engagement.retentionStrategy}"
-                    </CardDescription>
+                <div className="mt-4 space-y-2 text-xs">
+                  <div className="flex justify-between py-1 border-b border-white/[0.06]">
+                    <span className="text-muted-foreground">Subscriber Cohort</span>
+                    <span className="font-semibold text-white">{currentUser.engagement.cohort}</span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-white/[0.06]">
+                    <span className="text-muted-foreground">Catalog Diversity</span>
+                    <span className="font-mono font-bold text-white">{currentUser.engagement.genreDiversityPct}%</span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-white/[0.06]">
+                    <span className="text-muted-foreground">Mean Rating</span>
+                    <span className="font-mono font-bold text-amber-400">{currentUser.engagement.meanRating} ★</span>
+                  </div>
+                </div>
+              </CardHeader>
 
-                    <div className="mt-4 space-y-2 text-xs">
-                      <div className="flex justify-between py-1 border-b border-white/[0.06]">
-                        <span className="text-muted-foreground">Subscriber Cohort</span>
-                        <span className="font-semibold text-white">{currentUser.engagement.cohort}</span>
-                      </div>
-                      <div className="flex justify-between py-1 border-b border-white/[0.06]">
-                        <span className="text-muted-foreground">Catalog Diversity</span>
-                        <span className="font-mono font-bold text-white">{currentUser.engagement.genreDiversityPct}%</span>
-                      </div>
-                      <div className="flex justify-between py-1 border-b border-white/[0.06]">
-                        <span className="text-muted-foreground">Mean Rating</span>
-                        <span className="font-mono font-bold text-amber-400">{currentUser.engagement.meanRating} ★</span>
-                      </div>
-                    </div>
-                  </CardHeader>
+              <CardFooter className="mt-6 flex items-center justify-between p-0 pt-4 border-t border-white/[0.08]">
+                <Button variant="outline" size="sm" className="border-white/10 text-xs font-semibold hover:bg-white/5 hover:border-cyan-500/30 text-zinc-300 cursor-pointer">
+                  <ShieldAlert className="mr-1.5 h-3.5 w-3.5 text-cyan-400" />
+                  Live Protocol
+                </Button>
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] text-muted-foreground font-medium">Auto-Intervene</span>
+                  <Switch defaultChecked className="data-[state=checked]:bg-cyan-500" aria-label="Toggle autonomous retention" />
+                </div>
+              </CardFooter>
+            </Card>
+          );
 
-                  <CardFooter className="mt-6 flex items-center justify-between p-0 pt-4 border-t border-white/[0.08]">
-                    <Button variant="outline" size="sm" className="border-white/10 text-xs font-semibold hover:bg-white/5 hover:border-cyan-500/30 text-zinc-300 cursor-pointer">
-                      <ShieldAlert className="mr-1.5 h-3.5 w-3.5 text-cyan-400" />
-                      Live Protocol
-                    </Button>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] text-muted-foreground font-medium">Auto-Intervene</span>
-                      <Switch defaultChecked className="data-[state=checked]:bg-cyan-500" aria-label="Toggle autonomous retention" />
-                    </div>
-                  </CardFooter>
-                </Card>
-              }
-              trackers={
-                <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
-                  <CardContent className="flex h-full flex-col justify-between p-6">
-                    <div>
-                      <CardTitle className="text-base font-semibold text-white">Subscriber Cohort Signal</CardTitle>
-                      <CardDescription className="text-xs text-muted-foreground mt-0.5">Active peer streamers in cluster</CardDescription>
-                    </div>
-                    <div className="flex items-center justify-between pt-2">
-                      <div className="flex -space-x-2 overflow-hidden">
-                        <img
-                          className="inline-block h-8 w-8 rounded-full ring-2 ring-zinc-950 object-cover"
-                          src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80"
-                          alt="Streamer 1"
-                        />
-                        <img
-                          className="inline-block h-8 w-8 rounded-full ring-2 ring-zinc-950 object-cover"
-                          src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80"
-                          alt="Streamer 2"
-                        />
-                        <img
-                          className="inline-block h-8 w-8 rounded-full ring-2 ring-zinc-950 object-cover"
-                          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&q=80"
-                          alt="Streamer 3"
-                        />
-                      </div>
-                      <span className="text-xs font-mono font-semibold text-cyan-300">
-                        +{currentUser.engagement.totalRatings} Ratings
+          const cohortNode = (
+            <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300 flex flex-col justify-between">
+              <CardContent className="flex h-full flex-col justify-between p-6">
+                <div>
+                  <CardTitle className="text-base font-semibold text-white">Subscriber Cohort Signal</CardTitle>
+                  <CardDescription className="text-xs text-muted-foreground mt-0.5">Active peer streamers in cluster</CardDescription>
+                </div>
+                <div className="flex items-center justify-between pt-4">
+                  <div className="flex -space-x-2 overflow-hidden">
+                    <img
+                      className="inline-block h-8 w-8 rounded-full ring-2 ring-zinc-950 object-cover"
+                      src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&q=80"
+                      alt="Streamer 1"
+                    />
+                    <img
+                      className="inline-block h-8 w-8 rounded-full ring-2 ring-zinc-950 object-cover"
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=80"
+                      alt="Streamer 2"
+                    />
+                    <img
+                      className="inline-block h-8 w-8 rounded-full ring-2 ring-zinc-950 object-cover"
+                      src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&q=80"
+                      alt="Streamer 3"
+                    />
+                  </div>
+                  <span className="text-xs font-mono font-semibold text-cyan-300">
+                    +{currentUser.engagement.totalRatings} Ratings
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+          );
+
+          const statisticNode = (
+            <Card className={cn(
+              "relative h-full w-full overflow-hidden border backdrop-blur-2xl shadow-xl transition-all duration-300",
+              isColdStart ? "bg-cyan-950/50 border-cyan-400/40 shadow-cyan-500/10" : "bg-zinc-950/50 border-white/[0.08] hover:border-cyan-500/30"
+            )}>
+              <CardContent className="relative z-10 flex flex-col h-full items-center justify-center p-6 text-center">
+                {isColdStart ? (
+                  <>
+                    <span className="text-4xl lg:text-5xl font-black text-cyan-400 tracking-tight font-mono">
+                      0.00
+                    </span>
+                    <span className="text-xs font-bold text-cyan-200 uppercase tracking-wider mt-2 flex items-center gap-1">
+                      <Snowflake className="w-3.5 h-3.5 animate-spin" /> SVD Paused (Cold-Start)
+                    </span>
+                    <span className="text-[10px] text-zinc-400 mt-1">
+                      Zero latent factors available
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-5xl lg:text-6xl font-black text-white tracking-tight font-mono">
+                      {metadata?.svdRMSE ?? "0.898"}
+                    </span>
+                    <span className="text-xs font-semibold text-cyan-300/80 uppercase tracking-wider mt-2">
+                      SVD RMSE Benchmark
+                    </span>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          );
+
+          const focusNode = (
+            <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300 flex flex-col justify-between">
+              <CardContent className="flex h-full flex-col justify-between p-6">
+                <div className="flex items-start justify-between">
+                  <div>
+                    <CardTitle className="text-base font-semibold text-white">Engagement Index</CardTitle>
+                    <CardDescription className="text-xs text-muted-foreground">Activity & Health Score</CardDescription>
+                  </div>
+                  <Badge variant="outline" className="border-white/10 text-zinc-300 bg-white/5 text-xs font-semibold">
+                    {currentUser.engagement.cohort}
+                  </Badge>
+                </div>
+                <div className="py-2">
+                  <span className="text-5xl font-black text-white">{currentUser.engagement.score}%</span>
+                </div>
+                <div className="flex justify-between text-xs text-muted-foreground pt-2 border-t border-white/[0.06]">
+                  <span>Diversity: {currentUser.engagement.genreDiversityPct}%</span>
+                  <span>Ratings: {currentUser.engagement.totalRatings}</span>
+                </div>
+              </CardContent>
+            </Card>
+          );
+
+          const productivityNode = (
+            <Card className={cn(
+              "h-full border backdrop-blur-2xl shadow-xl transition-all duration-300 flex flex-col justify-between",
+              isColdStart ? "bg-cyan-950/50 border-cyan-400/40" : "bg-zinc-950/50 border-white/[0.08] hover:border-cyan-500/30"
+            )}>
+              <CardContent className="flex h-full flex-col justify-between p-6">
+                <div>
+                  <CardTitle className="text-base font-semibold text-white">
+                    {isColdStart ? "Cold-Start Fallback Engine" : "Hybrid Ensemble"}
+                  </CardTitle>
+                  <CardDescription className="text-xs text-muted-foreground mt-1">
+                    {isColdStart
+                      ? "SVD paused. Serving universal Bayesian popularity prior + diverse genre buffet."
+                      : `Surprise SVD (${collabWeight}%) + TF-IDF Cosine (${100 - collabWeight}%) dynamically tuned.`}
+                  </CardDescription>
+                </div>
+                <div className="flex items-center gap-2 pt-4">
+                  {isColdStart ? (
+                    <>
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-200">
+                        0% SVD (Paused)
                       </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              }
-              statistic={
-                <Card className={cn(
-                  "relative h-full w-full overflow-hidden border backdrop-blur-2xl shadow-xl transition-all duration-300",
-                  isColdStart ? "bg-cyan-950/50 border-cyan-400/40 shadow-cyan-500/10" : "bg-zinc-950/50 border-white/[0.08] hover:border-cyan-500/30"
-                )}>
-                  <CardContent className="relative z-10 flex flex-col h-full items-center justify-center p-6 text-center">
-                    {isColdStart ? (
-                      <>
-                        <span className="text-4xl lg:text-5xl font-black text-cyan-400 tracking-tight font-mono">
-                          0.00
-                        </span>
-                        <span className="text-xs font-bold text-cyan-200 uppercase tracking-wider mt-2 flex items-center gap-1">
-                          <Snowflake className="w-3.5 h-3.5 animate-spin" /> SVD Paused (Cold-Start)
-                        </span>
-                        <span className="text-[10px] text-zinc-400 mt-1">
-                          Zero latent factors available
-                        </span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-5xl lg:text-6xl font-black text-white tracking-tight font-mono">
-                          {metadata?.svdRMSE ?? "0.898"}
-                        </span>
-                        <span className="text-xs font-semibold text-cyan-300/80 uppercase tracking-wider mt-2">
-                          SVD RMSE Benchmark
-                        </span>
-                      </>
-                    )}
-                  </CardContent>
-                </Card>
-              }
-              focus={
-                <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
-                  <CardContent className="flex h-full flex-col justify-between p-6">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <CardTitle className="text-base font-semibold text-white">Engagement Index</CardTitle>
-                        <CardDescription className="text-xs text-muted-foreground">Activity & Health Score</CardDescription>
-                      </div>
-                      <Badge variant="outline" className="border-white/10 text-zinc-300 bg-white/5 text-xs font-semibold">
-                        {currentUser.engagement.cohort}
-                      </Badge>
-                    </div>
-                    <div>
-                      <span className="text-5xl font-black text-white">{currentUser.engagement.score}%</span>
-                    </div>
-                    <div className="flex justify-between text-xs text-muted-foreground pt-1 border-t border-white/[0.06]">
-                      <span>Diversity: {currentUser.engagement.genreDiversityPct}%</span>
-                      <span>Ratings: {currentUser.engagement.totalRatings}</span>
-                    </div>
-                  </CardContent>
-                </Card>
-              }
-              productivity={
-                <Card className={cn(
-                  "h-full border backdrop-blur-2xl shadow-xl transition-all duration-300",
-                  isColdStart ? "bg-cyan-950/50 border-cyan-400/40" : "bg-zinc-950/50 border-white/[0.08] hover:border-cyan-500/30"
-                )}>
-                  <CardContent className="flex h-full flex-col justify-between p-6">
-                    <div>
-                      <CardTitle className="text-base font-semibold text-white">
-                        {isColdStart ? "Cold-Start Fallback Engine" : "Hybrid Ensemble"}
-                      </CardTitle>
-                      <CardDescription className="text-xs text-muted-foreground mt-1">
-                        {isColdStart
-                          ? "SVD paused. Serving universal Bayesian popularity prior + diverse genre buffet."
-                          : `Surprise SVD (${collabWeight}%) + TF-IDF Cosine (${100 - collabWeight}%) dynamically tuned.`}
-                      </CardDescription>
-                    </div>
-                    <div className="flex items-center gap-2 pt-2">
-                      {isColdStart ? (
-                        <>
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-200">
-                            0% SVD (Paused)
-                          </span>
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-200">
-                            100% Popularity Prior
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/20 border border-purple-500/35 text-purple-200">
-                            {collabWeight}% SVD
-                          </span>
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/35 text-cyan-200">
-                            {100 - collabWeight}% Content
-                          </span>
-                        </>
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-200">
+                        100% Popularity Prior
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/20 border border-purple-500/35 text-purple-200">
+                        {collabWeight}% SVD
+                      </span>
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/35 text-cyan-200">
+                        {100 - collabWeight}% Content
+                      </span>
+                    </>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          );
+
+          const shortcutsNode = (
+            <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300 flex flex-col justify-between">
+              <CardContent className="flex h-full flex-wrap items-center justify-between gap-4 p-6">
+                <div>
+                  <CardTitle className="text-base font-semibold text-white">Fast Persona Switch</CardTitle>
+                  <CardDescription className="text-xs text-muted-foreground">
+                    Simulate subscriber vectors instantly with one-click triggers
+                  </CardDescription>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedUserId(42)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
+                  >
+                    <Command className="h-3 w-3" />
+                    <span>42 (Sci-Fi)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedUserId(1)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
+                  >
+                    <Command className="h-3 w-3" />
+                    <span>1 (Action)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedUserId(15)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
+                  >
+                    <Command className="h-3 w-3" />
+                    <span>15 (Drama)</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedUserId(84)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
+                  >
+                    <Command className="h-3 w-3" />
+                    <span>84 (Mystery)</span>
+                  </button>
+                </div>
+              </CardContent>
+            </Card>
+          );
+
+          return (
+            <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold tracking-wider uppercase text-cyan-400 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                      Subscriber Telemetry & Insights
+                    </span>
+                    <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25 flex items-center gap-1 font-mono">
+                      <GripVertical className="w-3 h-3 text-cyan-400" />
+                      Swapy Draggable
+                    </span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-white tracking-tight mt-0.5">
+                    Subscriber Diagnostic Matrix
+                  </h2>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+                  <Badge variant="outline" className="border-cyan-500/25 text-cyan-300 bg-cyan-500/10 text-xs font-medium">
+                    Cohort: {currentUser.engagement.cohort}
+                  </Badge>
+
+                  {/* Diagnostic Layout Switcher */}
+                  <div className="flex items-center gap-1 p-1 rounded-2xl bg-black/60 border border-white/[0.1] backdrop-blur-xl">
+                    <button
+                      type="button"
+                      onClick={() => setDiagnosticLayout('swapy')}
+                      className={cn(
+                        "px-2.5 py-1 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer",
+                        diagnosticLayout === 'swapy'
+                          ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-sm shadow-cyan-500/20"
+                          : "text-zinc-400 hover:text-white"
                       )}
+                    >
+                      <GripVertical className="w-3.5 h-3.5" />
+                      <span>Swapy Drag & Swap</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDiagnosticLayout('bento')}
+                      className={cn(
+                        "px-2.5 py-1 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer",
+                        diagnosticLayout === 'bento'
+                          ? "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-sm shadow-cyan-500/20"
+                          : "text-zinc-400 hover:text-white"
+                      )}
+                    >
+                      <LayoutGrid className="w-3.5 h-3.5" />
+                      <span>Classic Bento</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Swapy Draggable Layout */}
+              {diagnosticLayout === 'swapy' ? (
+                <div className="space-y-2">
+                  <p className="text-[11px] text-zinc-400 flex items-center gap-1.5 px-1 font-medium">
+                    <GripVertical className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Interactive Workspace: Grab any card by the handle in the top right to rearrange and swap your cockpit metrics live.</span>
+                  </p>
+
+                  <SwapyLayout
+                    id="diagnostic-swapy-matrix"
+                    className="w-full"
+                    config={{ swapMode: "hover" }}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                      <SwapySlot id="slot-retention" className="h-full">
+                        <SwapyItem id="item-retention" className="h-full relative group">
+                          <DragHandle className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                          {retentionNode}
+                        </SwapyItem>
+                      </SwapySlot>
+
+                      <SwapySlot id="slot-statistic" className="h-full">
+                        <SwapyItem id="item-statistic" className="h-full relative group">
+                          <DragHandle className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                          {statisticNode}
+                        </SwapyItem>
+                      </SwapySlot>
+
+                      <SwapySlot id="slot-productivity" className="h-full">
+                        <SwapyItem id="item-productivity" className="h-full relative group">
+                          <DragHandle className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                          {productivityNode}
+                        </SwapyItem>
+                      </SwapySlot>
+
+                      <SwapySlot id="slot-focus" className="h-full">
+                        <SwapyItem id="item-focus" className="h-full relative group">
+                          <DragHandle className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                          {focusNode}
+                        </SwapyItem>
+                      </SwapySlot>
+
+                      <SwapySlot id="slot-cohort" className="h-full">
+                        <SwapyItem id="item-cohort" className="h-full relative group">
+                          <DragHandle className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                          {cohortNode}
+                        </SwapyItem>
+                      </SwapySlot>
+
+                      <SwapySlot id="slot-shortcuts" className="h-full">
+                        <SwapyItem id="item-shortcuts" className="h-full relative group">
+                          <DragHandle className="opacity-70 group-hover:opacity-100 transition-opacity" />
+                          {shortcutsNode}
+                        </SwapyItem>
+                      </SwapySlot>
                     </div>
-                  </CardContent>
-                </Card>
-              }
-              shortcuts={
-                <Card className="h-full bg-zinc-950/50 border-white/[0.08] backdrop-blur-2xl shadow-xl hover:border-cyan-500/30 transition-all duration-300">
-                  <CardContent className="flex h-full flex-wrap items-center justify-between gap-4 p-6">
-                    <div>
-                      <CardTitle className="text-base font-semibold text-white">Fast Persona Switch</CardTitle>
-                      <CardDescription className="text-xs text-muted-foreground">
-                        Simulate subscriber vectors instantly with one-click triggers
-                      </CardDescription>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedUserId(42)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
-                      >
-                        <Command className="h-3 w-3" />
-                        <span>42 (Sci-Fi)</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedUserId(1)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
-                      >
-                        <Command className="h-3 w-3" />
-                        <span>1 (Action)</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedUserId(15)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
-                      >
-                        <Command className="h-3 w-3" />
-                        <span>15 (Drama)</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedUserId(84)}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-white/10 bg-black/40 hover:border-cyan-400/40 hover:bg-cyan-950/30 hover:text-cyan-200 text-xs font-mono font-medium text-zinc-300 transition-all cursor-pointer"
-                      >
-                        <Command className="h-3 w-3" />
-                        <span>84 (Mystery)</span>
-                      </button>
-                    </div>
-                  </CardContent>
-                </Card>
-              }
-            />
-          </div>
-        )}
+                  </SwapyLayout>
+                </div>
+              ) : (
+                <BentoGridShowcase
+                  integration={retentionNode}
+                  trackers={cohortNode}
+                  statistic={statisticNode}
+                  focus={focusNode}
+                  productivity={productivityNode}
+                  shortcuts={shortcutsNode}
+                />
+              )}
+            </div>
+          );
+        })()}
 
         {/* Dynamic Hybrid Ensemble Weight Tuner (Interactive SnappySlider) */}
         <section className="p-6 sm:p-8 rounded-3xl bg-zinc-950/50 border border-white/[0.08] backdrop-blur-2xl shadow-2xl space-y-5">
