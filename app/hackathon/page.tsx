@@ -27,7 +27,8 @@ import {
   ExternalLink,
   Command,
   SlidersHorizontal,
-  RotateCcw
+  RotateCcw,
+  Snowflake
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -148,6 +149,8 @@ export default function HackathonDashboard() {
   const [collabWeight, setCollabWeight] = useState<number>(60);
   const router = useRouter();
 
+  const isColdStart = selectedUserId === 0;
+
   // Dynamically re-calculate hybrid scores and sort based on live slider
   const tunedWatchlist = useMemo(() => {
     if (!watchlist || watchlist.length === 0) return [];
@@ -193,7 +196,9 @@ export default function HackathonDashboard() {
         ? movie.posterPath
         : `https://image.tmdb.org/t/p/w500${movie.posterPath}`;
       return {
-        tag: `#${movie.rank} • ${movie.matchPercentage}% MATCH`,
+        tag: isColdStart 
+          ? `#${movie.rank} • UNIVERSAL ONBOARDING PRIOR` 
+          : `#${movie.rank} • ${movie.matchPercentage}% MATCH`,
         titleLine1: movie.title,
         titleLine2: `${movie.year} • ${movie.genres.slice(0, 2).join(' / ')}`,
         desc: movie.explanation?.text || movie.overview || "Autonomous ML latent feature recommendation.",
@@ -301,16 +306,34 @@ export default function HackathonDashboard() {
 
           {/* Model Metrics Benchmarks */}
           <div className="flex items-center gap-3 self-start sm:self-auto text-xs">
-            <div className="px-3.5 py-2 rounded-xl bg-zinc-900/80 border border-white/[0.08] flex items-center gap-2 shadow-sm">
-              <Cpu className="w-3.5 h-3.5 text-zinc-400" />
-              <span className="text-muted-foreground">SVD RMSE:</span>
-              <span className="font-mono font-bold text-white">0.8982</span>
+            <div className={cn(
+              "px-3.5 py-2 rounded-xl border flex items-center gap-2 shadow-sm transition-all",
+              isColdStart
+                ? "bg-cyan-950/80 border-cyan-500/40 text-cyan-200"
+                : "bg-zinc-900/80 border-white/[0.08]"
+            )}>
+              {isColdStart ? (
+                <Snowflake className="w-3.5 h-3.5 text-cyan-400 animate-spin" />
+              ) : (
+                <Cpu className="w-3.5 h-3.5 text-zinc-400" />
+              )}
+              <span className="text-muted-foreground">SVD Engine:</span>
+              <span className="font-mono font-bold text-white">
+                {isColdStart ? "❄️ PAUSED (0 Latent)" : "RMSE 0.8982"}
+              </span>
             </div>
-            <div className="px-3.5 py-2 rounded-xl bg-zinc-900/80 border border-white/[0.08] flex items-center gap-2 shadow-sm">
-              <Activity className="w-3.5 h-3.5 text-amber-400" />
+            <div className={cn(
+              "px-3.5 py-2 rounded-xl border flex items-center gap-2 shadow-sm transition-all",
+              isColdStart
+                ? "bg-cyan-950/80 border-cyan-500/40"
+                : "bg-zinc-900/80 border-white/[0.08]"
+            )}>
+              <Activity className={cn("w-3.5 h-3.5", isColdStart ? "text-cyan-400" : "text-amber-400")} />
               <span className="text-muted-foreground">Ensemble:</span>
               <span className="font-mono font-bold text-zinc-200">
-                {(collabWeight / 100).toFixed(2)} C + {((100 - collabWeight) / 100).toFixed(2)} T
+                {isColdStart
+                  ? "1.00 Popularity Prior"
+                  : `${(collabWeight / 100).toFixed(2)} C + ${((100 - collabWeight) / 100).toFixed(2)} T`}
               </span>
             </div>
           </div>
@@ -364,6 +387,34 @@ export default function HackathonDashboard() {
 
           {/* Persona Pills */}
           <div className="flex flex-wrap gap-2 pt-1">
+            {/* Cold-Start Toggle Button */}
+            <button
+              type="button"
+              onClick={() => {
+                if (isColdStart) {
+                  setSelectedUserId(42);
+                } else {
+                  setSelectedUserId(0);
+                  setCustomInputId('');
+                }
+              }}
+              className={cn(
+                "px-3.5 py-2 rounded-xl text-xs font-bold transition-all border flex items-center gap-2 cursor-pointer",
+                isColdStart
+                  ? "bg-cyan-500/20 border-cyan-400 text-cyan-200 shadow-[0_0_20px_rgba(6,182,212,0.4)] scale-[1.02]"
+                  : "bg-cyan-950/40 border-cyan-500/30 text-cyan-300 hover:bg-cyan-900/50 hover:border-cyan-400"
+              )}
+            >
+              <Snowflake className={cn("w-3.5 h-3.5", isColdStart && "animate-spin text-cyan-300")} />
+              <span>❄️ Simulate Cold-Start User (0 Ratings)</span>
+              <span className={cn(
+                "text-[10px] px-1.5 py-0.5 rounded font-mono font-bold",
+                isColdStart ? "bg-cyan-400 text-zinc-950" : "bg-cyan-500/20 text-cyan-300"
+              )}>
+                {isColdStart ? "ACTIVE" : "TEST"}
+              </span>
+            </button>
+
             {availablePersonas.map((p) => {
               const isSelected = selectedUserId === p.userId;
               return (
@@ -397,6 +448,46 @@ export default function HackathonDashboard() {
             })}
           </div>
         </section>
+
+        {/* Cold-Start Educational & Live Simulation Banner */}
+        {isColdStart && (
+          <motion.section
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="p-5 rounded-2xl bg-gradient-to-r from-cyan-950/60 via-zinc-900/90 to-cyan-950/60 border border-cyan-500/30 backdrop-blur-xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4"
+          >
+            <div className="flex items-start gap-3.5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                <Snowflake className="h-5 w-5 animate-pulse" />
+              </div>
+              <div className="space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-sm font-bold text-cyan-100 flex items-center gap-2">
+                    Cold-Start Fallback Protocol Active • User #0 (New Subscriber)
+                  </h3>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono font-semibold">
+                    Latent Factors: [0, 0, 0, 0]
+                  </span>
+                </div>
+                <p className="text-xs text-zinc-300 max-w-3xl leading-relaxed">
+                  <strong>The RecSys Dilemma:</strong> Collaborative Filtering (SVD) requires historical ratings to map user-item latent vectors. With <strong>0 ratings</strong>, SVD is safely paused. CineMatch dynamically falls back to <strong>Bayesian Popularity Prior + Semantic Variety Buffet</strong> so new subscribers get high-consensus onboarding masterworks without app crashes.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2.5 shrink-0 self-start md:self-auto">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setSelectedUserId(42)}
+                className="rounded-xl border-cyan-500/30 bg-cyan-950/40 text-xs text-cyan-200 hover:bg-cyan-900/60 hover:border-cyan-400 cursor-pointer shadow-sm"
+              >
+                <RotateCcw className="h-3.5 w-3.5 mr-1 text-cyan-400" />
+                Exit Simulation (Load User #42)
+              </Button>
+            </div>
+          </motion.section>
+        )}
 
         {/* Subscriber Engagement & Retention Diagnostic Bento Grid */}
         {currentUser && (
@@ -501,14 +592,33 @@ export default function HackathonDashboard() {
                 </Card>
               }
               statistic={
-                <Card className="relative h-full w-full overflow-hidden bg-zinc-900/50 border-white/[0.08] backdrop-blur-xl shadow-lg hover:border-white/20 transition-all">
+                <Card className={cn(
+                  "relative h-full w-full overflow-hidden border backdrop-blur-xl shadow-lg transition-all",
+                  isColdStart ? "bg-cyan-950/40 border-cyan-500/40" : "bg-zinc-900/50 border-white/[0.08] hover:border-white/20"
+                )}>
                   <CardContent className="relative z-10 flex flex-col h-full items-center justify-center p-6 text-center">
-                    <span className="text-5xl lg:text-6xl font-black text-white tracking-tight font-mono">
-                      {metadata?.svdRMSE ?? "0.898"}
-                    </span>
-                    <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mt-2">
-                      SVD RMSE Benchmark
-                    </span>
+                    {isColdStart ? (
+                      <>
+                        <span className="text-4xl lg:text-5xl font-black text-cyan-400 tracking-tight font-mono">
+                          0.00
+                        </span>
+                        <span className="text-xs font-bold text-cyan-200 uppercase tracking-wider mt-2 flex items-center gap-1">
+                          <Snowflake className="w-3.5 h-3.5 animate-spin" /> SVD Paused (Cold-Start)
+                        </span>
+                        <span className="text-[10px] text-zinc-400 mt-1">
+                          Zero latent factors available
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-5xl lg:text-6xl font-black text-white tracking-tight font-mono">
+                          {metadata?.svdRMSE ?? "0.898"}
+                        </span>
+                        <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mt-2">
+                          SVD RMSE Benchmark
+                        </span>
+                      </>
+                    )}
                   </CardContent>
                 </Card>
               }
@@ -535,21 +645,41 @@ export default function HackathonDashboard() {
                 </Card>
               }
               productivity={
-                <Card className="h-full bg-zinc-900/50 border-white/[0.08] backdrop-blur-xl shadow-lg hover:border-white/20 transition-all">
+                <Card className={cn(
+                  "h-full border backdrop-blur-xl shadow-lg transition-all",
+                  isColdStart ? "bg-cyan-950/40 border-cyan-500/40" : "bg-zinc-900/50 border-white/[0.08] hover:border-white/20"
+                )}>
                   <CardContent className="flex h-full flex-col justify-between p-6">
                     <div>
-                      <CardTitle className="text-base font-semibold text-white">Hybrid Ensemble</CardTitle>
+                      <CardTitle className="text-base font-semibold text-white">
+                        {isColdStart ? "Cold-Start Fallback Engine" : "Hybrid Ensemble"}
+                      </CardTitle>
                       <CardDescription className="text-xs text-muted-foreground mt-1">
-                        Surprise SVD ({collabWeight}%) + TF-IDF Cosine ({100 - collabWeight}%) dynamically tuned.
+                        {isColdStart
+                          ? "SVD paused. Serving universal Bayesian popularity prior + diverse genre buffet."
+                          : `Surprise SVD (${collabWeight}%) + TF-IDF Cosine (${100 - collabWeight}%) dynamically tuned.`}
                       </CardDescription>
                     </div>
                     <div className="flex items-center gap-2 pt-2">
-                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-200">
-                        {collabWeight}% SVD
-                      </span>
-                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-200">
-                        {100 - collabWeight}% Content
-                      </span>
+                      {isColdStart ? (
+                        <>
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30 text-cyan-200">
+                            0% SVD (Paused)
+                          </span>
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-200">
+                            100% Popularity Prior
+                          </span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-200">
+                            {collabWeight}% SVD
+                          </span>
+                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-200">
+                            {100 - collabWeight}% Content
+                          </span>
+                        </>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
