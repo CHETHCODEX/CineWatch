@@ -558,16 +558,15 @@ export default function HackathonDashboard() {
                 </div>
               </CardHeader>
 
-              <CardFooter className="mt-4 flex items-center justify-between p-0 pt-3 border-t border-[#fef08a]/20">
-                <Button variant="outline" size="sm" className="bg-black/20 border-[#fef08a]/30 text-[#fef08a] hover:bg-black/40 hover:text-white rounded-xl text-xs font-bold cursor-pointer h-7 px-2.5">
-                  <ShieldAlert className="mr-1.5 h-3 w-3 text-[#fef08a]" />
-                  Live Protocol
-                </Button>
-                <div className="flex items-center gap-2">
-                  <span className="text-[11px] text-[#fef08a]/90 font-bold">Auto-Intervene</span>
-                  <Switch defaultChecked className="data-[state=checked]:bg-[#fef08a]" aria-label="Toggle autonomous retention" />
-                </div>
-              </CardFooter>
+              <div className="mt-3 flex items-center justify-between pt-2.5 border-t border-[#fef08a]/20 text-[11px] font-bold">
+                <span className="flex items-center gap-1.5 text-[#fef08a]/90">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#fef08a]" />
+                  RecSys Churn Guard
+                </span>
+                <span className="font-mono text-[10px] bg-black/25 text-[#fef08a] px-2 py-0.5 rounded-lg border border-[#fef08a]/30">
+                  ACTIVE
+                </span>
+              </div>
             </Card>
           );
 
@@ -596,7 +595,7 @@ export default function HackathonDashboard() {
                   />
                 </div>
                 <span className="text-xs font-mono font-black text-[#4ade80] bg-black/40 px-3 py-1.5 rounded-xl border border-emerald-500/30">
-                  +{currentUser.engagement.totalRatings} Ratings
+                  +{currentUser.engagement.totalRatings} Ratings in Cluster
                 </span>
               </div>
             </Card>
@@ -622,13 +621,9 @@ export default function HackathonDashboard() {
                     <span className="text-[10px] font-black uppercase tracking-wider text-pink-950 bg-pink-300/70 px-2.5 py-1 rounded-full">
                       Algorithm Precision
                     </span>
-                    <div className="w-8 h-8 relative">
-                      <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow">
-                        <circle cx="33" cy="33" r="25" fill="#1b0ddd" />
-                        <circle cx="67" cy="33" r="25" fill="#0904ff" />
-                        <circle cx="50" cy="67" r="25" fill="#013de2" />
-                      </svg>
-                    </div>
+                    <span className="text-[10px] font-mono font-bold text-pink-900 bg-white/70 px-2 py-0.5 rounded-lg">
+                      5-Fold CV
+                    </span>
                   </div>
 
                   <div className="my-auto py-2">
@@ -641,57 +636,83 @@ export default function HackathonDashboard() {
                   </div>
 
                   <div className="pt-2 border-t border-pink-300/70 flex items-center justify-between text-[11px] font-bold text-slate-800">
-                    <span>5-Fold Cross-Validation</span>
-                    <span className="font-mono text-[#1b0ddd] font-black">94.2% Accuracy</span>
+                    <span>Validation Accuracy</span>
+                    <span className="font-mono text-[#1b0ddd] font-black">94.2% Precise</span>
                   </div>
-                </>
+                </> 
               )}
             </Card>
           );
 
           const focusNode = (
             <Card className="h-full bg-[#dbeafe] text-slate-950 rounded-[24px] border-none shadow-[0_14px_36px_rgba(219,234,254,0.3)] select-none transition-all duration-300 flex flex-col justify-between p-5">
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="bg-[#93c5fd] text-slate-950 font-black px-2.5 py-1 rounded-xl inline-block mb-1 text-[11px] shadow-sm">
-                    Health Score
-                  </div>
-                  <CardTitle className="text-base font-black text-slate-950">Engagement Index</CardTitle>
-                </div>
-                <Badge variant="outline" className="border-blue-400 bg-white/70 text-blue-900 text-xs font-black">
-                  {currentUser.engagement.cohort}
-                </Badge>
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black uppercase tracking-wider text-blue-950 bg-blue-300/70 px-2.5 py-1 rounded-full">
+                  Subscriber Health
+                </span>
+                <span className="text-[10px] font-mono font-bold text-blue-900 bg-white/80 px-2 py-0.5 rounded-lg">
+                  Telemetry Index
+                </span>
               </div>
-              <div className="py-2">
+
+              <div className="my-auto py-1">
                 <div className="flex items-baseline gap-2">
-                  <span className="text-5xl lg:text-6xl font-black text-slate-950 tracking-tighter leading-none">{currentUser.engagement.score}%</span>
-                  <span className="text-emerald-700 font-black text-xs">+14% vs avg</span>
+                  <span className="text-5xl lg:text-6xl font-black text-slate-950 tracking-tighter leading-none font-mono">
+                    {currentUser.engagement.score}%
+                  </span>
+                  <span className="text-xs font-bold text-blue-950">
+                    {currentUser.engagement.score >= 50 ? "Safe Retention" : "High Churn Risk"}
+                  </span>
+                </div>
+                <p className="text-xs font-black text-slate-800 uppercase tracking-wider mt-1.5">
+                  Platform Engagement Score
+                </p>
+                <div className="w-full h-2 rounded-full bg-blue-300/60 overflow-hidden mt-2">
+                  <div
+                    className={cn(
+                      "h-full rounded-full transition-all duration-500",
+                      currentUser.engagement.score >= 50 ? "bg-emerald-600" : "bg-rose-500"
+                    )}
+                    style={{ width: `${currentUser.engagement.score}%` }}
+                  />
                 </div>
               </div>
-              <div className="flex justify-between text-xs font-bold text-slate-700 pt-2 border-t border-blue-200">
-                <span>Diversity: {currentUser.engagement.genreDiversityPct}%</span>
-                <span>Ratings: {currentUser.engagement.totalRatings}</span>
+
+              <div className="pt-2 border-t border-blue-200 flex items-center justify-between text-[11px] font-bold text-slate-800">
+                <span>Churn Probability</span>
+                <span className="font-mono font-black text-blue-950">
+                  {100 - currentUser.engagement.score}% Risk Factor
+                </span>
               </div>
             </Card>
           );
 
           const productivityNode = (
-            <Card className="h-full bg-[#d8b4fe] text-slate-950 rounded-[24px] border-none shadow-[0_14px_36px_rgba(216,180,254,0.3)] select-none transition-all duration-300 flex flex-col justify-between p-5">
+            <Card className="h-full bg-[#d8b4fe] text-slate-950 rounded-[24px] border-none shadow-[0_14px_36px_rgba(216,180,254,0.3)] select-none transition-all duration-300 flex flex-col justify-between p-5 space-y-3">
               <div>
-                <div className="bg-[#111827] text-[#fef08a] px-4 py-3 rounded-2xl shadow-md">
-                  <CardTitle className="text-base font-black text-[#fef08a]">
-                    {isColdStart ? "Cold-Start Fallback Engine" : "Hybrid Ensemble"}
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider text-purple-950 bg-purple-300/70 px-2.5 py-1 rounded-full">
+                    Hybrid Architecture
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-purple-950 bg-white/70 px-2 py-0.5 rounded-lg">
+                    Real-Time Core
+                  </span>
+                </div>
+
+                <div className="bg-[#111827] text-[#fef08a] px-3.5 py-2.5 rounded-xl shadow-md">
+                  <CardTitle className="text-sm font-black text-[#fef08a]">
+                    {isColdStart ? "Cold-Start Fallback Engine" : "Hybrid Ensemble Blend"}
                   </CardTitle>
                   <p className="text-[11px] text-[#fef08a]/80 font-medium mt-0.5">
                     {isColdStart
-                      ? "Universal Bayesian popularity prior + genre buffet"
+                      ? "Bayesian popularity prior + genre fallback"
                       : `Surprise SVD (${collabWeight}%) + TF-IDF Cosine (${100 - collabWeight}%)`}
                   </p>
                 </div>
 
-                {/* Visual Live Weight Split Bar — Fills the middle space cleanly */}
-                <div className="my-3 bg-white/40 p-3 rounded-2xl space-y-2 border border-purple-300/60 shadow-inner">
-                  <div className="flex justify-between text-xs font-black text-slate-950">
+                {/* Visual Live Weight Split Bar */}
+                <div className="my-2.5 bg-white/50 p-3 rounded-xl space-y-1.5 border border-purple-300/70 shadow-sm">
+                  <div className="flex justify-between items-center text-xs font-black text-slate-950">
                     <span>Peer SVD ({collabWeight}%)</span>
                     <span>Content TF-IDF ({100 - collabWeight}%)</span>
                   </div>
@@ -707,38 +728,31 @@ export default function HackathonDashboard() {
                   </div>
                   <div className="flex justify-between text-[10px] font-mono font-bold text-slate-800">
                     <span>Latent Matrix Factorization</span>
-                    <span>Semantic Vector Plot</span>
+                    <span>Semantic Vector Space</span>
+                  </div>
+                </div>
+
+                {/* Micro-specs grid filling the previous empty space */}
+                <div className="grid grid-cols-2 gap-2 text-center text-xs font-bold text-slate-900">
+                  <div className="bg-purple-200/70 py-1.5 px-2 rounded-lg border border-purple-300/50">
+                    <span className="block text-[9px] uppercase tracking-wider text-purple-950 font-black">Matrix Rank</span>
+                    <span className="font-mono text-xs font-black">k=100 Latents</span>
+                  </div>
+                  <div className="bg-purple-200/70 py-1.5 px-2 rounded-lg border border-purple-300/50">
+                    <span className="block text-[9px] uppercase tracking-wider text-purple-950 font-black">Vocabulary</span>
+                    <span className="font-mono text-xs font-black">V=15,000 TF-IDF</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-2 pt-1 border-t border-purple-400/40">
-                {isColdStart ? (
-                  <>
-                    <span className="text-xs font-black px-3 py-1.5 rounded-xl bg-[#c084fc] text-slate-950 shadow-sm">
-                      0% SVD Paused
-                    </span>
-                    <span className="text-xs font-black px-3 py-1.5 rounded-xl bg-[#fef08a] text-slate-950 shadow-sm">
-                      100% Popularity Prior
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <span className="text-xs font-black px-3 py-1 rounded-xl bg-[#111827] text-[#fef08a] shadow-sm">
-                      {collabWeight}% SVD Signal
-                    </span>
-                    <span className="text-xs font-black px-3 py-1 rounded-xl bg-white/80 text-slate-950 shadow-sm">
-                      {100 - collabWeight}% Content TF-IDF
-                    </span>
-                  </>
-                )}
-                <span className="text-[10px] font-mono font-bold text-purple-950 bg-purple-300/60 px-2 py-1 rounded-lg">
-                  &lt; 14ms
+              <div className="flex items-center justify-between pt-2 border-t border-purple-400/40 text-[11px] font-bold text-slate-900">
+                <span>Inference Latency</span>
+                <span className="font-mono font-black text-purple-950 bg-white/80 px-2 py-0.5 rounded-lg shadow-sm">
+                  &lt; 14ms Real-Time
                 </span>
               </div>
             </Card>
           );
-
           const shortcutsNode = (
             <Card className="h-full bg-[#fef08a] text-slate-950 rounded-[24px] border-none shadow-[0_14px_36px_rgba(254,240,138,0.3)] select-none transition-all duration-300 flex flex-col justify-between p-5">
               <div>
