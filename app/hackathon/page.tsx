@@ -299,32 +299,32 @@ export default function HackathonDashboard() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 space-y-8">
         {/* Header Title Section with Production Telemetry Micro-HUD */}
         <header className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/[0.08]">
-          <div className="space-y-2">
-
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight flex items-center gap-2.5">
-              CineMatch <span className="bg-gradient-to-r from-[#fef08a] via-[#34d399] to-[#d8b4fe] bg-clip-text text-transparent">Intelligence</span>
-            </h1>
-
-            <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed">
-              Personalized OTT catalog recommendations, subscriber taste clustering, and predictive retention telemetry.
-            </p>
+          <div className="space-y-4">
+            <div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight flex items-center gap-2.5">
+                CineMatch <span className="bg-gradient-to-r from-[#fef08a] via-[#34d399] to-[#d8b4fe] bg-clip-text text-transparent">Intelligence</span>
+              </h1>
+              <p className="text-xs sm:text-sm text-zinc-400 max-w-2xl leading-relaxed mt-2.5">
+                Personalized OTT catalog recommendations, subscriber taste clustering, and predictive retention telemetry.
+              </p>
+            </div>
 
             {/* Live Micro-HUD telemetry row */}
-            <div className="flex flex-wrap items-center gap-2 pt-1.5">
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300">
-                <Database className="w-3 h-3 text-[#34d399]" />
+            <div className="flex flex-wrap items-center gap-2.5 pt-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300 shadow-sm">
+                <Database className="w-3.5 h-3.5 text-[#34d399]" />
                 <span>k=100 Latents</span>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300">
-                <Layers className="w-3 h-3 text-[#d8b4fe]" />
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300 shadow-sm">
+                <Layers className="w-3.5 h-3.5 text-[#d8b4fe]" />
                 <span>V=15,000 TF-IDF</span>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300">
-                <Timer className="w-3 h-3 text-[#fef08a]" />
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300 shadow-sm">
+                <Timer className="w-3.5 h-3.5 text-[#fef08a]" />
                 <span>&lt; 14ms Latency</span>
               </div>
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300">
-                <Activity className="w-3 h-3 text-[#fbcfe8]" />
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-950 border border-white/[0.08] text-[11px] font-mono text-zinc-300 shadow-sm">
+                <Activity className="w-3.5 h-3.5 text-[#fbcfe8]" />
                 <span>98.4% Sparsity Filtered</span>
               </div>
             </div>
