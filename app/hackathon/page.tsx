@@ -15,27 +15,27 @@ import {
   Cpu, 
   BarChart3, 
   Search, 
-  Loader2,
-  X,
-  Play,
-  Plus,
-  Check,
-  Calendar,
-  Clock,
-  Film,
-  Users,
-  ExternalLink,
-  Command,
-  SlidersHorizontal,
-  RotateCcw,
-  Snowflake,
-  Grid,
-  Layers,
-  Zap,
-  Database,
-  Timer,
-  GripVertical,
-  LayoutGrid
+  Loader2, 
+  X, 
+  Play, 
+  Plus, 
+  Check, 
+  Calendar, 
+  Clock, 
+  Film, 
+  Users, 
+  ExternalLink, 
+  Command, 
+  SlidersHorizontal, 
+  RotateCcw, 
+  Snowflake, 
+  Grid, 
+  Layers, 
+  Zap, 
+  Database, 
+  Timer, 
+  GripVertical, 
+  LayoutGrid 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
@@ -46,6 +46,7 @@ import { CoverFlowCarousel, type CarouselItem } from '@/components/ui/3-d-coverf
 import { BentoGridShowcase } from '@/components/ui/bento-product-features';
 import { SwapyLayout, SwapySlot, SwapyItem, DragHandle } from '@/components/ui/swapy-draggable-card';
 import SwapyDemo from '@/components/ui/swapy-draggable-card-demo';
+import BentoDemo from '@/components/ui/bento-grid-demo';
 import {
   Card,
   CardHeader,
@@ -158,7 +159,7 @@ export default function HackathonDashboard() {
   const [loading, setLoading] = useState<boolean>(true);
   const [collabWeight, setCollabWeight] = useState<number>(60);
   const [viewMode, setViewMode] = useState<'coverflow' | 'grid'>('coverflow');
-  const [diagnosticLayout, setDiagnosticLayout] = useState<'swapy' | 'bento' | 'demo'>('swapy');
+  const [diagnosticLayout, setDiagnosticLayout] = useState<'swapy' | 'bento' | 'demo' | 'radix-bento'>('swapy');
   const router = useRouter();
 
   const isColdStart = selectedUserId === 0;
@@ -862,7 +863,19 @@ export default function HackathonDashboard() {
                           : "text-zinc-400 hover:text-white"
                       )}
                     >
-                      <span>🎨 UI-Layouts Original</span>
+                      <span>🎨 21st.dev UI-Layouts</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDiagnosticLayout('radix-bento')}
+                      className={cn(
+                        "px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer",
+                        diagnosticLayout === 'radix-bento'
+                          ? "bg-[#fbcfe8] text-slate-950 shadow-sm"
+                          : "text-zinc-400 hover:text-white"
+                      )}
+                    >
+                      <span>✨ Magic Bento</span>
                     </button>
                   </div>
                 </div>
@@ -937,6 +950,18 @@ export default function HackathonDashboard() {
                     </span>
                   </div>
                   <SwapyDemo />
+                </div>
+              ) : diagnosticLayout === 'radix-bento' ? (
+                <div className="rounded-[24px] bg-zinc-950 p-4 sm:p-6 border border-white/10 shadow-2xl space-y-4">
+                  <div className="flex items-center justify-between px-2">
+                    <p className="text-xs text-[#fef08a] font-bold uppercase tracking-wider">
+                      ✨ Magic UI Minimal Bento Grid Showcase
+                    </p>
+                    <span className="text-[10px] text-zinc-400 font-mono">
+                      Hover card to reveal smooth action buttons
+                    </span>
+                  </div>
+                  <BentoDemo />
                 </div>
               ) : (
                 <BentoGridShowcase
