@@ -788,17 +788,7 @@ export default function HackathonDashboard() {
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold tracking-wider uppercase text-[#fef08a] flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-[#fef08a]" />
-                      Subscriber Telemetry & Insights
-                    </span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/10 text-white border border-white/15 flex items-center gap-1 font-mono">
-                      <GripVertical className="w-3 h-3 text-[#fef08a]" />
-                      Swapy Draggable
-                    </span>
-                  </div>
-                  <h2 className="text-2xl font-black text-white tracking-tight mt-0.5">
+                  <h2 className="text-2xl font-black text-white tracking-tight">
                     Subscriber Diagnostic Matrix
                   </h2>
                 </div>
@@ -811,11 +801,7 @@ export default function HackathonDashboard() {
               </div>
 
               {/* Swapy Draggable Matrix (Dedicated View) */}
-              <div className="space-y-2">
-                <p className="text-[11px] text-zinc-400 flex items-center gap-1.5 px-1 font-medium">
-                  <GripVertical className="w-3.5 h-3.5 text-[#fef08a]" />
-                  <span>Interactive Workspace: Grab any card by the handle in the top right to rearrange and swap your cockpit metrics live.</span>
-                </p>
+              <div className="pt-1">
 
                 <SwapyLayout
                   id="diagnostic-swapy-matrix"
