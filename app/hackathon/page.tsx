@@ -25,11 +25,14 @@ import {
   Film,
   Users,
   ExternalLink,
-  Command
+  Command,
+  SlidersHorizontal,
+  RotateCcw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/sections/navbar';
+import { SnappySlider } from '@/components/ui/snappy-slider';
 import { CoverFlowCarousel, type CarouselItem } from '@/components/ui/3-d-coverflow-carousel';
 import { BentoGridShowcase } from '@/components/ui/bento-product-features';
 import {
@@ -142,11 +145,50 @@ export default function HackathonDashboard() {
   const [watchlist, setWatchlist] = useState<WatchlistItem[]>([]);
   const [metadata, setMetadata] = useState<MetadataStats | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [collabWeight, setCollabWeight] = useState<number>(60);
   const router = useRouter();
 
-  // Convert watchlist into items for the 3D CoverFlow Carousel
+  // Dynamically re-calculate hybrid scores and sort based on live slider
+  const tunedWatchlist = useMemo(() => {
+    if (!watchlist || watchlist.length === 0) return [];
+    const cWeight = collabWeight / 100;
+    const tWeight = (100 - collabWeight) / 100;
+
+    const scored = watchlist.map((movie) => {
+      const cScore = typeof movie.explanation?.collabScore === 'number'
+        ? movie.explanation.collabScore
+        : (movie.matchPercentage / 100);
+      const tScore = typeof movie.explanation?.contentScore === 'number'
+        ? movie.explanation.contentScore
+        : (movie.matchPercentage / 100);
+
+      const dynamicHybrid = (cScore * cWeight) + (tScore * tWeight);
+      const dynamicPct = Math.min(99, Math.max(50, Math.round(dynamicHybrid * 100)));
+
+      return {
+        ...movie,
+        matchPercentage: dynamicPct,
+        explanation: {
+          ...movie.explanation,
+          hybridScore: Number(dynamicHybrid.toFixed(3)),
+          collabScore: cScore,
+          contentScore: tScore,
+        },
+        dynamicScore: dynamicHybrid,
+      };
+    });
+
+    return scored
+      .sort((a, b) => b.dynamicScore - a.dynamicScore)
+      .map((item, idx) => ({
+        ...item,
+        rank: idx + 1,
+      }));
+  }, [watchlist, collabWeight]);
+
+  // Convert tuned watchlist into items for the 3D CoverFlow Carousel
   const coverFlowItems: CarouselItem[] = useMemo(() => {
-    return watchlist.map((movie) => {
+    return tunedWatchlist.map((movie) => {
       const posterUrl = movie.posterPath.startsWith('http')
         ? movie.posterPath
         : `https://image.tmdb.org/t/p/w500${movie.posterPath}`;
@@ -162,7 +204,7 @@ export default function HackathonDashboard() {
         data: movie,
       };
     });
-  }, [watchlist]);
+  }, [tunedWatchlist]);
 
   // Fetch recommendations whenever persona changes
   const fetchData = React.useCallback(async (userIdToFetch: number) => {
@@ -200,7 +242,7 @@ export default function HackathonDashboard() {
   const handleSelectMovie = (item: CarouselItem) => {
     const movie: WatchlistItem | undefined = item.data
       ? (item.data as WatchlistItem)
-      : watchlist.find((m) => m.movieId === item.movieId);
+      : tunedWatchlist.find((m) => m.movieId === item.movieId);
 
     if (!movie) return;
 
@@ -267,7 +309,9 @@ export default function HackathonDashboard() {
             <div className="px-3.5 py-2 rounded-xl bg-zinc-900/80 border border-white/[0.08] flex items-center gap-2 shadow-sm">
               <Activity className="w-3.5 h-3.5 text-amber-400" />
               <span className="text-muted-foreground">Ensemble:</span>
-              <span className="font-mono font-bold text-zinc-200">0.60 C + 0.40 T</span>
+              <span className="font-mono font-bold text-zinc-200">
+                {(collabWeight / 100).toFixed(2)} C + {((100 - collabWeight) / 100).toFixed(2)} T
+              </span>
             </div>
           </div>
         </header>
@@ -496,15 +540,15 @@ export default function HackathonDashboard() {
                     <div>
                       <CardTitle className="text-base font-semibold text-white">Hybrid Ensemble</CardTitle>
                       <CardDescription className="text-xs text-muted-foreground mt-1">
-                        Surprise SVD (60%) + TF-IDF Cosine (40%) across 4,760 catalog movies.
+                        Surprise SVD ({collabWeight}%) + TF-IDF Cosine ({100 - collabWeight}%) dynamically tuned.
                       </CardDescription>
                     </div>
                     <div className="flex items-center gap-2 pt-2">
-                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-200">
-                        60% SVD
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-200">
+                        {collabWeight}% SVD
                       </span>
-                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-zinc-200">
-                        40% Content
+                      <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-200">
+                        {100 - collabWeight}% Content
                       </span>
                     </div>
                   </CardContent>
@@ -560,6 +604,119 @@ export default function HackathonDashboard() {
           </div>
         )}
 
+        {/* Dynamic Hybrid Ensemble Weight Tuner (Interactive SnappySlider) */}
+        <section className="p-6 rounded-2xl bg-zinc-900/50 border border-white/[0.08] backdrop-blur-xl shadow-xl space-y-4">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2">
+                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-400/10 border border-amber-400/20 text-amber-400">
+                  <SlidersHorizontal className="h-3.5 w-3.5" />
+                </div>
+                <span className="text-xs font-bold uppercase tracking-wider text-amber-400">
+                  Live Model Sandbox
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-zinc-400 font-mono">
+                  Dynamic Re-Ranking
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-white tracking-tight mt-1.5">
+                Dynamic Hybrid Ensemble Weight Tuner
+              </h3>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Drag the interactive knob below to adjust the ratio between Collaborative SVD (peer behavior) and Content TF-IDF (metadata affinity).
+              </p>
+            </div>
+
+            {/* Quick Snap Presets */}
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setCollabWeight(100)}
+                className={cn(
+                  "px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer",
+                  collabWeight === 100
+                    ? "bg-purple-500/20 border-purple-500/40 text-purple-300 shadow-sm"
+                    : "bg-zinc-950/60 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-800"
+                )}
+              >
+                100% SVD (Discovery)
+              </button>
+              <button
+                type="button"
+                onClick={() => setCollabWeight(60)}
+                className={cn(
+                  "px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer",
+                  collabWeight === 60
+                    ? "bg-amber-500/20 border-amber-500/40 text-amber-300 shadow-sm"
+                    : "bg-zinc-950/60 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-800"
+                )}
+              >
+                60/40 (Default)
+              </button>
+              <button
+                type="button"
+                onClick={() => setCollabWeight(0)}
+                className={cn(
+                  "px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer",
+                  collabWeight === 0
+                    ? "bg-cyan-500/20 border-cyan-500/40 text-cyan-300 shadow-sm"
+                    : "bg-zinc-950/60 border-white/[0.08] text-zinc-400 hover:text-white hover:bg-zinc-800"
+                )}
+              >
+                100% TF-IDF (Strict Genre)
+              </button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCollabWeight(60)}
+                className="h-8 px-2.5 rounded-xl border-white/10 text-xs text-zinc-300 hover:bg-white/5 cursor-pointer"
+              >
+                <RotateCcw className="h-3.5 w-3.5 mr-1" />
+                Reset
+              </Button>
+            </div>
+          </div>
+
+          {/* Interactive SnappySlider Track */}
+          <div className="pt-3 pb-1 px-1">
+            <SnappySlider
+              values={[0, 20, 40, 50, 60, 70, 80, 100]}
+              defaultValue={60}
+              value={collabWeight}
+              onChange={(val) => setCollabWeight(Math.round(val))}
+              min={0}
+              max={100}
+              step={1}
+              snapping={true}
+              label="Collaborative SVD Ratio (Peer Signal)"
+              suffix="%"
+              config={{ snappingThreshold: 4 }}
+              className="w-full text-white"
+            />
+          </div>
+
+          {/* Dynamic Explainer Footer */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-white/[0.06] text-xs">
+            <div className="flex items-center gap-2 font-mono">
+              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                {collabWeight}% Collaborative (SVD)
+              </span>
+              <span className="text-zinc-500 font-bold">+</span>
+              <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                {100 - collabWeight}% Content (TF-IDF)
+              </span>
+            </div>
+
+            <p className="text-xs text-zinc-300/90 font-medium">
+              {collabWeight >= 75
+                ? "⚡ High Serendipity Mode — Prioritizing latent peer patterns from 100K+ ratings. Discovers unexpected cross-genre favorites."
+                : collabWeight <= 35
+                ? "🎯 Strict Plot & Genre Affinity — Prioritizing TF-IDF keywords, director, and storyline similarity. Zero surprise, safe picks."
+                : "⚖️ Balanced Production Ensemble (Default 60/40) — Optimal blend of peer taste vectors and cinematic metadata."}
+            </p>
+          </div>
+        </section>
+
         {/* Personalized Watchlist Section */}
         <div className="space-y-6 pt-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -576,7 +733,7 @@ export default function HackathonDashboard() {
                 )}
               </div>
               <p className="text-xs text-muted-foreground mt-1">
-                Curated by blending collaborative peer signals (60%) with metadata semantic affinity (40%). Click any title to explore full trailer, cast & XAI attribution.
+                Curated by dynamically blending collaborative peer signals ({collabWeight}%) with metadata semantic affinity ({100 - collabWeight}%). Click any title to explore full trailer, cast & XAI attribution.
               </p>
             </div>
             <div className="text-xs text-muted-foreground">
