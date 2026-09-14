@@ -6,7 +6,17 @@ Watchlist Slicing: Produced the personalized Top-12 Watchlist enriched with rele
 
 import numpy as np
 from config import ALPHA_COLLAB, BETA_CONTENT, TOP_N_DEFAULT
+ """
+    Hybrid Recommendation Engine.
 
+    Combines:
+        1. Collaborative Filtering score from SVD
+        2. Content-Based similarity score from TF-IDF + Cosine Similarity
+
+    Final score:
+        HybridScore = 0.6 * CollaborativeScore
+                    + 0.4 * ContentScore
+    """
 class HybridEngine:
     def __init__(self, data_loader, content_engine, collab_engine):
         self.data_loader = data_loader
