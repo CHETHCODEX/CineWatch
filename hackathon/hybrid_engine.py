@@ -4,6 +4,8 @@ Anchor Identification: Identified the user's top-rated anchor films (≥4.0⋆) 
 Score Fusion: Blended Collaborative SVD (60%) with Content Cosine Similarity (40%).
 Watchlist Slicing: Produced the personalized Top-12 Watchlist enriched with release years, genres, director, cast, predicted ratings, and display match percentages.'''
 
+#TODO:Hybrid Score=(0.60×SVD Collaborative Score)+(0.40×TF-IDF Content Score)
+
 import numpy as np
 from config import ALPHA_COLLAB, BETA_CONTENT, TOP_N_DEFAULT
  """

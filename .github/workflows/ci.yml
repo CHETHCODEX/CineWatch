@@ -1,0 +1,64 @@
+﻿name: CineMatch CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  # =========================================================================
+  # Job 1: Next.js Frontend & TypeScript Verification
+  # =========================================================================
+  frontend-check:
+    name: Frontend Typecheck & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Node Dependencies
+        run: npm install
+
+      - name: Run TypeScript Type Check
+        run: npm run typecheck
+
+      - name: Build Next.js Production Bundle
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://mock.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "mock-anon-key-for-ci"
+          TMDB_API_KEY: "mock-tmdb-api-key"
+        run: npm run build
+
+  # =========================================================================
+  # Job 2: Machine Learning & RecSys Pipeline Verification
+  # =========================================================================
+  ml-pipeline-check:
+    name: ML & RecSys Pipeline Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11 Runtime
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r hackathon/requirements.txt
+
+      - name: Run ML & RecSys Automated Tests
+        run: python hackathon/test_pipeline.py

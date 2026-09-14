@@ -19,6 +19,8 @@ The Phantom Menace (25.2% match)
 Revenge of the Sith (23.9% match) (Zero human hints — purely discovered by the ML algorithm reading text!)
 
 '''
+#FIXME:What TF-IDF does:
+# It reads every movie's plot, genres, director, and keywords, and converts that text into a 10,000-number fingerprint. Movies with similar fingerprints get recommended together.
 
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -26,12 +28,13 @@ from sklearn.metrics.pairwise import cosine_similarity
 from config import TFIDF_MAX_FEATURES, TFIDF_STOP_WORDS
 
 class ContentEngine:
+    #TODO:Uses scikit-learn, the premier Python machine learning library.
     def __init__(self, data_loader):
         self.data_loader = data_loader
         self.vectorizer = TfidfVectorizer(
-            max_features=TFIDF_MAX_FEATURES, 
-            stop_words=TFIDF_STOP_WORDS,
-            ngram_range=(1, 2)
+            max_features=TFIDF_MAX_FEATURES, # Keeps the top 10,000 most meaningful words
+            stop_words=TFIDF_STOP_WORDS,  # Ignores useless filler words ('the', 'is', 'at')
+            ngram_range=(1, 2)    # Understands single words ('sci-fi') & pairs ('space battle')
         )
         self.tfidf_matrix = None
         self.similarity_matrix = None
@@ -42,17 +45,27 @@ class ContentEngine:
         if self.data_loader.movies_df is None:
             self.data_loader.load_movies()
             
+        # TODO:What is a Feature_Bag? It is a combined text string for every movie:
+        # "Christopher Nolan Inception sci-fi dream subconscious heist Leonardo DiCaprio"
+        # fit_transform() turns every movie's description into a row of TF-IDF word scores.
         print("Fitting TF-IDF Vectorizer on movie feature bags...")
         feature_bags = self.data_loader.movies_df['Feature_Bag'].tolist()
         self.tfidf_matrix = self.vectorizer.fit_transform(feature_bags)
         print(f"TF-IDF Matrix shape: {self.tfidf_matrix.shape}")
         
+        # #TODO: Calculates the angle (Cosine Similarity) between every movie pair:
+        #         1.0 = Exactly identical storyline.
+        #         0.0 = Zero plot overlap.
         print("Computing Cosine Similarity Matrix (4,760 x 4,760)...")
         self.similarity_matrix = cosine_similarity(self.tfidf_matrix, self.tfidf_matrix)
         self.is_fitted = True
         print("Content Engine fitted successfully!")
         return self
         
+    #TODO: Real Result: When we passed Star Wars (1977) into this matrix, it automatically returned:
+            # The Empire Strikes Back (40.8% match)
+            # Return of the Jedi (29.1% match)
+            # Star Wars: Clone Wars (26.5% match)
     def get_content_recommendations(self, movie_id, top_n=10):
         """
         Returns top_n movie recommendations similar to movie_id based on metadata.

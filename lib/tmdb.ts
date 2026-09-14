@@ -115,7 +115,13 @@ export async function searchMovies(
 /** Get full movie details (with credits + videos + watch providers) */
 export async function getMovieDetails(id: number): Promise<MovieDetail> {
   const data = await tmdbFetch<any>(`/movie/${id}`, {
-    append_to_response: "credits,videos,watch/providers",
+//     #TODO:TMDB returns a structured JSON payload of every country in the world, categorized into:
+        // flatrate: Subscription streaming (e.g. Netflix, Hotstar, Prime).
+        // rent: 48-hour rental (e.g. YouTube Movies, Google Play).
+        // buy: Digital purchase (e.g. Apple TV Store).
+        // free / ads: Ad-supported platforms (e.g. Tubi, Freevee).
+
+    append_to_response: "credits,videos,watch/providers", 
   });
   if (data["watch/providers"]) {
     data.watch_providers = data["watch/providers"];

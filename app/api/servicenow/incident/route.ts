@@ -1,7 +1,9 @@
 ﻿import { NextRequest, NextResponse } from "next/server";
 
+
 export async function POST(req: NextRequest) {
   try {
+    // Parse and validate the fields required to create a meaningful incident.
     const body = await req.json();
     const { movieId, movieTitle, category, urgency = "2", description, userEmail } = body;
 
@@ -32,10 +34,13 @@ export async function POST(req: NextRequest) {
       "--- Automated Ticket Generated via CineWatch OTT Engagement Agent ---",
     ].join("\n");
 
-    // Check if ServiceNow credentials are fully configured
+    // Try the live ServiceNow instance first; the response below preserves a usable
+    // incident flow when the instance is unavailable or credentials are incomplete.
     if (instanceUrl && username && password) {
       try {
         const auth = Buffer.from(`${username}:${password}`).toString("base64");
+
+        // Map CineWatch feedback to the ServiceNow incident table schema.
         const response = await fetch(`${instanceUrl}/api/now/table/incident`, {
           method: "POST",
           headers: {
@@ -43,6 +48,7 @@ export async function POST(req: NextRequest) {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
+          //#TODO: "This block is our ITIL-compliant ticket payload. It maps our frontend diagnostics directly into ServiceNow's native incident table schema—assigning the short description, diagnostic body, category routing, and impact/urgency levels so the ticket lands in the right engineering queue with zero human intervention."
           body: JSON.stringify({
             short_description: shortDescription,
             description: fullDescription,
@@ -78,7 +84,7 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Graceful offline / mock fallback if instance is unreachable or sleeping
+    // Return a local incident representation when ServiceNow cannot create a ticket.
     const mockNumber = "INC" + Math.floor(1000000 + Math.random() * 9000000);
     return NextResponse.json({
       success: true,

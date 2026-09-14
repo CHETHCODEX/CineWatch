@@ -105,6 +105,7 @@ export function getProviderLogoUrl(path: string | null, size: TMDBProviderLogoSi
   return `${TMDB_IMAGE_BASE}/${size}${path}`;
 }
 
+// Builds direct launch URLs for Netflix, JioHotstar, Prime Video, Apple TV, Zee5, and SonyLIV.
 export function getDirectWatchUrl(providerName: string, movieTitle: string): string {
   const name = providerName.toLowerCase();
   const encodedTitle = encodeURIComponent(movieTitle);
