@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
 
       if (pythonRes.ok) {
         const data = await pythonRes.json();
-        if (data && data.results) {
+        if (data && Array.isArray(data.results) && data.results.length > 0) {
           console.log(`[AI Search] Semantic search succeeded for query: "${query}" (${data.results.length} matches)`);
           return NextResponse.json({ results: data.results, source: "ai" });
         }

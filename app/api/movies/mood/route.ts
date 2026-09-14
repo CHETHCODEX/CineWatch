@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
 
         if (pythonRes.ok) {
           const data = await pythonRes.json();
-          if (data && data.results) {
+          if (data && Array.isArray(data.results) && data.results.length > 0) {
             console.log(`[AI Mood Engine] Dynamic semantic matches found for mood: "${normalizedMood}"`);
             return NextResponse.json({
               results: data.results,
@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get("page") || "1", 10);
     const data = await getMoviesByMood(normalizedMood, page);
     return NextResponse.json({
-      results: data.results,
+      results: data?.results || [],
       source: "tmdb_fallback",
     });
 
