@@ -2,7 +2,6 @@
 // I designed separate interaction patterns for desktop, tablet and mobile.
 // Desktop uses expandable cards, tablet uses a compact expansion layout,
 // while mobile switches to horizontal snap scrolling for touch-friendly discovery.
-
 "use client";
 
 import { useState } from "react";
