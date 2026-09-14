@@ -1,3 +1,5 @@
+// #MOBILE-SWIPE
+// For mobile users, I added horizontal swipe detection so the same discovery experience works naturally on touch devices.
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
@@ -136,7 +138,8 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const animationFrameRef = useRef<number | null>(null);
     const lastTimeRef = useRef<number>(0);
 
-    const anglePerItem = 360 / items.length;
+    const anglePerItem = 360 / items.length;// #360-DEGREE-DISTRIBUTION
+// I divide the complete 360-degree space by the number of movies, giving every movie an equal angular position around the circular gallery. This creates a balanced and dynamic movie ring.
 
     // --- Dynamic Sizing for Responsiveness ---
     useEffect(() => {
@@ -237,9 +240,15 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                 const relativeAngle =
                   ((itemAngle + totalRotation + 360) % 360);
                 const normalizedAngle =
-                  relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;
-                const opacity = Math.max(0.15, 1 - normalizedAngle / 140);
-                const isFront = normalizedAngle < 30;
+                  relativeAngle > 180 ? 360 - relativeAngle : relativeAngle;// #ANGULAR-DISTANCE
+// I calculate the shortest angular distance between each movie and the front position. 
+              //This helps the interface understand which movies are close to the viewer and which ones are moving toward the back of the 3D ring.
+                const opacity = Math.max(0.15, 1 - normalizedAngle / 140);// #DEPTH-FADE
+// The farther a movie moves away from the viewer, the more its opacity decreases. 
+    //This creates a natural depth effect and visually separates the focused movie from the background movies.
+                const isFront = normalizedAngle < 30;// #FRONT-MOVIE-DETECTION
+// When a movie comes close to the front position, I identify it as the focused movie. 
+    //This allows me to apply stronger visual treatment to the movie currently being viewed by the user.
 
                 return (
                   <div
@@ -250,7 +259,9 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
                       height: `${cardHeight}px`,
                       left: `${leftOffset}px`,
                       top: `${topOffset}px`,
-                      transform: `rotateY(${itemAngle}deg) translateZ(${activeRadius}px)`,
+                      transform: `rotateY(${itemAngle}deg) translateZ(${activeRadius}px)`,// #CORE-3D-LOGIC
+// This is the core of the implementation. rotateY determines where the movie sits around the circular ring, while translateZ pushes the movie outward from the center. 
+  //Together, these transforms create a virtual 3D cylinder where movies appear to surround the viewer.
                       opacity,
                       transition: "opacity 0.3s ease",
                     }}
