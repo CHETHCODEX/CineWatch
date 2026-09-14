@@ -1,3 +1,8 @@
+// #RESPONSIVE-DESIGN
+// I designed separate interaction patterns for desktop, tablet and mobile.
+// Desktop uses expandable cards, tablet uses a compact expansion layout,
+// while mobile switches to horizontal snap scrolling for touch-friendly discovery.
+
 "use client";
 
 import { useState } from "react";
@@ -121,7 +126,9 @@ const DEFAULT_MOVIES: ExpandCardMovie[] = [
 // =============================================================================
 
 export default function ExpandCards({ movies = DEFAULT_MOVIES, className }: ExpandCardsProps) {
-  const [expandedIndex, setExpandedIndex] = useState(3);
+  const [expandedIndex, setExpandedIndex] = useState(3);// #EXPANDED-MOVIE-STATE
+// I maintain the index of the currently expanded movie. This allows only one
+// movie card to become the primary focus while the remaining cards stay compact.
   const { isInWatchlist, toggleWatchlist } = useAuth();
 
   const convertToMovie = (m: ExpandCardMovie): Movie => {
@@ -159,7 +166,9 @@ export default function ExpandCards({ movies = DEFAULT_MOVIES, className }: Expa
                   height: "26rem",
                   flexShrink: 0,
                 }}
-                onMouseEnter={() => setExpandedIndex(idx)}
+                onMouseEnter={() => setExpandedIndex(idx)}// #HOVER-TO-EXPAND
+// When the user moves over a movie, that card becomes the active card and
+// expands to reveal richer movie information without opening a separate page.
               >
                 {/* Poster image */}
                 <Image
@@ -196,7 +205,10 @@ export default function ExpandCards({ movies = DEFAULT_MOVIES, className }: Expa
                 <div
                   className={cn(
                     "absolute inset-0 flex flex-col justify-end transition-all duration-500",
-                    isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
+                    isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"// #PROGRESSIVE-DISCLOSURE
+// The collapsed card shows only essential information, while the expanded
+// state progressively reveals the rating, genre, overview and actions.
+// This keeps the interface visually clean while providing more information on demand.
                   )}
                 >
                   {/* Rating badge */}
@@ -278,7 +290,9 @@ export default function ExpandCards({ movies = DEFAULT_MOVIES, className }: Expa
             return (
               <div
                 key={movie.id}
-                className="relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-in-out"
+                className="relative cursor-pointer overflow-hidden rounded-2xl transition-all duration-500 ease-in-out"// #SMOOTH-EXPANSION
+// The width, opacity and content transitions create a smooth expansion effect,
+// making the interaction feel like an interactive OTT browsing experience.
                 style={{
                   width: isExpanded ? "20rem" : "4rem",
                   height: "22rem",
@@ -333,7 +347,9 @@ export default function ExpandCards({ movies = DEFAULT_MOVIES, className }: Expa
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        toggleWatchlist(convertToMovie(movie));
+                        toggleWatchlist(convertToMovie(movie));// #WATCHLIST-INTEGRATION
+// The card is connected directly to the user's watchlist, allowing the user
+// to save or remove a movie without leaving the browsing experience.
                       }}
                       className={cn(
                         "flex items-center justify-center w-7 h-7 rounded-xl transition-all duration-200 backdrop-blur-sm border",
