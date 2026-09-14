@@ -1,3 +1,7 @@
+// #3D-COVERFLOW-CAROUSEL
+// This is my 3D CoverFlow carousel.
+//My objective here was to move away from the traditional OTT pattern where recommendations are displayed as flat horizontal rows.
+//Instead, I created an immersive cinematic interface where the active movie is presented prominently and the surrounding movies create a sense of depth and exploration.
 "use client";
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
@@ -103,13 +107,16 @@ export function CoverFlowCarousel({
   onCtaClick,
   onCardClick,
 }: CoverFlowCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);// #ACTIVE-MOVIE-STATE
+// First, I maintain the active movie using currentIndex. 
+//This state determines which movie is currently in focus and allows the entire carousel to dynamically update whenever the user navigates to another movie.
   const [isHovered, setIsHovered] = useState(false);
   const touchStartX = useRef(0);
   const total = items.length;
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % total);
+    setCurrentIndex((prev) => (prev + 1) % total);// #INFINITE-NAVIGATION
+// I use modulo-based navigation so that after reaching the last movie, the carousel automatically continues from the beginning.
   }, [total]);
 
   const prevSlide = useCallback(() => {
@@ -211,7 +218,9 @@ export function CoverFlowCarousel({
           style={{ perspective: "1400px" }}
         >
           {items.map((item, idx) => {
-            const offset = (idx - currentIndex + total) % total;
+            const offset = (idx - currentIndex + total) % total;// #RELATIVE-CARD-POSITION
+// I calculate each movie's position relative to the active movie.
+//This allows the carousel to understand whether a movie should appear in the center, beside the active movie, or farther away in the 3D layout.
 
             let transform = "translateX(0px) scale(0.4) rotateY(0deg)";
             let opacity = 0;
@@ -226,8 +235,13 @@ export function CoverFlowCarousel({
               zIndex = 30;
               filter = "brightness(1)";
             } else if (offset === 1) {
-              transform = "translateX(285px) scale(0.84) rotateY(-24deg)";
+              transform = "translateX(285px) scale(0.84) rotateY(-24deg)";// #3D-CARD-TRANSFORM
+// Based on the movie's position, I change its X position, scale and Y-axis rotation. 
+  //The active movie appears larger and straight, while neighboring movies become smaller and angled, creating the CoverFlow effect and making the interface feel more cinematic.
               opacity = 0.65;
+              // #VISUAL-DEPTH
+// I also control depth using z-index, opacity and filter.
+      //This creates a clear visual hierarchy where the active movie receives maximum attention while secondary movies remain visible without competing with the main content.
               zIndex = 20;
               filter = "brightness(0.75)";
             } else if (offset === 2) {
