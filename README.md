@@ -535,21 +535,25 @@ The complete architectural specification, system design, and component interacti
 
 ---
 
-### Low-Level Design (LLD) Upload Repository
+### Low-Level Design (LLD) Documentation Repository
 
+All engineering subsystems have been designed and documented with low-level component specifications, API schemas, data contracts, and algorithmic models by each team member:
 
-
-| Team Member | Engineering Role | Assigned Subsystem / Module | LLD Document Status |
+| Team Member | Engineering Role | Assigned Subsystem / Module | Low-Level Design (LLD) Document |
 | :--- | :--- | :--- | :---: |
-| **Member 1** | Lead Frontend / UI-UX Engineer | 3D Circular Carousel, Persona Switcher, Dynamic Layouts & Responsive UI | [📄 View LLD](docs/LLD/member-1/LLD.pdf) |
-| **Member 2** | Lead Backend / API Engineer | Next.js API Gateway, Error Handling, Rate Limiting & Server Caching | [📄 View LLD](docs/LLD/member-2/LLD.pdf) |
-| **Member 3** | Database, Data Eng & Enterprise Integrations | ServiceNow ITSM Integration, Real-Time OTT Streaming Gateway & Supabase Sync | [📄 View LLD](docs/LLD/member-3/LLD.pdf) |
-| **Member 4** | ML Engineer (Content-Based) | TF-IDF Vectorization, Metadata Bagging & Mood Selector Engine | [📄 View LLD](docs/LLD/member-4/LLD.pdf) |
-| **Member 5** | ML Engineer (Collaborative) | SVD Matrix Factorization, Co-Watch Matcher & Latent Taste Modeling | [📄 View LLD](docs/LLD/member-5/LLD.pdf) |
-| **Member 6** | ML Engineer (Hybrid & XAI) | 60/40 Hybrid Fusion Model & Explainable AI (XAI) Attribution Engine | [📄 View LLD](docs/LLD/member-6/LLD.pdf) |
-| **Member 7** | Data Analyst / Behavioral Engineer | Engagement Scoring, Cold-Start Penalization & Python Analytics Pipeline | [📄 View LLD](docs/LLD/member-7/LLD.pdf) |
+| **Member 1** | Lead Frontend / UI-UX Engineer | 3D Circular Carousel, Persona Switcher, Dynamic Layouts & Responsive UI | [📄 View Member 1 LLD](https://app.notion.com/p/CineMatch-LLD-Member-1-Frontend-UI-UX-f8b5b619211d48a3b6258eccddbd0552?source=copy_link) |
+| **Member 2** | Lead Backend / API Engineer | Next.js API Gateway, Error Handling, Rate Limiting & Server Caching | [📄 View Member 2 LLD](https://app.notion.com/p/LLD-Lead-Backend-API-Engineer-Next-js-API-routes-1be534e56d384748b3e5151af2e1c33c?source=copy_link) |
+| **Member 3** | Database, Data Eng & Enterprise Integrations | ServiceNow ITSM Integration, Real-Time OTT Streaming Gateway & Supabase Sync | [📄 View Member 3 LLD](https://app.notion.com/p/LLD-Database-Data-Eng-Enterprise-Integrations-3da247050b9780c5977ee7e85b7eefd8?source=copy_link) |
+| **Member 4** | ML Engineer (Content-Based) | TF-IDF Vectorization, Metadata Bagging & Mood Selector Engine | [📄 View Member 4 LLD](https://app.notion.com/p/CineWatch-LLD-Member-4-ML-Engineer-Content-Based-7e140351328e4dd5a8c76c64d7825da2?source=copy_link) |
+| **Member 5** | ML Engineer (Collaborative) | SVD Matrix Factorization, Co-Watch Matcher & Latent Taste Modeling | [📄 View Member 5 LLD](https://app.notion.com/p/CineMatch-Collaborative-Filtering-LLD-3dbe59c7b275803e9e5cd684163f05f5?source=copy_link) |
+| **Member 6** | ML Engineer (Hybrid & XAI) | 60/40 Hybrid Fusion Model & Explainable AI (XAI) Attribution Engine | [📄 View Member 6 LLD](https://app.notion.com/p/CineWatch-Member-6-LLD-Hybrid-Recommendation-XAI-7d342a1cae184358a805806b354f6cb0?source=copy_link) |
+| **Member 7** | Data Analyst / Behavioral Engineer | Engagement Scoring, Cold-Start Penalization & Python Analytics Pipeline | [📄 View Member 7 LLD](https://app.notion.com/p/LLD-Data-Analyst-Behavioral-Eng-Engagement-Scoring-9036e7f822c84f869d3a4894ba1e6694?source=copy_link) |
 
 ---
+
+### Recommended Documentation Folder Structure
+
+For offline repository backups, PDF exports of the Notion design documents can be structured inside the repository as follows:
 
 ### Recommended Documentation Folder Structure
 
