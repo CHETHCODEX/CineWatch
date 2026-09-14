@@ -104,7 +104,10 @@ CineWatch AI resolves these challenges through an integrated 5-tier architecture
 ![CineWatch AI Details Page](./public/screenshots/details-demo.webp)
 
 ### 🤖 AI Mode
-[▶️ Watch AI Mode Demo]
+![CineWatch AI Mode Demo](./public/screenshots/ai-mode-demo.webp)
+
+[▶️ Watch Full Video Demo with Audio](./AI%20Match%20Dashboard%20Demo.mp4)
+
 ---
 
 ## ✨ Key Features
