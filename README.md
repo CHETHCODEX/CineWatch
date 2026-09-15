@@ -1,5 +1,4 @@
 <div align="center">
-
 # 🎬 CineWatch AI — Next-Gen Movie Discovery
 
 **A premium, enterprise-ready hybrid AI movie recommendation and OTT discovery platform featuring 3D circular carousels, mood-based semantic matching, co-watching matcher games, Explainable AI (XAI), and sub-millisecond multi-tier caching.**
