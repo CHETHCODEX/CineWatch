@@ -45,6 +45,5 @@ next-env.d.ts
 __pycache__/
 *.pyc
 DATASET/
-
 # Large movie datasets
 ../movie-data/
