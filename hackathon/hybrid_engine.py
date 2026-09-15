@@ -31,7 +31,7 @@ class HybridEngine:
         """Returns set of movie IDs the user has already rated."""
         user_ratings = self.data_loader.get_user_ratings(user_id)
         if user_ratings.empty:
-            return set()
+            return set() # new user with no rating history
         return set(user_ratings['movieId'].tolist())
 
     def get_candidate_movie_ids(self, user_id, watched_ids, max_candidates=250):
@@ -97,11 +97,14 @@ class HybridEngine:
             if anchor_ids:
                 content_score = self.content_engine.get_content_affinity(anchor_ids, m_id)
             else:
+                # neutral score when no anchor movies exist — avoids biasing hybrid_score up or down
                 content_score = 0.5
                 
             hybrid_score = (self.alpha * collab_score) + (self.beta * content_score)
             
             # Calibrate match percentage into appealing 65% - 98% range for display
+             # UI-only cosmetic score, NOT used in ranking — compresses hybrid_score into
+           # a friendlier 65-98% band so nothing displays as a discouragingly low match
             display_match = int(np.clip(55 + (hybrid_score * 50), 65, 98))
             
             meta = self.data_loader.movie_meta.get(m_id, {})
