@@ -4,7 +4,6 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
-
 /* ============================================================================
    CineMatch — Dark Cinematic Theme
    Aesthetic: High-end film magazine meets premium streaming platform
