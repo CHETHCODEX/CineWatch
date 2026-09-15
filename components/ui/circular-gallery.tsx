@@ -155,7 +155,7 @@ const CircularGallery = React.forwardRef<HTMLDivElement, CircularGalleryProps>(
     const isMobile = windowWidth < 768;
     const isTablet = windowWidth >= 768 && windowWidth < 1024;
 
-    const activeRadius = isMobile ? 240 : isTablet ? 380 : radius;
+    const activeRadius = isMobile ? 240 : isTablet ? 380 : radius;//dynamically adjusting the radius ,card dimensions and container height according to the viewport. 
     const cardWidth = isMobile ? 170 : isTablet ? 220 : 280;
     const cardHeight = isMobile ? 250 : isTablet ? 320 : 400;
     const leftOffset = -cardWidth / 2;
